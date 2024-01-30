@@ -20,12 +20,17 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({ children, }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const hideAppBar = () => {
+    const hasNew = pathname.includes('/new')
+    const hasMesCenter = pathname.includes('/message_center')
+    return (hasNew === hasMesCenter)
+  }
   const hideSideBar = () => {
     const hasDetail = pathname.includes('/detail');
     const hasNew = pathname.includes('/new')
     const hasMesCenter = pathname.includes('/message_center')
-
-    return (hasDetail === hasNew === hasMesCenter)
+    const hasExplore = pathname.includes('/explore')
+    return (hasDetail || hasNew || hasMesCenter || hasExplore)
   }
 
   return (
@@ -35,7 +40,9 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
           hideSideBar() ? null : <SideBar />
         }
         <div className={'flex flex-col ' + (hideSideBar() ? 'w-full' : 'w-[94%]')}>
-          <AppBar />
+          {
+            hideAppBar() ? <AppBar /> : null
+          }
           {children}
         </div>
       </body>

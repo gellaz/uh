@@ -1,27 +1,27 @@
-import { MdChatBubble, MdDashboard, MdHomeWork, MdPeople } from "react-icons/md"
+import { LayoutDashboard, Users, Search, Building2 } from 'lucide-react';
 
 const tabIconSize = 20;
 export const sibeBarTabs = [
     {
         title: 'Dashboard',
         href: '/dashboard',
-        icon: <MdDashboard key={'dashboard'} size={tabIconSize} />,
+        icon: <LayoutDashboard key={'dashboard'} size={tabIconSize} />,
     },
     {
-        title: 'Contacts',
+        title: 'Contatti',
         href: '/contacts',
-        icon: <MdPeople key={'contacts'} size={tabIconSize} />,
+        icon: <Users key={'contacts'} size={tabIconSize} />,
     },
     {
-        title: 'Chats',
-        href: '/chats',
-        icon: <MdChatBubble key={'chats'} size={tabIconSize} />,
+        title: 'Esplora',
+        href: '/explore',
+        icon: <Search key={'searching'} size={tabIconSize} />,
 
     },
     {
-        title: 'Properties',
+        title: 'Proprietà',
         href: '/properties',
-        icon: <MdHomeWork key={'properties'} size={tabIconSize} />,
+        icon: <Building2 key={'properties'} size={tabIconSize} />,
     },
 
 

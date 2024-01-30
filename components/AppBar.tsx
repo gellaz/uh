@@ -78,20 +78,7 @@ export default function AppBar() {
                             <AvatarFallback>CN</AvatarFallback>
                         </Avatar>
                 }
-                {
-                    usePathname().includes('new')
-                        ? <div className='flex flex-row w-full space-x-4'>
-                            <Button className='flex-1' variant={'ghost'}>{'Cancella'}</Button>
-                            <Button className='flex-1'>{'Salva'}</Button>
-
-                        </div>
-                        : null
-                }
-
-
-
             </div>
-
         </div>
     );
 };

@@ -90,4 +90,17 @@
   main{
     @apply bg-background 
   }
+
+  .col{
+    @apply flex flex-col w-full h-full
+  }
+
+  .row{
+    @apply flex flex-row w-full h-full
+  }
+
+  .outlined{
+    @apply border hover:border-black rounded-md
+  }
+
 }
