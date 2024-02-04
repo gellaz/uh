@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 import UploadMediaDiv from "@/components/uploadMediaDiv";
 import { newPropertyContext } from "../../../../app/(home)/properties/new/page";
-import { propertyCategoryTypeItems } from "@/constast/propertyTypeItems";
+import { propertyCategoryTypeItems } from "@/constants/propertyTypeItems";
 
 export default function MediaPage() {
   const sharedContext = useContext(newPropertyContext);

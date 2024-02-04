@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 
 import { Input } from "@/components/ui/input";
 import { newPropertyContext } from "../../../../app/(home)/properties/new/page";
-import { propertyCategoryTypeItems } from "@/constast/propertyTypeItems";
+import { propertyCategoryTypeItems } from "@/constants/propertyTypeItems";
 
 export default function CategoryPage() {
   // STATE MANAGMENT
