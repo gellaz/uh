@@ -1,12 +1,28 @@
 "use client";
 
-import { ArrowLeft, Bell, MessageCircleMore } from "lucide-react";
+import {
+  ArrowLeft,
+  Bell,
+  CreditCardIcon,
+  LogOutIcon,
+  MessageCircleMore,
+  SettingsIcon,
+  UserIcon,
+} from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { usePathname, useRouter } from "next/navigation";
 
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import React from "react";
 
 export default function AppBar() {
   const notiStyle =
@@ -71,14 +87,45 @@ export default function AppBar() {
         )}
         {usePathname().includes("profile") ||
         usePathname().includes("new") ? null : (
-          <Avatar
-            className={
-              "flex w-9 h-9 rounded-full overflow-hidden items-center justify-center cursor-pointer"
-            }
-          >
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
+          <div className="flex items-center">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Avatar className="hover:cursor-pointer hover:ring-2 hover:ring-primary">
+                  <AvatarFallback>MG</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                <DropdownMenuLabel>
+                  Marco Gelli
+                  <p className="text-xs font-light">marcogelli1994@gmail.com</p>
+                </DropdownMenuLabel>
+
+                <DropdownMenuSeparator />
+                <DropdownMenuGroup>
+                  <DropdownMenuItem className="hover:cursor-pointer">
+                    <UserIcon className="mr-2 h-4 w-4" />
+                    <span>Profile</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="hover:cursor-pointer">
+                    <CreditCardIcon className="mr-2 h-4 w-4" />
+                    <span>Billing</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="hover:cursor-pointer">
+                    <SettingsIcon className="mr-2 h-4 w-4" />
+                    <span>Settings</span>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  className="hover:cursor-pointer focus:text-rose-500"
+                  onClick={async () => console.log("sign out")}
+                >
+                  <LogOutIcon className="mr-2 h-4 w-4" />
+                  <span>Log out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         )}
       </div>
     </div>
