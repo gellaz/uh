@@ -9,8 +9,6 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-
-      // AGENT
       agent: {
         Row: {
           created_at: string
@@ -52,8 +50,6 @@ export interface Database {
           }
         ]
       }
-
-      // PROFILE
       profile: {
         Row: {
           birthdate: string | null
@@ -84,8 +80,6 @@ export interface Database {
         }
         Relationships: []
       }
-
-      // PROPERTIES
       properties: {
         Row: {
           accessibility: Json
@@ -161,8 +155,6 @@ export interface Database {
         }
         Relationships: []
       }
-
-      // RENTAL
       rental: {
         Row: {
           deposit: number

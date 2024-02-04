@@ -1,43 +1,37 @@
-'use server'
+"use server";
 
-import { createClient } from "@/utils/supabase/actions"
-import { cookies } from "next/headers"
+import { Database } from "@/types/supabase";
+import { supabase } from "@/utils/supabase/client";
 
-export async function getProperties(){
-    const cookieStore = cookies()
-    const supabase = createClient(cookieStore);
+export async function getProperties() {
+  const { data, error } = await supabase
+    .from("properties")
+    .select()
+    .order("inserted_at", { ascending: false });
 
-    const { data, error } = await supabase
-        .from('properties')
-        .select()
-        .order('created_at', {ascending: false})
+  if (error) {
+    console.error(error);
+    return error;
+  }
 
-        if (error) {
-            console.error(error)
-            return error
-        }
-
-
-        console.log(data)
-        return data 
+  console.log(data);
+  return data;
 }
 
 export async function getPropertyWithId(id: string) {
-    const cookieStore = cookies()
-    const supabase = createClient(cookieStore);
-    const { data, error } = await supabase
-        .from('properties')
-        .select()
-        .eq('id', id)
-        .single()
+  const { data, error } = await supabase
+    .from("properties")
+    .select()
+    .eq("id", id)
+    .single();
 
-        if (error) {
-            console.error(error)
-            return error
-        }
+  if (error) {
+    console.error(error);
+    return error;
+  }
 
-        console.log(data)
-        return data
+  console.log(data);
+  return data;
 }
 
 // export async function getProperties(){
@@ -56,5 +50,3 @@ export async function getPropertyWithId(id: string) {
 //     if (error) throw error;
 //     return data;
 //   };
-  
-  
