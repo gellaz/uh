@@ -1,5 +1,5 @@
 import AppBar from "@/components/AppBar";
-import SideBar from "@/components/sideBar";
+import Sidebar from "@/components/Sidebar";
 import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
@@ -32,7 +32,7 @@ export default async function HomeLayout({
 
   return (
     <main className="flex flex-row h-screen w-screen">
-      <SideBar />
+      <Sidebar />
       <div className={"flex flex-col w-full"}>
         <AppBar />
         {children}
