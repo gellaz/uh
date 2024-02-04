@@ -36,7 +36,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { createClient } from "@/utils/supabase/client";
+import { createClient, supabase } from "@/utils/supabase/client";
 import { type IRegister } from "@/validation/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
@@ -124,7 +124,6 @@ export default function RegisterFormPrivate({
   step,
   setStep,
 }: RegisterFormPrivateProps) {
-  const supabase = createClient();
   const router = useRouter();
   const [registrationComplete, setRegistrationComplete] = React.useState(false);
 

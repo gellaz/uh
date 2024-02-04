@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
 
 @layer base {
   :root {
@@ -49,58 +48,60 @@
     --ring: 20.5 90.2% 48.2%;
   }
 }
- 
+
 @layer base {
-  h1{
-    @apply text-2xl font-semibold; 
+  h1 {
+    @apply text-2xl font-semibold;
   }
 
-  h2{
-    @apply text-2xl font-medium
+  h2 {
+    @apply text-2xl font-medium;
   }
 
-  h3{
-    @apply text-xl font-semibold
+  h3 {
+    @apply text-xl font-semibold;
   }
 
-  h4{
-    @apply text-xl font-medium
+  h4 {
+    @apply text-xl font-medium;
   }
 
-  h5{
-    @apply text-lg font-semibold
+  h5 {
+    @apply text-lg font-semibold;
   }
 
-  h6{
-    @apply text-lg font-medium
+  h6 {
+    @apply text-lg font-medium;
   }
 
-  p{
-    @apply text-base font-normal
+  p {
+    @apply text-base font-normal;
   }
 
   label {
-    @apply text-xs
+    @apply text-xs;
   }
 
   body {
     @apply bg-primary-foreground text-foreground overflow-hidden w-full h-full;
   }
 
-  main{
-    @apply bg-background 
+  main {
+    @apply bg-background;
   }
 
-  .col{
-    @apply flex flex-col w-full h-full
+  .col {
+    @apply flex flex-col w-full h-full;
   }
 
-  .row{
-    @apply flex flex-row w-full h-full
+  .row {
+    @apply flex flex-row w-full h-full;
   }
 
-  .outlined{
-    @apply border hover:border-black rounded-md
+  .outlined {
+    @apply border hover:border-black rounded-md;
   }
-
+}
+.rdp-vhidden {
+  @apply hidden;
 }
