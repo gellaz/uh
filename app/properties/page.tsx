@@ -1,39 +1,24 @@
 'use client'
 
-import PropertyTile from "@/components/property/propertyTile"
 import { PropertiesService } from "@/utils/a/propertyService";
-import { PropertyType } from "@/models/property/type";
 import { useState, useEffect } from 'react'
 import PropertyCard from "@/components/property/propertyCard";
 import TabController from "@/components/tabController";
 import { Plus, Filter } from 'lucide-react'
+import { Property } from "@/types/properties";
+import { getProperties } from "@/actions/property/getProperty";
 
 
 
 export default function PropertyPage() {
     const [error, setError] = useState<string | null>(null)
-    const [properties, setProperties] = useState<PropertyType[] | null>(null)
-
+    const [properties, setProperties] = useState<Property[] | null>(null)
+    const result = await getProperties()
 
     // DATA FETCHING
     useEffect(() => {
-        PropertiesService.getUserProperties().then(
-            (result) => {
-                if (result) {
-                    if (result instanceof Array && result.length > 0) {
-                        setProperties(result)
-                        return
-                    }
 
-                    setError('Error occurred - getUserProperties')
-                    return
-                }
-
-                setError('Error occurred - getUserProperties')
-                return
-            }
-        ), []
-    })
+    }, [])
 
     return <div className='flex flex-col h-full w-full p-4 space-y-4'>
         <div className='flex flex-row space-x-4 w-full items-center justify-between'>

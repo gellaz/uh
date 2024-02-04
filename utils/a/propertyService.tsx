@@ -1,22 +1,20 @@
-import { PropertyType } from '@/models/property/type'
-// import supabase from '@/utils/supabase/client';
-// import { createServerClient } from '@supabase/ssr';
+// import { PropertyType } from '@/models/property/type'
+import { Database, Tables } from '@/types/supabase';
 import { TokenService } from "./tokenService";
 import { supabaseClient } from '@/utils/supabase/client';
+import { Property } from '@/types/properties';
 
 export class PropertiesService {
-    static tableName = 'properties'
-
 
     // GET API - fetch all the user properties [PROPERTIES TABLE]
     static async getUserProperties() {
         await TokenService.refreshSession();
-        const { data, error } = await supabaseClient.from(this.tableName).select();
+        const { data, error } = await supabaseClient.from('properties').select();
 
         if (data) {
             if (data.length > 0) {
                 console.log('data: ' + data)
-                return data as PropertyType[]
+                return data
             }
 
             console.log('data null')
@@ -31,13 +29,13 @@ export class PropertiesService {
     static async getPropertyWithId(property_id: string) {
         await TokenService.refreshSession();
         const { data, error } = await supabaseClient
-            .from(this.tableName)
+            .from('properties')
             .select()
             .eq('id', property_id)
             .single()
 
         if (data) {
-            return data as PropertyType
+            return data
         }
 
         console.error('Error occurred - getPropertyWithId:' + error)

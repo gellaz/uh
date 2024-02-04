@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { DividerVerticalIcon } from "@radix-ui/react-icons";
 import { PropertiesService } from "@/utils/a/propertyService";
-import { PropertyType } from "@/models/property/type";
 import { useRouter } from "next/navigation";
 import { Edit, Share, Megaphone, Globe2, LockKeyhole, BadgeCheck } from 'lucide-react'
 import { Button } from "@/components/ui/button"
@@ -17,16 +16,17 @@ import Image1 from '/public/image1.jpg';
 import LocationPage from "./locationPage/page";
 import AccesibilityPage from "./accessibilityPage/page";
 import IllustrationCard from "@/components/property/illustrationCard";
+import { Property } from "@/types/properties";
+import { supabaseClient } from "@/utils/supabase/client";
 
 export default function PropertyDetailPage({ params }: { params: { id: string } }) {
-    const router = useRouter()
     const [tabSelected, setTabSelected] = useState(0)
-    const [property, setProperty] = useState<PropertyType>()
+    const [property, setProperty] = useState<Property>()
     const [error, setError] = useState<string | null>()
     const paragraphStyle = 'text-sm font-normal';
     const paragraphStyle2 = 'text-sm font-semibold';
     const imageStyle = 'bg-slate-100 w-full h-full rounded-lg shadow-md border-[0.4px] border-primary/10';
-    const getAddress = `${property?.address.street} ${property?.address.street_number}, ${property?.address.city}, ${property?.address.zipcode}, ${property?.address.region}`
+    const getAddress = `${property?.address}`;
     const unknownValue = 'No data available'
     const iconSize = 18
     const privateButton = <Button variant={'outline'}><Globe2 size={iconSize} className='mr-2' />Privato</Button>;
@@ -35,23 +35,10 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
 
     // DATA FETCHING
     useEffect(() => {
-        PropertiesService.getPropertyWithId(params.id).then(
-            (result) => {
-                if (result) {
-                    if (!(result instanceof Error)) {
-                        setProperty(result as PropertyType)
-                        return
-                    }
 
-                    setError('result')
-                    return
-                }
+    }, [])
 
-                setError('Error occurred - getPropertyWithId')
-                return
-            }
-        ), []
-    })
+
 
     // TAB CONTENT PAGES
     const tabContents = [GeneralPage(property!), FeaturesPage(property!), HeatingPage(property!), AccesibilityPage(property!), PricePage(property!), LocationPage(property!)];

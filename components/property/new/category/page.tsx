@@ -1,6 +1,6 @@
 import { propertyCategoryTypeItems } from '@/constast/propertyTypeItems'
 import React, { useState, useContext } from 'react'
-import { newPropertyContext } from '../page';
+import { newPropertyContext } from '../../../../app/properties/new/page';
 import { Input } from '@/components/ui/input';
 
 export default function CategoryPage() {

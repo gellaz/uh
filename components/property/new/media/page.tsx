@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { newPropertyContext } from '../page'
+import { newPropertyContext } from '../../../../app/properties/new/page'
 import { propertyCategoryTypeItems } from '@/constast/propertyTypeItems'
 import UploadMediaDiv from '@/components/uploadMediaDiv'
 

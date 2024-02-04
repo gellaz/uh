@@ -1,10 +1,10 @@
 
 import Row from "@/components/property/detail/row";
-import { PropertyType } from "@/types/propertyTypes";
+import { Property } from "@/types/properties";
 import { MdOutlineBathtub, MdOutlineKingBed, MdOutlineKitchen } from "react-icons/md";
 import { RxWidth } from "react-icons/rx";
 
-export default function GeneralPage(property: PropertyType | null) {
+export default function GeneralPage(property: Property) {
     const mainStyle = 'flex flex-col h-[1000px] w-full overflow-hidden space-y-10 p-4';
     const gridStyle = 'grid grid-cols-2 gap-10';
     const iconSize = 18
@@ -34,9 +34,9 @@ export default function GeneralPage(property: PropertyType | null) {
                 {
                     keysLeft.map((item, i) => { return <Row key={i} title={textCleaning(item)} value={valuesLeft[i]?.toString() ?? emptyValue} /> })
                 }
-                {/* <Row title={'Categoria'} value={property?.category?.toString() ?? unknownValue} />
-                <Row title={'Subcategoria'} value={property?.subcategory?.toString() ?? unknownValue} />
-                <Row icon={<FaStairs size={iconSize} />} title={'Piano'} value={property?.floor?.toString() ?? unknownValue} /> */}
+                {/* <Row title={'Categoria'} value={property.category?.toString() ?? unknownValue} />
+                <Row title={'Subcategoria'} value={property.subcategory?.toString() ?? unknownValue} />
+                <Row icon={<FaStairs size={iconSize} />} title={'Piano'} value={property.floor?.toString() ?? unknownValue} /> */}
             </div>
 
             {/* RIGHT SIDE */}
@@ -44,17 +44,19 @@ export default function GeneralPage(property: PropertyType | null) {
                 {
                     keysRight.map((item, i) => { return <Row key={i} icon={iconsRight[i]} title={textCleaning(item)} value={valuesRight[i]?.toString() ?? emptyValue} emptyValue={emptyValue} /> })
                 }
-                {/* <Row icon={<RxWidth size={iconSize} />} title={'Superficie (mq)'} value={property?.mq?.toString() ?? unknownValue} />
-                <Row icon={<MdOutlineKingBed size={iconSize} />} title={'Locali'} value={property?.beds?.toString() ?? unknownValue} />
-                <Row icon={<MdOutlineBathtub size={iconSize} />} title={'Bagni'} value={property?.baths?.toString() ?? unknownValue} /> */}
+                {/* <Row icon={<RxWidth size={iconSize} />} title={'Superficie (mq)'} value={property.mq?.toString() ?? unknownValue} />
+                <Row icon={<MdOutlineKingBed size={iconSize} />} title={'Locali'} value={property.beds?.toString() ?? unknownValue} />
+                <Row icon={<MdOutlineBathtub size={iconSize} />} title={'Bagni'} value={property.baths?.toString() ?? unknownValue} /> */}
             </div>
         </div>
 
         {/* DESCRIPTION */}
         <div className='flex flex-col space-y-2 h-fit'>
             <p className='text-sm text-medium opacity-50'>Descrizione</p>
-            <p className={property?.description == null
-                ? 'opacity-50' : ''}>{property?.description ?? emptyValue}</p>
+            <p className={
+                property?.description == null
+                    ? 'opacity-50' : ''}
+            >{property?.description ?? emptyValue}</p>
         </div>
     </main >
 }
