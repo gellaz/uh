@@ -36,6 +36,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import { createClient } from "@/utils/supabase/client";
 import { type IRegister } from "@/validation/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
@@ -123,6 +124,7 @@ export default function RegisterFormPrivate({
   step,
   setStep,
 }: RegisterFormPrivateProps) {
+  const supabase = createClient();
   const router = useRouter();
   const [registrationComplete, setRegistrationComplete] = React.useState(false);
 
@@ -157,7 +159,10 @@ export default function RegisterFormPrivate({
     setStep(step - 1);
   }
 
-  const onSubmit: SubmitHandler<IRegister> = async (data) => {
+  // 2. Define a submit handler.
+  async function onSubmit(values: IRegister) {
+    console.log(values);
+
     if (step < 4) {
       setStep(step + 1);
     } else {
@@ -165,10 +170,21 @@ export default function RegisterFormPrivate({
 
       if (isFormValid) {
         setRegistrationComplete(true);
-        console.log(data); // TODO: use supabase to register user
+        const { data, error } = await supabase.auth.signUp({
+          email: values.email,
+          password: values.password,
+          phone: values.phoneNumber,
+        });
+
+        if (error) {
+          console.error(error);
+          return;
+        } else {
+          console.log(data);
+        }
       }
     }
-  };
+  }
 
   return (
     <>

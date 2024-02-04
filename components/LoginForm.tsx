@@ -11,13 +11,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { toast } from "@/components/ui/use-toast";
+import { createClient } from "@/utils/supabase/client";
 import { loginSchema, type ILogin } from "@/validation/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+const formSchema = z.object({
+  email: z.string().email({ message: "Insert a valid email" }),
+  password: z.string().min(0, { message: "Insert your password" }),
+});
 
 export default function LoginForm() {
+  const supabase = createClient();
   const router = useRouter();
 
   const form = useForm<ILogin>({
@@ -28,47 +35,21 @@ export default function LoginForm() {
     },
   });
 
-  async function onSubmit(values: ILogin) {
-    console.log(values);
-  }
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const { error } = await supabase.auth.signInWithPassword(values);
 
-  /*   async function onSubmitOld(values: ILogin) {
-    try {
-      const res = await signIn("credentials", {
-        email: values.email,
-        password: values.password,
-        redirect: false,
-      });
-
-      if (res?.error) {
-        toast({
-          title: "Uh oh! An error occurred.",
-          description: res.error,
-          variant: "destructive",
-        });
-      } else {
-        const session = await getSession();
-
-        if (session) {
-          router.push(
-            `/dashboard/${session.user.role.toLowerCase()}/${session.user.id}`
-          );
-        }
-      }
-    } catch (error) {
-      toast({
-        title: "Uh oh! An error occurred.",
-        description: "There was an error logging in.",
-        variant: "destructive",
-      });
+    if (error) {
+      router.push("/error");
     }
-  } */
+
+    router.push("/");
+  }
 
   return (
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          {/** email */}
+          {/** Email */}
           <FormField
             control={form.control}
             name="email"
@@ -76,13 +57,13 @@ export default function LoginForm() {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="user@mail.com" {...field} />
+                  <Input type="text" placeholder="user@mail.com" {...field} />
                 </FormControl>
                 <FormMessage className="text-xs" />
               </FormItem>
             )}
           ></FormField>
-          {/** password */}
+          {/** Password */}
           <FormField
             control={form.control}
             name="password"
