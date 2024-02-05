@@ -23,8 +23,14 @@ import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { User } from "@supabase/supabase-js";
+import { supabase } from "@/utils/supabase/client";
 
-export default function AppBar() {
+interface AppBarProps {
+  user: User;
+}
+
+export default function AppBar({ user }: AppBarProps) {
   const notiStyle =
     "flex w-9 h-9 rounded-md items-center justify-center hover:bg-slate-100";
   const iconSize = 20;
@@ -53,6 +59,11 @@ export default function AppBar() {
     }
 
     return <h1>{cleanned}</h1>;
+  };
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.refresh();
   };
 
   return (
@@ -91,13 +102,13 @@ export default function AppBar() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Avatar className="hover:cursor-pointer hover:ring-2 hover:ring-primary">
-                  <AvatarFallback>MG</AvatarFallback>
+                  <AvatarFallback>UU</AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56">
                 <DropdownMenuLabel>
                   Marco Gelli
-                  <p className="text-xs font-light">marcogelli1994@gmail.com</p>
+                  <p className="text-xs font-light">{user.email}</p>
                 </DropdownMenuLabel>
 
                 <DropdownMenuSeparator />
@@ -118,7 +129,7 @@ export default function AppBar() {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
                   className="hover:cursor-pointer focus:text-rose-500"
-                  onClick={async () => console.log("sign out")}
+                  onClick={handleSignOut}
                 >
                   <LogOutIcon className="mr-2 h-4 w-4" />
                   <span>Log out</span>

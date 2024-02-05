@@ -34,7 +34,7 @@ export default async function HomeLayout({
     <main className="flex flex-row h-screen w-screen">
       <Sidebar />
       <div className={"flex flex-col w-full"}>
-        <AppBar />
+        <AppBar user={data.user} />
         {children}
       </div>
     </main>
