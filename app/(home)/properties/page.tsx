@@ -1,11 +1,12 @@
-"use client";
+'use client'
 
-import { Filter, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Property } from "@/types/properties";
 import PropertyCard from "@/components/property/propertyCard";
 import TabController from "@/components/tabController";
 import { getProperties } from "@/actions/property/propertyActions";
+import CategoryDialog from "@/components/property/new/CategoryDialog";
+import FilterSheet from "@/components/property/new/FilterSheet";
 
 export default function PropertyPage() {
   const [error, setError] = useState<string | null>(null);
@@ -28,31 +29,14 @@ export default function PropertyPage() {
   return (
     <div className="flex flex-col h-full w-full p-4 space-y-4">
       <div className="flex flex-row space-x-4 w-full items-center justify-between">
-        {/* <input
-                type="search"
-                name='searchInput'
-                id='searchInput'
-                className={'border rounded-md p-2 text-sm hover:bg-slate-50 hover:border-black '}
-                placeholder='Cerca qui...'
-            /> */}
         <TabController
           className="flex-1"
           tabs={["Tutti", "Affitto", "Vendita"]}
           selected={0}
           onTabChange={() => { }}
         />
-        <a
-          className="flex w-9 h-9 p-2 rounded-full border border-primary items-center justify-center hover:bg-primary hover:text-white"
-          href="properties/new/"
-        >
-          <Plus />
-        </a>
-        <a
-          className="flex w-9 h-9 p-2 rounded-full border border-primary items-center justify-center hover:bg-primary hover:text-white"
-          href=""
-        >
-          <Filter />
-        </a>
+        <CategoryDialog />
+        <FilterSheet />
       </div>
       <div className="flex grid-cols-4 gap-4 w-full h-full">
         {error != null ? (

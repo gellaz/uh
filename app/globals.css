@@ -98,6 +98,10 @@
     @apply flex flex-row w-full h-full;
   }
 
+  .grid-col{
+    @apply grid grid-flow-row gap-2 
+  }
+
   .outlined {
     @apply border hover:border-black rounded-md;
   }

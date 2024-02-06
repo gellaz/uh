@@ -1,17 +1,16 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-
-import AccessibilityPage from "../../../../components/property/new/accessibility/page";
-import AmenitiesPage from "../../../../components/property/new/amenities/page";
+import AccessibilityContent from "../../../../components/property/new/contents/AccessibilityContent";
+import FeaturesContent from "../../../../components/property/new/contents/FeaturesContent";
 import { Button } from "@/components/ui/button";
-import CategoryPage from "../../../../components/property/new/category/page";
-import HeatingPage from "../../../../components/property/new/heating/page";
-import LocationPage from "../../../../components/property/new/location/page";
-import MediaPage from "../../../../components/property/new/media/page";
+import CategoryContent from "../../../../components/property/new/contents/CategoryContent";
+import HeatingContent from "../../../../components/property/new/contents/HeatingContent";
+import LocationContent from "../../../../components/property/new/contents/LocationContent";
+import MediaContent from "../../../../components/property/new/contents/MediaContent";
 import NavBarNewProperty from "@/components/property/NavBar";
-import PricePage from "../../../../components/property/new/price/page";
-import RoomsPage from "../../../../components/property/new/rooms/page";
+import PriceContent from "../../../../components/property/new/contents/PriceContent";
+import RoomsContent from "../../../../components/property/new/contents/RoomConent";
 import TabController from "@/components/tabController";
 import { useFormState } from "react-dom";
 import { z } from "zod";
@@ -25,7 +24,6 @@ export const newPropertyContext = createContext({
 export default function NewPropertyPage() {
   const [tabSelected, setTabSelected] = useState(0);
   const tabs = [
-    "Categoria",
     "Locali",
     "Caratteristiche",
     "Riscaldamento",
@@ -36,21 +34,20 @@ export default function NewPropertyPage() {
     "Descrizione",
   ];
   const contentViews = [
-    <CategoryPage />,
-    <RoomsPage />,
-    <AmenitiesPage />,
-    <HeatingPage />,
-    <AccessibilityPage />,
-    <PricePage />,
-    <MediaPage />,
-    <LocationPage />,
+    <RoomsContent />,
+    <FeaturesContent />,
+    <HeatingContent />,
+    <AccessibilityContent />,
+    <PriceContent />,
+    <MediaContent />,
+    <LocationContent />,
   ];
   const context = useContext(newPropertyContext);
   // const [formData, setFormData] = useFormState();
   const formSchema = z.object({});
 
   return (
-    <div className="w-screen h-full flex flex-col p-4 bg-white">
+    <div className="w-full h-full flex flex-col p-4 bg-white">
       {/* <NavBarNewProperty /> */}
       <TabController
         className="pt-0"
@@ -59,36 +56,34 @@ export default function NewPropertyPage() {
         onTabChange={handleOnTabChange}
       />
 
-      <form>
+      <form className='h-full w-full p-6'>
         {
           // CONTENT VIEW
           contentViews[tabSelected]
         }
       </form>
-      <footer className="flex w-full h-32 items-center justify-center px-10 pb-10">
-        <div className="flex flex-row w-1/2 space-x-4">
-          <Button
-            className="flex-1"
-            variant={"outline"}
-            onClick={() => {
-              if (tabSelected != 0) {
-                setTabSelected(tabSelected - 1);
-              }
-            }}
-          >
-            {tabSelected == 0 ? "Cancella" : "Indietro"}
-          </Button>
-          <Button
-            className="flex-1"
-            onClick={() => {
-              if (tabSelected != contentViews.length) {
-                setTabSelected(tabSelected + 1);
-              }
-            }}
-          >
-            {tabSelected != contentViews.length ? "Avanti" : "Crea"}
-          </Button>
-        </div>
+      <footer className="row w-full h-fit items-center justify-center px-56 py-10 space-x-4 ">
+        <Button
+          className="flex-1 "
+          variant={"outline"}
+          onClick={() => {
+            if (tabSelected != 0) {
+              setTabSelected(tabSelected - 1);
+            }
+          }}
+        >
+          {tabSelected == 0 ? "Cancella" : "Indietro"}
+        </Button>
+        <Button
+          className="flex-1"
+          onClick={() => {
+            if (tabSelected != contentViews.length) {
+              setTabSelected(tabSelected + 1);
+            }
+          }}
+        >
+          {tabSelected != contentViews.length ? "Avanti" : "Crea"}
+        </Button>
       </footer>
     </div>
   );

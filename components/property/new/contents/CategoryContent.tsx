@@ -39,18 +39,18 @@ export default function CategoryPage() {
                 sharedContext.category = i;
                 sharedContext.subcategory = -1;
                 setTypeLenght(
-                  propertyCategoryTypeItems[i].types != null
-                    ? propertyCategoryTypeItems[i].types!.length
+                  propertyCategoryTypeItems[i].subcategories != null
+                    ? propertyCategoryTypeItems[i].subcategories!.length
                     : 0
                 );
               }}
-              onChange={() => {}}
+              onChange={() => { }}
             >
               <p>{item.category}</p>
               <input
                 type="checkbox"
                 checked={sharedContext.category == i ? true : false}
-                onChange={() => {}}
+                onChange={() => { }}
                 readOnly={true}
               />
             </ol>
@@ -68,26 +68,26 @@ export default function CategoryPage() {
         </div>
         <Input className="p-4" placeholder="Cerca per tipologia..." />
         <div className={scrollColumnStyle}>
-          {propertyCategoryTypeItems[categorySelection].types != null
-            ? propertyCategoryTypeItems[categorySelection].types!.map(
-                (item, i) => (
-                  <ol
-                    key={i}
-                    className={olStyle}
-                    onClick={() => {
-                      setTypeSeltion(i);
-                      sharedContext.subcategory = i;
-                    }}
-                  >
-                    <p>{item.title}</p>
-                    <input
-                      type="checkbox"
-                      checked={sharedContext.subcategory == i ? true : false}
-                      onChange={() => {}}
-                    />
-                  </ol>
-                )
+          {propertyCategoryTypeItems[categorySelection].subcategories != null
+            ? propertyCategoryTypeItems[categorySelection].subcategories!.map(
+              (item, i) => (
+                <ol
+                  key={i}
+                  className={olStyle}
+                  onClick={() => {
+                    setTypeSeltion(i);
+                    sharedContext.subcategory = i;
+                  }}
+                >
+                  <p>{item.title}</p>
+                  <input
+                    type="checkbox"
+                    checked={sharedContext.subcategory == i ? true : false}
+                    onChange={() => { }}
+                  />
+                </ol>
               )
+            )
             : null}
         </div>
       </div>

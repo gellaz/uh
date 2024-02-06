@@ -9,14 +9,6 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
-
-interface heatingFormState {
-    ipe: boolean,
-    type: boolean,
-    fuel_source: boolean,
-    energy_class: boolean,
-}
-
 function RenderSelect(values: string[]) {
     return <Select>
         <SelectTrigger className="w-fit">
@@ -37,7 +29,7 @@ function RenderSelect(values: string[]) {
 export default function HeatingPage() {
     const types = ['Autonomo', 'Centralizzato', 'Conta calorie', 'Riscaldamento a gas', 'Riscaldamento a pavimento', 'Riscaldamento a parete', 'Riscaldamento a soffitto', 'Riscaldamento a ventilconvettori', 'Riscaldamento a termosifoni', 'Riscaldamento a stufa', 'Riscaldamento a pellet', 'Riscaldamento a legna', 'Riscaldamento a carbone', 'Riscaldamento a biomassa', 'Riscaldamento a aria', 'Riscaldamento a infrarossi', 'Riscaldamento a pannelli radianti', 'Riscaldamento a pannelli radianti a pavimento', 'Riscaldamento a pannelli radianti a parete', 'Riscaldamento a pannelli radianti a soffitto', 'Riscaldamento a pannelli radianti a ventilconvettori', 'Riscaldamento a pannelli radianti a termosifoni', 'Riscaldamento a pannelli radianti a stufa', 'Riscaldamento a pannelli radianti a pellet', 'Riscaldamento a pannelli radianti a legna', 'Riscaldamento a pannelli radianti a carbone', 'Riscaldamento a pannelli radianti a biomassa', 'Riscaldamento a pannelli radianti a aria', 'Riscaldamento a pannelli radianti a infrarossi', 'Riscaldamento a pannelli radianti a pannelli radianti'];
     const fuels = ['Gas', 'GPL', 'Elettrico']
-    const formStyle = 'flex flex-col w-full h-full space-y-4 items-center justify-center';
+    const formStyle = 'col w-full h-full space-y-4 items-center justify-center';
     const inputStyle = 'w-4'
 
     return (

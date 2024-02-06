@@ -1,8 +1,8 @@
 'use client'
 
 import { useRef, useState } from "react";
-import { MdDeleteOutline, MdOutlineImage } from "react-icons/md";
-
+import { Image, Trash2 } from 'lucide-react'
+// import { MdDeleteOutline } from "react-icons/md";
 
 interface uploadMediaDivProps {
     type: number
@@ -49,7 +49,7 @@ export default function UploadMediaDiv(props: uploadMediaDivProps) {
             }
             onMouseEnter={() => { isUploaded ? setIsHovered(true) : null }}
             onMouseLeave={() => { isUploaded ? setIsHovered(false) : null }}
-            className='flex flex-col h-[140px] w-full p-2 items-center justify-center border rounded-sm text-sm font-medium space-y-1 cursor-pointer hover:border-black'
+            className='col h-[124px] w-[160px] p-2 items-center justify-center border rounded-sm text-sm font-medium space-y-1 cursor-pointer hover:border-black'
             style={
                 {
                     backgroundImage: selectedImage ? `url(${selectedImage})` : 'none',
@@ -57,7 +57,7 @@ export default function UploadMediaDiv(props: uploadMediaDivProps) {
                     backgroundPosition: 'center',
                 }
             }>
-            {!isUploaded && <MdOutlineImage size={'32'} color={'gray'} />}
+            {!isUploaded && <Image size={'32'} color={'gray'} />}
             {!isUploaded && <p className={pStyle}>{handleType(props.type, props.index)}</p>}
             {
 
@@ -67,7 +67,7 @@ export default function UploadMediaDiv(props: uploadMediaDivProps) {
                             className='flex w-10 h-10 rounded-full items-center justify-center bg-red-100 text-red-500 text-xl'
                             onClick={() => handleDeleteFileSelected()}
                         >
-                            <MdDeleteOutline />
+                            <Trash2 size={16} />
                         </button>
                     </div>
                     : null
