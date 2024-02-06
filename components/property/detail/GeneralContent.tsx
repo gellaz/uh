@@ -1,10 +1,9 @@
 
 import Row from "@/components/property/detail/row";
 import { Property } from "@/types/properties";
-import { MdOutlineBathtub, MdOutlineKingBed, MdOutlineKitchen } from "react-icons/md";
-import { RxWidth } from "react-icons/rx";
+import { Ruler, Bath, BedDouble, Utensils } from "lucide-react";
 
-export default function GeneralPage(property: Property) {
+export default function GeneralContent(property: Property) {
     const mainStyle = 'flex flex-col h-[1000px] w-full overflow-hidden space-y-10 p-4';
     const gridStyle = 'grid grid-cols-2 gap-10';
     const iconSize = 18
@@ -12,7 +11,7 @@ export default function GeneralPage(property: Property) {
     const values = (property != null ? Object.values(property) : [])
     const keysLeft = keys.slice(3, 8)
     const valuesLeft = values.slice(3, 8)
-    const iconsRight = [<RxWidth key={1} size={iconSize} />, <MdOutlineKingBed key={2} size={iconSize} />, <MdOutlineBathtub key={3} size={iconSize} />, <MdOutlineKitchen key={4} size={iconSize} />]
+    const iconsRight = [<Ruler key={1} size={iconSize} />, <BedDouble key={2} size={iconSize} />, <Bath key={3} size={iconSize} />, <Utensils key={4} size={iconSize} />]
     const keysRight = keys.slice(9, 13)
     const valuesRight = values.slice(9, 13)
 
@@ -34,9 +33,6 @@ export default function GeneralPage(property: Property) {
                 {
                     keysLeft.map((item, i) => { return <Row key={i} title={textCleaning(item)} value={valuesLeft[i]?.toString() ?? emptyValue} /> })
                 }
-                {/* <Row title={'Categoria'} value={property.category?.toString() ?? unknownValue} />
-                <Row title={'Subcategoria'} value={property.subcategory?.toString() ?? unknownValue} />
-                <Row icon={<FaStairs size={iconSize} />} title={'Piano'} value={property.floor?.toString() ?? unknownValue} /> */}
             </div>
 
             {/* RIGHT SIDE */}
@@ -44,9 +40,6 @@ export default function GeneralPage(property: Property) {
                 {
                     keysRight.map((item, i) => { return <Row key={i} icon={iconsRight[i]} title={textCleaning(item)} value={valuesRight[i]?.toString() ?? emptyValue} emptyValue={emptyValue} /> })
                 }
-                {/* <Row icon={<RxWidth size={iconSize} />} title={'Superficie (mq)'} value={property.mq?.toString() ?? unknownValue} />
-                <Row icon={<MdOutlineKingBed size={iconSize} />} title={'Locali'} value={property.beds?.toString() ?? unknownValue} />
-                <Row icon={<MdOutlineBathtub size={iconSize} />} title={'Bagni'} value={property.baths?.toString() ?? unknownValue} /> */}
             </div>
         </div>
 

@@ -26,7 +26,7 @@ export type Heating = {
   energy_class: null;
 };
 
-export type Accessability = {
+export type Accessibility = {
   elevator: null;
   wheelchair_friendly: null;
 };

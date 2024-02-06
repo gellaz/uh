@@ -2,31 +2,28 @@
 
 import { useEffect, useState } from "react";
 import { DividerVerticalIcon } from "@radix-ui/react-icons";
-import { PropertiesService } from "@/utils/a/propertyService";
-import { useRouter } from "next/navigation";
-import { Edit, Share, Megaphone, Globe2, LockKeyhole, BadgeCheck } from 'lucide-react'
+import { Edit, Share, Megaphone, Globe2, LockKeyhole, BadgeCheck, } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import TabController from "@/components/tabController";
-import GeneralPage from "./generalPage/page";
-import FeaturesPage from "./featuresPage/page";
-import PricePage from "./pricePage/page";
-import HeatingPage from "./heatingPage/page";
+import GeneralContent from "../../../../../components/property/detail/GeneralContent";
+import FeaturesContent from "../../../../../components/property/detail/FeaturesContent";
+import PriceContent from "../../../../../components/property/detail/PriceContent";
+import HeatingContent from "../../../../../components/property/detail/HeatingContent";
 import Image from 'next/image'
 import Image1 from '/public/image1.jpg';
-import LocationPage from "./locationPage/page";
-import AccesibilityPage from "./accessibilityPage/page";
+import LocationContent from "../../../../../components/property/detail/LocationContent";
+import AccesibilityConent from "../../../../../components/property/detail/AccessibilityContent";
 import IllustrationCard from "@/components/property/illustrationCard";
-import { Property } from "@/types/properties";
-import { supabaseClient } from "@/utils/supabase/client";
+import { Accessibility, Address, Features, Heating, Price, Property } from "@/types/properties";
+import { getPropertyWithId } from "@/actions/property/propertyActions";
 
 export default function PropertyDetailPage({ params }: { params: { id: string } }) {
     const [tabSelected, setTabSelected] = useState(0)
     const [property, setProperty] = useState<Property>()
-    const [error, setError] = useState<string | null>()
+    const [error, setError] = useState()
     const paragraphStyle = 'text-sm font-normal';
     const paragraphStyle2 = 'text-sm font-semibold';
     const imageStyle = 'bg-slate-100 w-full h-full rounded-lg shadow-md border-[0.4px] border-primary/10';
-    const getAddress = `${property?.address}`;
     const unknownValue = 'No data available'
     const iconSize = 18
     const privateButton = <Button variant={'outline'}><Globe2 size={iconSize} className='mr-2' />Privato</Button>;
@@ -34,14 +31,27 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
     const verifyButton = <Button className='bg-cyan-500 hover:bg-cyan-600'><BadgeCheck size={iconSize} className='mr-2' />Verifica</Button>;
 
     // DATA FETCHING
-    useEffect(() => {
+    async function fetchProperty() {
+        try {
+            const response = await getPropertyWithId(params.id)
+            setProperty(response as Property)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
+    useEffect(() => {
+        fetchProperty();
     }, [])
 
-
-
     // TAB CONTENT PAGES
-    const tabContents = [GeneralPage(property!), FeaturesPage(property!), HeatingPage(property!), AccesibilityPage(property!), PricePage(property!), LocationPage(property!)];
+    const features = property?.features as Features;
+    const heating = property?.heating as Heating;
+    const accessibility = property?.accessibility as Accessibility;
+    const price = property?.price as Price;
+    const address = property?.address as Address
+    const fullAddress = `${address?.street} ${address?.street_number}, ${address?.city}, ${address?.zipcode},  ${address?.region}`;
+    const tabContents = [GeneralContent(property!), FeaturesContent(features), HeatingContent(heating), AccesibilityConent(accessibility), PriceContent(price), LocationContent(address)];
 
     // UPDATE THE SELECTED TAB INDEX
     function handleTabChange(index: number) {
@@ -90,7 +100,7 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
                     <h1>{property?.name}</h1>
                     <div className='flex flex-row space-x-2 items-center'>
                         {/* ADDRESS */}
-                        <p className={paragraphStyle}>{getAddress}</p>
+                        <p className={paragraphStyle}>{fullAddress}</p>
                         <DividerVerticalIcon color="gray" />
                         <p className={paragraphStyle + ' opacity-50'}>{'Creata: '}</p>
                         <p className={paragraphStyle}>{handleLocalDate(property?.inserted_at ?? unknownValue)}</p>

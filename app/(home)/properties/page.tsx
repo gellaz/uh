@@ -2,8 +2,6 @@
 
 import { Filter, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
-
-import { PropertiesService } from "@/utils/a/propertyService";
 import { Property } from "@/types/properties";
 import PropertyCard from "@/components/property/propertyCard";
 import TabController from "@/components/tabController";
@@ -13,6 +11,7 @@ export default function PropertyPage() {
   const [error, setError] = useState<string | null>(null);
   const [properties, setProperties] = useState<Property[]>([]);
 
+  // DATA FETCHING
   async function fetchProperties() {
     try {
       const response = await getProperties();
@@ -22,7 +21,6 @@ export default function PropertyPage() {
     }
   }
 
-  // DATA FETCHING
   useEffect(() => {
     fetchProperties();
   }, []);
@@ -41,7 +39,7 @@ export default function PropertyPage() {
           className="flex-1"
           tabs={["Tutti", "Affitto", "Vendita"]}
           selected={0}
-          onTabChange={() => {}}
+          onTabChange={() => { }}
         />
         <a
           className="flex w-9 h-9 p-2 rounded-full border border-primary items-center justify-center hover:bg-primary hover:text-white"

@@ -1,15 +1,15 @@
 import Row from "@/components/property/detail/row";
-import { PropertyType } from "@/models/property/type";
-import { MdOutlineElevator } from "react-icons/md";
-import { FaWheelchair } from "react-icons/fa";
+// import { MdOutlineElevator } from "react-icons/md";
+import { Accessibility as Wheelchair } from "lucide-react";
+import { Accessibility } from "@/types/properties";
 
-export default function AccesibilityPage(property: PropertyType) {
+export default function AccesibilityConent(accessibility: Accessibility) {
     const mainStyle = 'flex flex-col h-full w-full p-4 items-center';
     const dataStyle = 'flex flex-col w-[48%] space-y-4 overflow-scroll';
     const iconSize = 20
-    const icons = [<MdOutlineElevator key={1} size={iconSize} />, <FaWheelchair key={2} size={iconSize} />]
-    const keys = (property != null) ? Object.keys(property.accessibility) : []
-    const values = (property != null) ? Object.values(property.accessibility) : []
+    const icons = [<Wheelchair key={1} size={iconSize} />, <Wheelchair key={2} size={iconSize} />]
+    const keys = accessibility != null ? Object.keys(accessibility) : []
+    const values = accessibility != null ? Object.values(accessibility) : []
     const emptyValue = 'No data available'
 
     // CAPITALIZED AND CLEAN STRING 
@@ -17,7 +17,6 @@ export default function AccesibilityPage(property: PropertyType) {
         const cleanned = value.replaceAll('_', ' ')
         const letter = cleanned.charAt(0).toUpperCase()
         const slice = cleanned.slice(1)
-
         return letter + slice
     }
 
@@ -29,7 +28,7 @@ export default function AccesibilityPage(property: PropertyType) {
                         key={item}
                         icon={icons[i]}
                         title={textCleaning(item)}
-                        value={values[i]?.toString() ?? emptyValue}
+                        value={values[i] ?? emptyValue}
                         emptyValue={emptyValue}
                     />
                 )

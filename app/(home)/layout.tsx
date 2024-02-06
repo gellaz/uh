@@ -1,21 +1,16 @@
 import AppBar from "@/components/AppBar";
-import Sidebar from "@/components/Sidebar";
 import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import Sidebar from "@/components/sideBar";
 
-export default async function HomeLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function HomeLayout({ children, }: { children: React.ReactNode; }) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
-
   const { data, error } = await supabase.auth.getUser();
-  if (error || !data?.user) {
-    redirect("/login");
-  }
+
+  if (error || !data?.user) redirect("/login");
+
   /*   const pathname = usePathname();
   const hideAppBar = () => {
     const hasNew = pathname.includes("/new");

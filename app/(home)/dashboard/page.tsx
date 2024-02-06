@@ -1,7 +1,7 @@
+'use client'
+
 import DashboardContactTile from "@/components/dashboard/dashboardContact";
-import DashboardProperty from "@/components/dashboard/dashboardProperty";
-import { Button } from "@/components/ui/button";
-import { sibeBarTabs } from "@/constants/navBarItems";
+import { sibeBarTabs } from "@/components/sideBar";
 import Link from "next/link";
 
 export default function DashboardPage() {
