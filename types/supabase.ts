@@ -52,29 +52,29 @@ export interface Database {
       }
       profile: {
         Row: {
-          birthdate: string | null
+          birth_date: string | null
           email_secondary: string | null
-          firstname: string
+          first_name: string
           id: string
-          lastname: string | null
+          last_name: string | null
           sex: Database["public"]["Enums"]["sexEnum"]
           tax_id: string | null
         }
         Insert: {
-          birthdate?: string | null
+          birth_date?: string | null
           email_secondary?: string | null
-          firstname: string
+          first_name: string
           id?: string
-          lastname?: string | null
+          last_name?: string | null
           sex: Database["public"]["Enums"]["sexEnum"]
           tax_id?: string | null
         }
         Update: {
-          birthdate?: string | null
+          birth_date?: string | null
           email_secondary?: string | null
-          firstname?: string
+          first_name?: string
           id?: string
-          lastname?: string | null
+          last_name?: string | null
           sex?: Database["public"]["Enums"]["sexEnum"]
           tax_id?: string | null
         }
@@ -263,7 +263,7 @@ export interface Database {
         | "Villa plurifamiliare"
         | "Villa a schiera"
         | "Appartamento in villa"
-      sexEnum: "Male" | "Famale" | "Other"
+      sexEnum: "MALE" | "FEMALE" | "OTHER"
       WarehouseSubcategory: "Capannone"
     }
     CompositeTypes: {
