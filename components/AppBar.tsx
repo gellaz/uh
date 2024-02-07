@@ -64,8 +64,8 @@ export default function AppBar({ profile }: AppBarProps) {
 
   function getAvatarFallback(profile: Profile) {
     return (
-      profile.first_name?.charAt(0).toUpperCase() +
-      profile.last_name?.charAt(0).toUpperCase()
+      profile.first_name.charAt(0).toUpperCase() +
+      profile.last_name.charAt(0).toUpperCase()
     );
   }
 
