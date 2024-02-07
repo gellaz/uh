@@ -11,7 +11,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { createClient, supabase } from "@/utils/supabase/client";
+import { createClient } from "@/utils/supabase/client";
 import { loginSchema, type ILogin } from "@/validation/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -24,6 +24,7 @@ const formSchema = z.object({
 });
 
 export default function LoginForm() {
+  const supabase = createClient();
   const router = useRouter();
 
   const form = useForm<ILogin>({

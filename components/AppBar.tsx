@@ -24,13 +24,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { User } from "@supabase/supabase-js";
-import { supabase } from "@/utils/supabase/client";
+import { createClient } from "@/utils/supabase/client";
 
 interface AppBarProps {
   user: User;
 }
 
 export default function AppBar({ user }: AppBarProps) {
+  const supabase = createClient();
   const notiStyle =
     "flex w-9 h-9 rounded-md items-center justify-center hover:bg-slate-100";
   const iconSize = 20;
