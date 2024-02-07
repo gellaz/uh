@@ -14,8 +14,11 @@ export async function signUp(registerSchema: IRegister) {
     phone: registerSchema.phoneNumber,
     options: {
       data: {
+        email: registerSchema.email,
+        phone: registerSchema.phoneNumber,
         first_name: registerSchema.firstName,
         last_name: registerSchema.lastName,
+        tax_id: registerSchema.taxId,
       },
     },
   });
