@@ -6,7 +6,7 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
-export interface Database {
+export type Database = {
   public: {
     Tables: {
       agent: {
@@ -50,35 +50,40 @@ export interface Database {
           }
         ]
       }
-      profile: {
+      profiles: {
         Row: {
-          birth_date: string | null
-          email_secondary: string | null
+          email: string
           first_name: string
           id: string
-          last_name: string | null
-          sex: Database["public"]["Enums"]["sexEnum"]
-          tax_id: string | null
+          last_name: string
+          phone: string | null
+          tax_id: string
         }
         Insert: {
-          birth_date?: string | null
-          email_secondary?: string | null
+          email: string
           first_name: string
-          id?: string
-          last_name?: string | null
-          sex: Database["public"]["Enums"]["sexEnum"]
-          tax_id?: string | null
+          id: string
+          last_name: string
+          phone?: string | null
+          tax_id: string
         }
         Update: {
-          birth_date?: string | null
-          email_secondary?: string | null
+          email?: string
           first_name?: string
           id?: string
-          last_name?: string | null
-          sex?: Database["public"]["Enums"]["sexEnum"]
-          tax_id?: string | null
+          last_name?: string
+          phone?: string | null
+          tax_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "profiles_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       properties: {
         Row: {
