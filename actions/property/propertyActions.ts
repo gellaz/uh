@@ -1,17 +1,19 @@
 "use server";
 
-import { Database } from "@/types/supabase";
-import { supabase } from "@/utils/supabase/client";
+import { Property } from "@/types/properties";
+import { cookies } from "next/headers";
+import { createClient } from "@/utils/supabase/actions";
 
-export async function getProperties() {
+export async function getProperties(): Promise<Property[]> {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
   const { data, error } = await supabase
     .from("properties")
-    .select()
+    .select("*")
     .order("inserted_at", { ascending: false });
 
   if (error) {
-    console.error(error);
-    return error;
+    throw error;
   }
 
   console.log(data);
@@ -19,9 +21,11 @@ export async function getProperties() {
 }
 
 export async function getPropertyWithId(id: string) {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
   const { data, error } = await supabase
     .from("properties")
-    .select()
+    .select("*")
     .eq("id", id)
     .single();
 
@@ -33,20 +37,3 @@ export async function getPropertyWithId(id: string) {
   console.log(data);
   return data;
 }
-
-// export async function getProperties(){
-//     const { data, error } = await supabaseClient
-//       .from('properties')
-//       .select('*');
-//     if (error) throw error;
-//     return data;
-//   };
-
-//   export async function getProperty(id: string) {
-//     const { data, error } = await supabaseClient
-//       .from('properties')
-//       .select('*')
-//       .order('inserted_at', { ascending: true });
-//     if (error) throw error;
-//     return data;
-//   };
