@@ -9,7 +9,7 @@ import {
   SettingsIcon,
   UserIcon,
 } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,14 +23,14 @@ import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { User } from "@supabase/supabase-js";
+import { Profile } from "@/types/profiles";
 import { createClient } from "@/utils/supabase/client";
 
 interface AppBarProps {
-  user: User;
+  profile: Profile;
 }
 
-export default function AppBar({ user }: AppBarProps) {
+export default function AppBar({ profile }: AppBarProps) {
   const supabase = createClient();
   const notiStyle =
     "flex w-9 h-9 rounded-md items-center justify-center hover:bg-slate-100";
@@ -62,10 +62,19 @@ export default function AppBar({ user }: AppBarProps) {
     return <h1>{cleanned}</h1>;
   };
 
+  function getAvatarFallback(profile: Profile) {
+    return (
+      profile.first_name?.charAt(0).toUpperCase() +
+      profile.last_name?.charAt(0).toUpperCase()
+    );
+  }
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     router.refresh();
   };
+
+  const avatarFallback = getAvatarFallback(profile);
 
   return (
     <div className="flex flex-row p-3 justify-between items-center border-b bg-background">
@@ -103,13 +112,13 @@ export default function AppBar({ user }: AppBarProps) {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Avatar className="hover:cursor-pointer hover:ring-2 hover:ring-primary">
-                  <AvatarFallback>UU</AvatarFallback>
+                  <AvatarFallback>{avatarFallback}</AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56">
                 <DropdownMenuLabel>
-                  Marco Gelli
-                  <p className="text-xs font-light">{user.email}</p>
+                  {profile.first_name} {profile.last_name}
+                  <p className="text-xs font-light">{profile.email}</p>
                 </DropdownMenuLabel>
 
                 <DropdownMenuSeparator />
