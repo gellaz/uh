@@ -30,9 +30,9 @@ export const registerSchema = z.object({
 
         return age >= 18;
       },
-      { message: "You must be 18 years or older" },
+      { message: "You must be 18 years or older" }
     ),
-  sex: z.enum(["MALE", "FEMALE", "OTHER"]).optional(),
+  sex: z.enum(["MALE", "FEMALE", "OTHER"]),
   secondaryEmail: z
     .string()
     .email({ message: "Invalid secondary email address" })
