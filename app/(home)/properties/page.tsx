@@ -16,7 +16,7 @@ export default function PropertyPage() {
   async function fetchProperties() {
     try {
       const response = await getProperties();
-      setProperties(response as Property[]);
+      setProperties(response);
     } catch (error) {
       console.error(error);
     }
