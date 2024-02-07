@@ -1,5 +1,6 @@
 "use client";
 
+import { signUp } from "@/actions/auth";
 import PasswordInput from "@/components/PasswordInput";
 import {
   AlertDialog,
@@ -36,14 +37,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { createClient, supabase } from "@/utils/supabase/client";
+import { createClient } from "@/utils/supabase/client";
 import { type IRegister } from "@/validation/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 const stepOneBaseSchema = z.object({
@@ -76,7 +77,7 @@ const stepTwoBaseSchema = z.object({
       },
       { message: "You must be 18 years or older" }
     ),
-  sex: z.enum(["MALE", "FEMALE", "OTHER"]).optional(),
+  sex: z.enum(["MALE", "FEMALE", "OTHER"]),
 });
 
 const stepThreeBaseSchema = z.object({
@@ -124,6 +125,7 @@ export default function RegisterFormPrivate({
   step,
   setStep,
 }: RegisterFormPrivateProps) {
+  const supabase = createClient();
   const router = useRouter();
   const [registrationComplete, setRegistrationComplete] = React.useState(false);
 
@@ -136,51 +138,52 @@ export default function RegisterFormPrivate({
       ? stepThreeBaseSchema
       : combinedSchema;
 
+  const defaultFormValues = {
+    email: "",
+    password: "",
+    confirmPassword: "",
+    firstName: "",
+    lastName: "",
+    taxId: "",
+    birthDate: undefined,
+    sex: undefined,
+    secondaryEmail: "",
+    phoneNumber: "",
+    acceptTerms: undefined,
+  };
+
   const form = useForm<z.infer<typeof combinedSchema>>({
     resolver: zodResolver(currentSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-      confirmPassword: "",
-      firstName: "",
-      lastName: "",
-      taxId: "",
-      birthDate: undefined,
-      sex: undefined,
-      secondaryEmail: "",
-      phoneNumber: "",
-      acceptTerms: undefined,
-    },
+    defaultValues: defaultFormValues,
   });
 
-  function handleBackClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  async function handleBackClick(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) {
     e.preventDefault();
     setStep(step - 1);
   }
 
-  // 2. Define a submit handler.
+  async function validateForm(values: IRegister) {
+    const isFormValid = await form.trigger();
+    return isFormValid;
+  }
+
+  async function submitForm(values: IRegister) {
+    setRegistrationComplete(true);
+    signUp(values);
+  }
+
   async function onSubmit(values: IRegister) {
     console.log(values);
 
     if (step < 4) {
       setStep(step + 1);
     } else {
-      const isFormValid = await form.trigger();
+      const isFormValid = await validateForm(values);
 
       if (isFormValid) {
-        setRegistrationComplete(true);
-        const { data, error } = await supabase.auth.signUp({
-          email: values.email,
-          password: values.password,
-          phone: values.phoneNumber,
-        });
-
-        if (error) {
-          console.error(error);
-          return;
-        } else {
-          console.log(data);
-        }
+        submitForm(values);
       }
     }
   }
