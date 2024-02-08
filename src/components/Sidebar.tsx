@@ -4,7 +4,6 @@ import { Building2, LayoutDashboard, Search, Users } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
-import Logo from "@/public/favicon.ico";
 import { usePathname } from "next/navigation";
 
 export const sibeBarTabs = [
@@ -32,7 +31,6 @@ export const sibeBarTabs = [
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const logoSize = 24;
 
   const getClassName = (href: string) => {
     const isActive = pathname.endsWith(href);
@@ -44,7 +42,12 @@ export default function Sidebar() {
   return (
     <div className="flex flex-col w-[6%] h-full py-4 bg-primary space-y-4 items-center">
       <div className={getClassName("/")}>
-        <Image src={Logo} alt={"Logo"} width={logoSize} height={logoSize} />
+        <Image
+          src="/logo-white.svg"
+          alt="UrbanHunt logo"
+          width={30}
+          height={30}
+        />
       </div>
       <div className="flex flex-col w-full h-fit space-y-0 items-center flex-grow">
         {sibeBarTabs.map((tab, i) => (
