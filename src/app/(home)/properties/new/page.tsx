@@ -3,16 +3,16 @@
 import { createContext, useContext, useState } from "react";
 
 import AccessibilityContent from "../../../../components/property/new/contents/AccessibilityContent";
-import { Button } from "@/src/components/ui/button";
+import { Button } from "@/components/ui/button";
 import CategoryContent from "../../../../components/property/new/contents/CategoryContent";
 import FeaturesContent from "../../../../components/property/new/contents/FeaturesContent";
 import HeatingContent from "../../../../components/property/new/contents/HeatingContent";
 import LocationContent from "../../../../components/property/new/contents/LocationContent";
 import MediaContent from "../../../../components/property/new/contents/MediaContent";
-import NavBarNewProperty from "@/src/components/property/NavBar";
+import NavBarNewProperty from "@/components/property/NavBar";
 import PriceContent from "../../../../components/property/new/contents/PriceContent";
 import RoomsContent from "../../../../components/property/new/contents/RoomConent";
-import TabController from "@/src/components/tabController";
+import TabController from "@/components/tabController";
 import { useFormState } from "react-dom";
 import { z } from "zod";
 

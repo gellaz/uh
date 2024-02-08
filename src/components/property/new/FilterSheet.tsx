@@ -7,7 +7,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/src/components/ui/sheet";
+} from "@/components/ui/sheet";
 
 import { Filter } from "lucide-react";
 

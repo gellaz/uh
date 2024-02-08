@@ -5,10 +5,10 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/src/components/ui/select";
+} from "@/components/ui/select";
 
-import InputRow from "@/src/components/property/new/inputRow";
-import Row from "@/src/components/property/detail/row";
+import InputRow from "@/components/property/new/inputRow";
+import Row from "@/components/property/detail/row";
 
 function RenderSelect(values: string[]) {
   return (

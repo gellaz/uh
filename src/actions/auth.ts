@@ -1,8 +1,8 @@
 "use server";
 
-import { IRegister } from "@/src/validation/auth";
+import { IRegister } from "@/validation/auth";
 import { cookies } from "next/headers";
-import { createClient } from "@/src/utils/supabase/actions";
+import { createClient } from "@/utils/supabase/actions";
 
 export async function signUp(registerSchema: IRegister) {
   const cookieStore = cookies();

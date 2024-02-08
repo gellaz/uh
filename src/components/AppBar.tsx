@@ -18,13 +18,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/src/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { usePathname, useRouter } from "next/navigation";
 
-import { Button } from "@/src/components/ui/button";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Profile } from "@/src/types/profiles";
-import { createClient } from "@/src/utils/supabase/client";
+import { Profile } from "@/types/profiles";
+import { createClient } from "@/utils/supabase/client";
 
 interface AppBarProps {
   profile: Profile;

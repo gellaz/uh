@@ -1,5 +1,5 @@
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { Input, type InputProps } from "@/src/components/ui/input";
+import { Input, type InputProps } from "@/components/ui/input";
 import React, { useState } from "react";
 
 const PasswordInput: React.FC<InputProps> = ({ className, ...props }) => {

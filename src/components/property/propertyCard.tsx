@@ -1,4 +1,4 @@
-import { Address, Price, Property } from "@/src/types/properties";
+import { Address, Price, Property } from "@/types/properties";
 import { Bath, BedDouble, Ruler } from "lucide-react";
 
 import Image from "next/image";

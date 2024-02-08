@@ -1,18 +1,13 @@
 "use client";
 
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/src/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { Button } from "@/src/components/ui/button";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import RegisterFormPrivate from "@/src/components/RegisterFormPrivate";
-import RegisterStepperPrivate from "@/src/components/RegisterStepperPrivate";
-import { Separator } from "@/src/components/ui/separator";
+import RegisterFormPrivate from "@/components/RegisterFormPrivate";
+import RegisterStepperPrivate from "@/components/RegisterStepperPrivate";
+import { Separator } from "@/components/ui/separator";
 import { UserPlus2Icon } from "lucide-react";
 import { useState } from "react";
 

@@ -1,9 +1,9 @@
-import { Button } from "@/src/components/ui/button";
+import { Button } from "@/components/ui/button";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import LoginForm from "@/src/components/LoginForm";
-import { Separator } from "@/src/components/ui/separator";
+import LoginForm from "@/components/LoginForm";
+import { Separator } from "@/components/ui/separator";
 import { UserCircle2Icon } from "lucide-react";
 
 export default function LoginPage() {

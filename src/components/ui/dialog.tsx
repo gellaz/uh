@@ -4,7 +4,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import * as React from "react";
 
 import { Cross2Icon } from "@radix-ui/react-icons";
-import { cn } from "@/src/lib/utils";
+import { cn } from "@/lib/utils";
 
 const Dialog = DialogPrimitive.Root;
 

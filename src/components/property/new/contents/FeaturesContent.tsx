@@ -1,6 +1,6 @@
 import { Flame, ParkingSquare, Trees } from "lucide-react";
 
-import InputRow from "@/src/components/property/new/inputRow";
+import InputRow from "@/components/property/new/inputRow";
 
 export default function AmenitiesPage() {
   const formStyle = "col w-full h-full space-y-4 items-center justify-center";

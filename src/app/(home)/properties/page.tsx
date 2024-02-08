@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 
-import CategoryDialog from "@/src/components/property/new/CategoryDialog";
-import FilterSheet from "@/src/components/property/new/FilterSheet";
-import { Property } from "@/src/types/properties";
-import PropertyCard from "@/src/components/property/propertyCard";
-import TabController from "@/src/components/tabController";
-import { getProperties } from "@/src/actions/property";
+import CategoryDialog from "@/components/property/new/CategoryDialog";
+import FilterSheet from "@/components/property/new/FilterSheet";
+import { Property } from "@/types/properties";
+import PropertyCard from "@/components/property/propertyCard";
+import TabController from "@/components/tabController";
+import { getProperties } from "@/actions/property";
 
 export default function PropertyPage() {
   const [error, setError] = useState<string | null>(null);

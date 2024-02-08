@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowLeftIcon } from "lucide-react";
-import { Button } from "@/src/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
 export default function NavBarPropertyDetail({

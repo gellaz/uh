@@ -10,7 +10,7 @@ import {
   ChevronUpIcon,
 } from "@radix-ui/react-icons";
 
-import { cn } from "@/src/lib/utils";
+import { cn } from "@/lib/utils";
 
 const Select = SelectPrimitive.Root;
 

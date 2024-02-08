@@ -1,7 +1,7 @@
 "use client";
 
-import PasswordInput from "@/src/components/PasswordInput";
-import { Button } from "@/src/components/ui/button";
+import PasswordInput from "@/components/PasswordInput";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -9,10 +9,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/src/components/ui/form";
-import { Input } from "@/src/components/ui/input";
-import { createClient } from "@/src/utils/supabase/client";
-import { loginSchema, type ILogin } from "@/src/validation/auth";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { createClient } from "@/utils/supabase/client";
+import { loginSchema, type ILogin } from "@/validation/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";

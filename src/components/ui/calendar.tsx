@@ -10,11 +10,11 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/src/components/ui/select";
+} from "@/components/ui/select";
 
-import { ScrollArea } from "@/src/components/ui/scroll-area";
-import { buttonVariants } from "@/src/components/ui/button";
-import { cn } from "@/src/lib/utils";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 

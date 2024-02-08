@@ -1,7 +1,7 @@
 "use client";
 
-import { signUp } from "@/src/actions/auth";
-import PasswordInput from "@/src/components/PasswordInput";
+import { signUp } from "@/actions/auth";
+import PasswordInput from "@/components/PasswordInput";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -11,10 +11,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/src/components/ui/alert-dialog";
-import { Button } from "@/src/components/ui/button";
-import { Calendar } from "@/src/components/ui/calendar";
-import { Checkbox } from "@/src/components/ui/checkbox";
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -22,23 +22,23 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/src/components/ui/form";
-import { Input } from "@/src/components/ui/input";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/src/components/ui/popover";
+} from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/src/components/ui/select";
-import { cn } from "@/src/lib/utils";
-import { createClient } from "@/src/utils/supabase/client";
-import { type IRegister } from "@/src/validation/auth";
+} from "@/components/ui/select";
+import { cn } from "@/lib/utils";
+import { createClient } from "@/utils/supabase/client";
+import { type IRegister } from "@/validation/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";

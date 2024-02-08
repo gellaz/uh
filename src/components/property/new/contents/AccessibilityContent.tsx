@@ -1,4 +1,4 @@
-import InputRow from "@/src/components/property/new/inputRow";
+import InputRow from "@/components/property/new/inputRow";
 import { Accessibility as Wheelchair } from "lucide-react";
 
 export default function AccessibilityPage() {

@@ -1,4 +1,4 @@
-import MessageCard from "@/src/components/message_center/messageCard";
+import MessageCard from "@/components/message_center/MessageCard";
 
 export default function MessageCenterPage() {
   const messages = [

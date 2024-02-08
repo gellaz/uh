@@ -7,7 +7,7 @@ import {
   Heating,
   Price,
   Property,
-} from "@/src/types/properties";
+} from "@/types/properties";
 import {
   BadgeCheck,
   Edit,
@@ -19,18 +19,18 @@ import {
 import { useEffect, useState } from "react";
 
 import AccesibilityConent from "../../../../../components/property/detail/AccessibilityContent";
-import { Button } from "@/src/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { DividerVerticalIcon } from "@radix-ui/react-icons";
 import FeaturesContent from "../../../../../components/property/detail/FeaturesContent";
 import GeneralContent from "../../../../../components/property/detail/GeneralContent";
 import HeatingContent from "../../../../../components/property/detail/HeatingContent";
-import IllustrationCard from "@/src/components/property/illustrationCard";
+import IllustrationCard from "@/components/property/illustrationCard";
 import Image from "next/image";
 import Image1 from "/public/image1.jpg";
 import LocationContent from "../../../../../components/property/detail/LocationContent";
 import PriceContent from "../../../../../components/property/detail/PriceContent";
-import TabController from "@/src/components/tabController";
-import { getPropertyWithId } from "@/src/actions/property";
+import TabController from "@/components/tabController";
+import { getPropertyWithId } from "@/actions/property";
 
 export default function PropertyDetailPage({
   params,

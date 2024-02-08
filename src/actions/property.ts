@@ -1,8 +1,8 @@
 "use server";
 
-import { Property } from "@/src/types/properties";
+import { Property } from "@/types/properties";
 import { cookies } from "next/headers";
-import { createClient } from "@/src/utils/supabase/actions";
+import { createClient } from "@/utils/supabase/actions";
 
 export async function getProperties(): Promise<Property[]> {
   const cookieStore = cookies();

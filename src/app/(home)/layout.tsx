@@ -1,9 +1,7 @@
-import { QueryData, QueryError, QueryResult } from "@supabase/supabase-js";
-
-import AppBar from "@/src/components/AppBar";
-import Sidebar from "@/src/components/Sidebar";
+import AppBar from "@/components/AppBar";
+import Sidebar from "@/components/Sidebar";
 import { cookies } from "next/headers";
-import { createClient } from "@/src/utils/supabase/server";
+import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
 export default async function HomeLayout({
