@@ -1,4 +1,4 @@
-create type external_fixtures as enum (
+CREATE TYPE external_fixtures AS enum(
     'Glass wood',
     'Double glass wood',
     'Triple glass wood',
@@ -9,3 +9,4 @@ create type external_fixtures as enum (
     'Double glass PVC',
     'Triple glass PVC'
 );
+

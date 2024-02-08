@@ -1,1 +1,6 @@
-create type sex as enum ('Male', 'Female', 'Other');
+CREATE TYPE sex AS enum(
+    'Male',
+    'Female',
+    'Other'
+);
+

@@ -1,4 +1,4 @@
-create type energy_class as enum (
+CREATE TYPE energy_class AS enum(
     'Pending',
     'Exempt',
     'Unclassifiable',
@@ -15,3 +15,4 @@ create type energy_class as enum (
     'F',
     'G'
 );
+

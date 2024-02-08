@@ -1,4 +1,4 @@
-create type exposure as enum (
+CREATE TYPE exposure AS enum(
     'North',
     'South',
     'East',
@@ -15,3 +15,4 @@ create type exposure as enum (
     'South East West',
     'North South East West'
 );
+

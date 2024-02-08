@@ -1,6 +1,7 @@
-create type air_conditioning as enum (
+CREATE TYPE air_conditioning AS enum(
     'Cold only',
     'Hot only',
     'Cold and hot',
     'None'
 );
+

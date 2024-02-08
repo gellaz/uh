@@ -1,6 +1,13 @@
-create table property_subcategories (
-    name text not null,
-    category_name text not null,
-    constraint property_subcategories_pkey primary key (name),
-    constraint property_subcategories_category_name_fkey foreign key (category_name) references property_categories (name) on delete cascade
+CREATE TABLE public.property_subcategories(
+    name text NOT NULL,
+    category_name text NOT NULL,
+    CONSTRAINT property_subcategories_pkey PRIMARY KEY (name),
+    CONSTRAINT property_subcategories_category_name_fkey FOREIGN KEY (category_name) REFERENCES property_categories(name) ON DELETE CASCADE
 );
+
+ALTER TABLE public.property_subcategories ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Property subcategories are viewable by everyone." ON property_subcategories
+    FOR SELECT
+        USING (TRUE);
+

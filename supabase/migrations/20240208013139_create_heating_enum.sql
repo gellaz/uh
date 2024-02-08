@@ -1,5 +1,6 @@
-create type heating as enum (
+CREATE TYPE heating AS enum(
     'Independent',
     'Centralized',
     'None'
 );
+
