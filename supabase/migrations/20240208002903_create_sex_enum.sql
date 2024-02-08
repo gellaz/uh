@@ -1,0 +1,1 @@
+create type sex as enum ('Male', 'Female', 'Other');
