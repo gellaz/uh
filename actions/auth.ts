@@ -15,10 +15,12 @@ export async function signUp(registerSchema: IRegister) {
     options: {
       data: {
         email: registerSchema.email,
-        phone: registerSchema.phoneNumber,
         first_name: registerSchema.firstName,
         last_name: registerSchema.lastName,
+        birth_date: registerSchema.birthDate.toISOString().split("T")[0],
         tax_id: registerSchema.taxId,
+        phone: registerSchema.phoneNumber,
+        email_secondary: registerSchema.secondaryEmail,
       },
     },
   });
