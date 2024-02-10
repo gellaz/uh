@@ -15,12 +15,11 @@ import LocationContent from "../../../../../components/property/detail/LocationC
 import AccesibilityConent from "../../../../../components/property/detail/AccessibilityContent";
 import IllustrationCard from "@/components/property/illustrationCard";
 import { Accessibility, Address, Features, Heating, Price, Property } from "@/types/properties";
-import { getPropertyWithId } from "@/actions/property/propertyActions";
+import { getPropertyWithId } from "@/actions/property";
 
 export default function PropertyDetailPage({ params }: { params: { id: string } }) {
     const [tabSelected, setTabSelected] = useState(0)
     const [property, setProperty] = useState<Property>()
-    const [error, setError] = useState()
     const paragraphStyle = 'text-sm font-normal';
     const paragraphStyle2 = 'text-sm font-semibold';
     const imageStyle = 'bg-slate-100 w-full h-full rounded-lg shadow-md border-[0.4px] border-primary/10';

@@ -1,7 +1,6 @@
 "use client";
 
 import { Building2, LayoutDashboard, Search, Users } from "lucide-react";
-
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/public/favicon.ico";
@@ -30,15 +29,15 @@ export const sibeBarTabs = [
   },
 ];
 
-export default function Sidebar() {
-  const pathname = usePathname();
+export default function SideBar() {
+  const path = usePathname()
   const logoSize = 24;
-
   const getClassName = (href: string) => {
-    const isActive = pathname.endsWith(href);
-    return `flex w-full h-[56px] p-2 items-center justify-center hover:bg-orange-400 text-white ${
-      isActive ? "bg-orange-400" : "bg-primary"
-    }`;
+    const isActive = path.endsWith(href);
+    return `flex w-full h-[56px] p-2 items-center justify-center hover:bg-orange-400 text-white ${isActive
+      ? "bg-orange-400"
+      : "bg-primary"
+      }`;
   };
 
   return (

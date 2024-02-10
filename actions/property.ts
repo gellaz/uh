@@ -34,19 +34,10 @@ export async function getPropertyWithId(id: string) {
   return data;
 }
 
-// export async function getProperties(){
-//     const { data, error } = await supabaseClient
-//       .from('properties')
-//       .select('*');
-//     if (error) throw error;
-//     return data;
-//   };
+export async function getPropertyImage(id: string) {
+  const {data, error } = await supabase.storage.getBucket('propertyImages')
 
-//   export async function getProperty(id: string) {
-//     const { data, error } = await supabaseClient
-//       .from('properties')
-//       .select('*')
-//       .order('inserted_at', { ascending: true });
-//     if (error) throw error;
-//     return data;
-//   };
+  if (error != null) throw new Error(error.message); 
+
+  return data
+}

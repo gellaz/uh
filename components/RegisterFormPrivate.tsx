@@ -131,10 +131,10 @@ export default function RegisterFormPrivate({
     step === 1
       ? stepOneSchema
       : step === 2
-      ? stepTwoBaseSchema
-      : step === 3
-      ? stepThreeBaseSchema
-      : combinedSchema;
+        ? stepTwoBaseSchema
+        : step === 3
+          ? stepThreeBaseSchema
+          : combinedSchema;
 
   const form = useForm<z.infer<typeof combinedSchema>>({
     resolver: zodResolver(currentSchema),
@@ -173,6 +173,13 @@ export default function RegisterFormPrivate({
           email: values.email,
           password: values.password,
           phone: values.phoneNumber,
+          options: {
+            data: {
+              first_name: values.firstName,
+              last_name: values.lastName,
+              tax_id: values.taxId,
+            }
+          }
         });
 
         if (error) {
@@ -372,7 +379,7 @@ export default function RegisterFormPrivate({
               <FormField
                 control={form.control}
                 name="email"
-                render={({}) => (
+                render={({ }) => (
                   <FormItem>
                     <FormLabel>Primary contact email</FormLabel>
                     <FormControl>

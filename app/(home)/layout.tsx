@@ -2,7 +2,7 @@ import AppBar from "@/components/AppBar";
 import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import Sidebar from "@/components/sideBar";
+import SideBar from "@/components/SideBar";
 
 export default async function HomeLayout({ children, }: { children: React.ReactNode; }) {
   const cookieStore = cookies();
@@ -27,7 +27,7 @@ export default async function HomeLayout({ children, }: { children: React.ReactN
 
   return (
     <main className="flex flex-row h-screen w-screen">
-      <Sidebar />
+      <SideBar />
       <div className={"flex flex-col w-full"}>
         <AppBar user={data.user} />
         {children}

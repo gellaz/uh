@@ -41,17 +41,17 @@ export default function CategoryDialog() {
     }, [])
 
     // FUNCTIONS 
-    function handleChangeInSubcategory() {
-        const cat = (propertyCategoryTypeItems.find(item => item.category === category))
+    function handleChangeInSubcategory(newCategory: string) {
+        const cat = (propertyCategoryTypeItems.find(item => item.category === newCategory))
         const subcats = cat?.subcategories.map(item => item.title)
-        console.log('category: ' + category)
+        console.log('category: ' + newCategory)
         console.log('subcats: ' + subcats)
         setSubcategory(subcats ?? [])
     }
 
     function handleDropdownMenuTapped(item: any) {
         setCategory(item.category)
-        handleChangeInSubcategory()
+        handleChangeInSubcategory(item.category)
         setSelected(null)
     }
 
