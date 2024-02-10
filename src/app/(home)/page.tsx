@@ -2,6 +2,7 @@
 
 import DashboardContactTile from "@/components/dashboard/DashboardContact";
 import Link from "next/link";
+import NumberInput from "@/components/NumberInput";
 import { sibeBarTabs } from "@/components/Sidebar";
 
 export default function DashboardPage() {
@@ -25,6 +26,7 @@ export default function DashboardPage() {
             {dividerHor}
             {/* <DashboardProperty property={properties[2]} /> */}
           </div>
+          <NumberInput />
         </div>
 
         {/* RIGHT SIDE */}
