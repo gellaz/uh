@@ -30,10 +30,10 @@ If you wish to just develop locally and not deploy to Vercel, [follow the steps 
 
 3. Rename `.env.local.example` to `.env.local` and update the following:
 
-    ```dotenv
-    NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
-    NEXT_PUBLIC_SUPABASE_ANON_KEY=[INSERT SUPABASE PROJECT API ANON KEY]
-    ```
+   ```dotenv
+   NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=[INSERT SUPABASE PROJECT API ANON KEY]
+   ```
 
    Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` can be found in [your Supabase project's API settings](https://app.supabase.com/project/_/settings/api)
 
@@ -46,3 +46,9 @@ If you wish to just develop locally and not deploy to Vercel, [follow the steps 
    The starter kit should now be running on [localhost:3000](http://localhost:3000/).
 
 > Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally using Docker.
+
+5. Create new migration in local Database
+
+   ```bash
+   npx supabse migration new <migration_name>
+   ```

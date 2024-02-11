@@ -4,7 +4,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typegen": "npx supabase gen types typescript --local --schema public > src/types/supabase.ts"
+    "typegen": "npx supabase gen types typescript --local --schema public > src/types/supabase.ts",
+    "reset_local_db": "npx supabase db reset"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
