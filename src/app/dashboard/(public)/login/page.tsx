@@ -51,7 +51,7 @@ export default function LoginPage() {
             </div>
             <LoginForm />
             <Separator className="mb-3 mt-6" />
-            <Link href="/login">
+            <Link href="/dashboard/login">
               <div className="flex justify-center ">
                 <Button variant={"link"} className="text-md sm:text-base">
                   Forgot password?

@@ -50,7 +50,7 @@ export default function RegisterPage() {
               <span className="text-md mr-2 sm:text-base">
                 Already have an account?
               </span>
-              <Link href="/login">
+              <Link href="/dashboard/login">
                 <Button
                   variant="link"
                   className="text-md text-white sm:text-base"
