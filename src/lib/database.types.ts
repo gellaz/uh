@@ -52,21 +52,24 @@ export interface Database {
       }
       properties: {
         Row: {
+          air_conditioning: Database["public"]["Enums"]["air_conditioning"]
           bathrooms: number
-          bedrooms: number
           category: string
           city: string
           condition: Database["public"]["Enums"]["condition"]
           construction_year: number | null
           country: string
           created_at: string
-          elevator: boolean
+          elevator: Database["public"]["Enums"]["elevator"]
           energy_class: Database["public"]["Enums"]["energy_class"]
           exposure: Database["public"]["Enums"]["exposure"]
-          external_fixtures: Database["public"]["Enums"]["external_fixtures"]
+          external_fixtures_glass_type: Database["public"]["Enums"]["external_fixtures_glass_type"]
+          external_fixtures_material: Database["public"]["Enums"]["external_fixtures_material"]
           floor: number | null
           furnishing: Database["public"]["Enums"]["furnishing"]
           heating: Database["public"]["Enums"]["heating"]
+          heating_fuel: Database["public"]["Enums"]["heating_fuel"]
+          heating_type: Database["public"]["Enums"]["heating_type"] | null
           id: string
           kitchens: number
           mq: number
@@ -82,21 +85,24 @@ export interface Database {
           user_id: string
         }
         Insert: {
+          air_conditioning: Database["public"]["Enums"]["air_conditioning"]
           bathrooms: number
-          bedrooms: number
           category: string
           city: string
           condition: Database["public"]["Enums"]["condition"]
           construction_year?: number | null
           country: string
           created_at?: string
-          elevator: boolean
+          elevator: Database["public"]["Enums"]["elevator"]
           energy_class: Database["public"]["Enums"]["energy_class"]
           exposure: Database["public"]["Enums"]["exposure"]
-          external_fixtures: Database["public"]["Enums"]["external_fixtures"]
+          external_fixtures_glass_type: Database["public"]["Enums"]["external_fixtures_glass_type"]
+          external_fixtures_material: Database["public"]["Enums"]["external_fixtures_material"]
           floor?: number | null
           furnishing: Database["public"]["Enums"]["furnishing"]
           heating: Database["public"]["Enums"]["heating"]
+          heating_fuel: Database["public"]["Enums"]["heating_fuel"]
+          heating_type?: Database["public"]["Enums"]["heating_type"] | null
           id?: string
           kitchens: number
           mq: number
@@ -112,21 +118,24 @@ export interface Database {
           user_id: string
         }
         Update: {
+          air_conditioning?: Database["public"]["Enums"]["air_conditioning"]
           bathrooms?: number
-          bedrooms?: number
           category?: string
           city?: string
           condition?: Database["public"]["Enums"]["condition"]
           construction_year?: number | null
           country?: string
           created_at?: string
-          elevator?: boolean
+          elevator?: Database["public"]["Enums"]["elevator"]
           energy_class?: Database["public"]["Enums"]["energy_class"]
           exposure?: Database["public"]["Enums"]["exposure"]
-          external_fixtures?: Database["public"]["Enums"]["external_fixtures"]
+          external_fixtures_glass_type?: Database["public"]["Enums"]["external_fixtures_glass_type"]
+          external_fixtures_material?: Database["public"]["Enums"]["external_fixtures_material"]
           floor?: number | null
           furnishing?: Database["public"]["Enums"]["furnishing"]
           heating?: Database["public"]["Enums"]["heating"]
+          heating_fuel?: Database["public"]["Enums"]["heating_fuel"]
+          heating_type?: Database["public"]["Enums"]["heating_type"] | null
           id?: string
           kitchens?: number
           mq?: number
@@ -214,6 +223,7 @@ export interface Database {
         | "Excellent renovated"
         | "Good livable"
         | "To be renovated"
+      elevator: "None" | "Elevator" | "Goods Lift"
       energy_class:
         | "Pending"
         | "Exempt"
@@ -246,22 +256,22 @@ export interface Database {
         | "North East West"
         | "South East West"
         | "North South East West"
-      external_fixtures:
-        | "Glass wood"
-        | "Double glass wood"
-        | "Triple glass wood"
-        | "Glass metal"
-        | "Double glass metal"
-        | "Triple glass metal"
-        | "Glass PVC"
-        | "Double glass PVC"
-        | "Triple glass PVC"
+      external_fixtures_glass_type: "Single" | "Double" | "Triple"
+      external_fixtures_material: "Wood" | "Metal" | "PVC" | "Hybrid"
       furnishing:
         | "Furnished"
         | "Unfurnished"
         | "Partially furnished"
         | "Kitchen only"
       heating: "Independent" | "Centralized" | "None"
+      heating_fuel:
+        | "GPL"
+        | "Gas"
+        | "Elettrico"
+        | "Ibrido"
+        | "Metano"
+        | "Geo-termico"
+      heating_type: "A Pavimento" | "A Pannelli" | "A Parete"
       sex: "Male" | "Female" | "Other"
     }
     CompositeTypes: {
