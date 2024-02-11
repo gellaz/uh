@@ -42,7 +42,7 @@ export default function LoginForm() {
       router.push("/error");
     }
 
-    router.push("/");
+    router.push("/dashboard");
   }
 
   return (
