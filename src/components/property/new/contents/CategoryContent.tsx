@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 
 import { Input } from "@/components/ui/input";
-import { newPropertyContext } from "../../../../app/(dashboard)/properties/new/page";
+import { newPropertyContext } from "../../../../app/dashboard/properties/new/page";
 import { propertyCategoryTypeItems } from "@/constants/propertyTypeItems";
 
 export default function CategoryPage() {
