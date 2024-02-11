@@ -31,7 +31,7 @@ export default function LoginPage() {
           <Separator className="mt-6" />
           <div className="mt-4 flex items-center justify-center">
             <span className="text-md mr-2 sm:text-base">No account?</span>
-            <Link href="/register">
+            <Link href="/dashboard/register">
               <div className="flex justify-center ">
                 <Button
                   variant={"link"}
