@@ -18,17 +18,17 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import AccesibilityConent from "../../../../../components/property/detail/AccessibilityContent";
+import AccesibilityConent from "../../../../../../components/property/detail/AccessibilityContent";
 import { Button } from "@/components/ui/button";
 import { DividerVerticalIcon } from "@radix-ui/react-icons";
-import FeaturesContent from "../../../../../components/property/detail/FeaturesContent";
-import GeneralContent from "../../../../../components/property/detail/GeneralContent";
-import HeatingContent from "../../../../../components/property/detail/HeatingContent";
+import FeaturesContent from "../../../../../../components/property/detail/FeaturesContent";
+import GeneralContent from "../../../../../../components/property/detail/GeneralContent";
+import HeatingContent from "../../../../../../components/property/detail/HeatingContent";
 import IllustrationCard from "@/components/property/illustrationCard";
 import Image from "next/image";
 import Image1 from "/public/image1.jpg";
-import LocationContent from "../../../../../components/property/detail/LocationContent";
-import PriceContent from "../../../../../components/property/detail/PriceContent";
+import LocationContent from "../../../../../../components/property/detail/LocationContent";
+import PriceContent from "../../../../../../components/property/detail/PriceContent";
 import TabController from "@/components/tabController";
 import { getPropertyWithId } from "@/actions/property";
 
