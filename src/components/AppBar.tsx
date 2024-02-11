@@ -23,7 +23,6 @@ import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Profile } from "@/types/profiles";
 import { createClient } from "@/utils/supabase/client";
 
 interface AppBarProps {

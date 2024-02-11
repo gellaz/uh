@@ -1,5 +1,4 @@
 import { ChevronRight } from "lucide-react";
-import { Property } from "@/types/properties";
 
 interface DashboardPropertyProps {
   property: Property;

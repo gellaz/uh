@@ -1,6 +1,5 @@
 "use server";
 
-import { Property } from "@/types/properties";
 import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/actions";
 

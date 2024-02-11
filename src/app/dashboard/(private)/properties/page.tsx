@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 import CategoryDialog from "@/components/property/new/CategoryDialog";
 import FilterSheet from "@/components/property/new/FilterSheet";
-import { Property } from "@/types/properties";
 import PropertyCard from "@/components/property/propertyCard";
 import TabController from "@/components/tabController";
 import { getProperties } from "@/actions/property";
