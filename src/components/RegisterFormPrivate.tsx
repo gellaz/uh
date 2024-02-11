@@ -481,7 +481,9 @@ export default function RegisterFormPrivate({
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel onClick={() => router.push("/login")}>
+                      <AlertDialogCancel
+                        onClick={() => router.push("/dashboard/login")}
+                      >
                         Close
                       </AlertDialogCancel>
                     </AlertDialogFooter>
