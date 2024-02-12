@@ -38,8 +38,8 @@ export async function getPropertyWithId(id: string) {
 }
 
 /**
- * Fetches all the property sub-categories from the database
- * @returns The property sub-categories
+ * Fetches all the property categories from the database
+ * @returns The property categories
  */
 export async function fetchPropertyCategories(): Promise<PropertyCategory[]> {
   const cookieStore = cookies();
