@@ -14,17 +14,17 @@ export const sibeBarTabs = [
   },
   {
     title: "Contatti",
-    href: "/contacts",
+    href: "/dashboard/contacts",
     icon: <Users size={20} />,
   },
   {
     title: "Esplora",
-    href: "/explore",
+    href: "/dashboard/explore",
     icon: <Search size={20} />,
   },
   {
     title: "Proprietà",
-    href: "/properties",
+    href: "/dashboard/properties",
     icon: <Building2 size={20} />,
   },
 ];
