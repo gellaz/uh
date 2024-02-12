@@ -9,8 +9,6 @@ declare global {
   export type Property = DB["public"]["Tables"]["properties"]["Row"];
   export type PropertyCategory =
     DB["public"]["Tables"]["property_categories"]["Row"];
-  export type PropertySubCategory =
-    DB["public"]["Tables"]["property_subcategories"]["Row"];
   export type AirConditioning = DB["public"]["Enums"]["air_conditioning"];
   export type Condition = DB["public"]["Enums"]["condition"];
   export type Elevator = DB["public"]["Enums"]["elevator"];
