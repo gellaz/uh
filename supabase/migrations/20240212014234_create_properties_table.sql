@@ -1,7 +1,7 @@
 CREATE TABLE public.properties(
     id uuid NOT NULL DEFAULT gen_random_uuid(),
     category text NOT NULL,
-    sub_category text NOT NULL,
+    subcategory text NOT NULL,
     street_name text NOT NULL,
     street_number text NOT NULL,
     postal_code text NOT NULL,
@@ -31,8 +31,7 @@ CREATE TABLE public.properties(
     updated_at timestamp with time zone NOT NULL DEFAULT now(),
     user_id uuid NOT NULL,
     CONSTRAINT properties_pkey PRIMARY KEY (id),
-    CONSTRAINT properties_category_fkey FOREIGN KEY (category) REFERENCES property_categories(name),
-    CONSTRAINT properties_sub_category_fkey FOREIGN KEY (sub_category) REFERENCES property_subcategories(name),
+    CONSTRAINT properties_category_fkey FOREIGN KEY (category, subcategory) REFERENCES property_categories(category, subcategory),
     CONSTRAINT properties_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
 );
 

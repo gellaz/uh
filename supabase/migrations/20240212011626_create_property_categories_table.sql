@@ -1,6 +1,7 @@
 CREATE TABLE public.property_categories(
-    name text NOT NULL,
-    CONSTRAINT property_categories_pkey PRIMARY KEY (name)
+    category text NOT NULL,
+    subcategory text NOT NULL,
+    CONSTRAINT property_categories_pkey PRIMARY KEY (category, subcategory)
 );
 
 ALTER TABLE public.property_categories ENABLE ROW LEVEL SECURITY;

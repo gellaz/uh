@@ -79,7 +79,7 @@ export interface Database {
           state: string | null
           street_name: string
           street_number: string
-          sub_category: string
+          subcategory: string
           total_floors: number | null
           updated_at: string
           user_id: string
@@ -112,7 +112,7 @@ export interface Database {
           state?: string | null
           street_name: string
           street_number: string
-          sub_category: string
+          subcategory: string
           total_floors?: number | null
           updated_at?: string
           user_id: string
@@ -145,7 +145,7 @@ export interface Database {
           state?: string | null
           street_name?: string
           street_number?: string
-          sub_category?: string
+          subcategory?: string
           total_floors?: number | null
           updated_at?: string
           user_id?: string
@@ -153,17 +153,10 @@ export interface Database {
         Relationships: [
           {
             foreignKeyName: "properties_category_fkey"
-            columns: ["category"]
+            columns: ["category", "subcategory"]
             isOneToOne: false
             referencedRelation: "property_categories"
-            referencedColumns: ["name"]
-          },
-          {
-            foreignKeyName: "properties_sub_category_fkey"
-            columns: ["sub_category"]
-            isOneToOne: false
-            referencedRelation: "property_subcategories"
-            referencedColumns: ["name"]
+            referencedColumns: ["category", "subcategory"]
           },
           {
             foreignKeyName: "properties_user_id_fkey"
@@ -176,38 +169,18 @@ export interface Database {
       }
       property_categories: {
         Row: {
-          name: string
+          category: string
+          subcategory: string
         }
         Insert: {
-          name: string
+          category: string
+          subcategory: string
         }
         Update: {
-          name?: string
+          category?: string
+          subcategory?: string
         }
         Relationships: []
-      }
-      property_subcategories: {
-        Row: {
-          category_name: string
-          name: string
-        }
-        Insert: {
-          category_name: string
-          name: string
-        }
-        Update: {
-          category_name?: string
-          name?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "property_subcategories_category_name_fkey"
-            columns: ["category_name"]
-            isOneToOne: false
-            referencedRelation: "property_categories"
-            referencedColumns: ["name"]
-          }
-        ]
       }
     }
     Views: {
