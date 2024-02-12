@@ -36,3 +36,21 @@ export async function getPropertyWithId(id: string) {
   console.log(data);
   return data;
 }
+
+/**
+ * Fetches all the property sub-categories from the database
+ * @returns The property sub-categories
+ */
+export async function fetchPropertyCategories(): Promise<PropertyCategory[]> {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  const { data, error } = await supabase
+    .from("property_categories")
+    .select("*");
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
