@@ -20,7 +20,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useFormStep } from "@/context/FormStepContext";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -110,22 +110,7 @@ interface NewPropertyFormSchema {
 export default function NewPropertyForm({
   residentialSubcategories,
 }: NewPropertyFormSchema) {
-  const [currentStep, setCurrentStep] = useState(1);
-  const totalSteps = 3;
-
-  function nextStep() {
-    if (currentStep < totalSteps) {
-      setCurrentStep(currentStep + 1);
-    } else {
-      form.handleSubmit(onSubmit)(); // Manually trigger form submission if it's the final step
-    }
-  }
-
-  function prevStep() {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
-    }
-  }
+  const { currentStepIndex, nextStep, prevStep, totalSteps } = useFormStep();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -167,7 +152,7 @@ export default function NewPropertyForm({
   return (
     <Form {...form}>
       <form onSubmit={(e) => e.preventDefault()} className="space-y-8">
-        {currentStep === 1 && (
+        {currentStepIndex === 0 && (
           <>
             {/** Subcategory */}
             <FormField
@@ -287,7 +272,7 @@ export default function NewPropertyForm({
             </div>
           </>
         )}
-        {currentStep === 2 && (
+        {currentStepIndex === 1 && (
           <>
             <div className="grid grid-cols-4 gap-2">
               {/** Mq */}
@@ -570,7 +555,7 @@ export default function NewPropertyForm({
             </div>
           </>
         )}
-        {currentStep === 3 && (
+        {currentStepIndex === 2 && (
           <>
             <div className="grid grid-cols-3 gap-2">
               {/** External fixtures material */}
@@ -791,7 +776,7 @@ export default function NewPropertyForm({
         )}
         {/* Buttons container */}
         <div className="flex justify-center mt-4 space-x-4 w-full">
-          {currentStep > 1 && (
+          {currentStepIndex > 0 && (
             <Button
               variant="outline"
               type="button"
@@ -803,10 +788,10 @@ export default function NewPropertyForm({
           )}
 
           {/* Spacer div to ensure 'Next' button alignment when 'Previous' button is not rendered */}
-          {currentStep === 1 && <div className="w-1/4"></div>}
+          {currentStepIndex === 0 && <div className="w-1/4"></div>}
 
           <div className="w-1/4">
-            {currentStep < totalSteps ? (
+            {currentStepIndex < totalSteps - 1 ? (
               <Button type="button" onClick={nextStep} className="w-full">
                 Next
               </Button>
