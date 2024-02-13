@@ -1,4 +1,4 @@
-CREATE TYPE sex AS enum(
+CREATE TYPE sex_enum AS enum(
     'Male',
     'Female',
     'Other'
