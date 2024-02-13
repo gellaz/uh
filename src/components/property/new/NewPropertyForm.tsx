@@ -775,35 +775,37 @@ export default function NewPropertyForm({
           </>
         )}
         {/* Buttons container */}
-        <div className="flex justify-center mt-4 space-x-4 w-full">
-          {currentStepIndex > 0 && (
-            <Button
-              variant="outline"
-              type="button"
-              onClick={prevStep}
-              className="w-1/4"
-            >
-              Previous
-            </Button>
-          )}
-
-          {/* Spacer div to ensure 'Next' button alignment when 'Previous' button is not rendered */}
-          {currentStepIndex === 0 && <div className="w-1/4"></div>}
-
-          <div className="w-1/4">
-            {currentStepIndex < totalSteps - 1 ? (
-              <Button type="button" onClick={nextStep} className="w-full">
-                Next
-              </Button>
-            ) : (
+        <div className="mt-auto p-4">
+          <div className="flex justify-center space-x-4 w-full">
+            {currentStepIndex > 0 && (
               <Button
+                variant="outline"
                 type="button"
-                onClick={() => form.handleSubmit(onSubmit)()}
-                className="w-full"
+                onClick={prevStep}
+                className="w-1/4"
               >
-                Submit
+                Previous
               </Button>
             )}
+
+            {/* Spacer div to ensure 'Next' button alignment when 'Previous' button is not rendered */}
+            {currentStepIndex === 0 && <div className="w-1/4"></div>}
+
+            <div className="w-1/4">
+              {currentStepIndex < totalSteps - 1 ? (
+                <Button type="button" onClick={nextStep} className="w-full">
+                  Next
+                </Button>
+              ) : (
+                <Button
+                  type="button"
+                  onClick={() => form.handleSubmit(onSubmit)()}
+                  className="w-full"
+                >
+                  Submit
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </form>
