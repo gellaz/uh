@@ -1,7 +1,11 @@
-CREATE TYPE air_conditioning AS enum(
-    'Cold only',
-    'Hot only',
-    'Cold and hot',
-    'None'
+CREATE TYPE air_conditioning_enum AS enum(
+    'Autonomo',
+    'Centralizzato',
+    'Predisposizione impianto',
+    'Assente',
 );
 
+-- 'Cold only',
+-- 'Hot only',
+-- 'Cold and hot',
+-- 'None',

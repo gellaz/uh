@@ -1,9 +1,16 @@
-CREATE TYPE heating_fuel AS enum(
-    'GPL',
+CREATE TYPE heating_fuel_enum AS enum(
     'Gas',
-    'Elettrico',
-    'Ibrido',
     'Metano',
-    'Geo-termico'
+    'GPL',
+    'Gasolio',
+    'Pellet',
+    'Legna',
+    'Solare',
+    'Foto-voltaico',
+    'Teleriscaldamento',
+    'Pompa di calore',
+    'Elettrico',
 );
 
+-- 'Ibrido',
+-- 'Geo-termico',

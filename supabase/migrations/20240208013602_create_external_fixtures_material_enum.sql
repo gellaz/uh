@@ -1,4 +1,4 @@
-CREATE TYPE external_fixtures_material AS enum(
+CREATE TYPE external_fixtures_material_enum AS enum(
     'Wood',
     'Metal',
     'PVC',

@@ -1,6 +1,9 @@
-CREATE TYPE heating_type AS enum(
+CREATE TYPE heating_type_enum AS enum(
     'A Pavimento',
-    'A Pannelli',
-    'A Parete'
+    'A Radiatori',
+    'Ad Aria',
+    'A Stufa'.
 );
 
+-- 'A Pannelli',
+-- 'A Parete',

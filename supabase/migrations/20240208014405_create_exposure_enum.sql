@@ -1,4 +1,4 @@
-CREATE TYPE exposure AS enum(
+CREATE TYPE exposure_enum AS enum(
     'North',
     'South',
     'East',

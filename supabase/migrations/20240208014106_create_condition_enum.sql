@@ -1,4 +1,4 @@
-CREATE TYPE condition AS enum(
+CREATE TYPE condition_enum AS enum(
     'New under construction',
     'Excellent renovated',
     'Good livable',
