@@ -36,15 +36,9 @@ export default async function NewPropertyPage() {
 
   return (
     <FormStepProvider steps={formSteps}>
-      <div className="p-4 flex flex-col space-y-4">
+      <div className="flex flex-col space-y-4">
         <BreadcrumbStepper />
-        <Card className="w-30">
-          <CardContent className="p-8 h-fit">
-            <NewPropertyForm
-              residentialSubcategories={residentialSubcategories}
-            />
-          </CardContent>
-        </Card>
+        <NewPropertyForm residentialSubcategories={residentialSubcategories} />
       </div>
     </FormStepProvider>
   );
