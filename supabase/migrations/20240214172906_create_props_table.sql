@@ -394,6 +394,7 @@ CREATE TABLE public.properties_residential(
     subcategory property_residential_subcategory_enum NOT NULL,
     -- SUPERFICIE: sezione da aggiungere vedi getrix
     -- COMPOSIZIONE
+    mq smallint NOT NULL,
     rooms smallint NOT NULL,
     bathrooms smallint NOT NULL, -- può essere di vari tipi lo gestiamo con jsonb?
     kitchens smallint NOT NULL, -- può essere di vari tipi lo gestiamo con jsonb?
