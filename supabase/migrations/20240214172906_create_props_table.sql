@@ -13,15 +13,15 @@ CREATE TYPE property_condition_enum AS enum(
 -- Stato/Condizioni immobile
 --
 CREATE TYPE property_floor_enum AS enum(
-    '', -- interrato (-5)
-    '', -- interrato (-4)
-    '', -- interrato (-3)
-    '', -- interrato (-2)
-    '', -- interrato (-1)
-    '', -- seminterrato 
-    '', -- piano terra
-    '', -- ammezzato
-    '', -- piano rialzato
+    'underground (-5)', -- interrato (-5)
+    'underground (-4)', -- interrato (-4)
+    'underground (-3)', -- interrato (-3)
+    'underground (-2)', -- interrato (-2)
+    'underground (-1)', -- interrato (-1)
+    'basement', -- seminterrato 
+    'ground floor', -- piano terra
+    'mezzanine', -- ammezzato
+    'raised floor', -- piano rialzato
     '1', -- 1
     '13', -- '13' 
     '14', -- '14' 
@@ -112,8 +112,8 @@ CREATE TYPE property_furnishing_enum AS enum(
 -- 
 CREATE TYPE property_class_enum AS enum(
     'Luxury', -- Di lusso
-    '', -- Signorile
-    '', -- Media
+    'Elengant', -- Signorile
+    'Medium', -- Media
     'Economy' -- Economica
 );
 
@@ -241,7 +241,7 @@ CREATE TYPE property_air_conditioning_enum AS enum(
 CREATE TYPE property_air_conditioning_type_enum AS enum(
     'Cold only', -- Solo freddo
     'Hot only', -- Solo caldo
-    'Cold/Hot', -- Freddo e caldo
+    'Cold/Hot' -- Freddo e caldo
 );
 
 --
@@ -349,8 +349,8 @@ CREATE TYPE property_cadestral_category_enum AS enum(
     'F/4', -- Residenziale
     'F/5', -- Residenziale
     'F/6', -- Residenziale
-    'T', -- Residenziale
-)
+    'T' -- Residenziale
+);
     
 -- #############################################################
 --
@@ -359,6 +359,7 @@ CREATE TYPE property_cadestral_category_enum AS enum(
 
 CREATE TABLE public.properties_residential(
     id uuid NOT NULL DEFAULT gen_random_uuid(),
+    user_id uuid NOT NULL,
     -- SUPERFICIE: sezione da aggiungere vedi getrix
     -- COMPOSIZIONE
     rooms smallint NOT NULL,
@@ -431,7 +432,7 @@ CREATE TABLE public.properties_residential(
     -- MEDIA
     -- fotografie, video, planimetrie, virtual tour, APE,
     CONSTRAINT properties_pkey PRIMARY KEY (id),
-    CONSTRAINT properties_category_fkey FOREIGN KEY (category, subcategory) REFERENCES property_categories(category, subcategory),
     CONSTRAINT properties_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+    -- CONSTRAINT properties_category_fkey FOREIGN KEY (category, subcategory) REFERENCES property_categories(category, subcategory),
 );
 

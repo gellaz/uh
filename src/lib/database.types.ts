@@ -50,114 +50,284 @@ export interface Database {
           }
         ]
       }
-      properties: {
+      properties_residential: {
         Row: {
-          air_conditioning: Database["public"]["Enums"]["air_conditioning"]
+          air_conditioning:
+            | Database["public"]["Enums"]["property_air_conditioning_enum"]
+            | null
+          air_conditioning_type:
+            | Database["public"]["Enums"]["property_air_conditioning_type_enum"]
+            | null
+          alarm: boolean | null
+          balcony: number | null
           bathrooms: number
-          category: string
+          cadastral_particle: string | null
+          cadastral_section: string | null
+          cadastral_sheet: string | null
+          cadastral_subaltern: string | null
+          cadestral_category:
+            | Database["public"]["Enums"]["property_cadestral_category_enum"]
+            | null
+          cadestral_income: number | null
+          cadestral_other: string | null
+          cadestral_quote: string | null
+          cantina: number | null
+          chimney: boolean | null
           city: string
-          condition: Database["public"]["Enums"]["condition"]
+          concierge_service:
+            | Database["public"]["Enums"]["property_concierge_service_enum"]
+            | null
+          condition:
+            | Database["public"]["Enums"]["property_condition_enum"]
+            | null
           construction_year: number | null
-          country: string
-          created_at: string
-          elevator: Database["public"]["Enums"]["elevator"]
-          energy_class: Database["public"]["Enums"]["energy_class"]
-          exposure: Database["public"]["Enums"]["exposure"]
-          external_fixtures_glass_type: Database["public"]["Enums"]["external_fixtures_glass_type"]
-          external_fixtures_material: Database["public"]["Enums"]["external_fixtures_material"]
-          floor: number | null
-          furnishing: Database["public"]["Enums"]["furnishing"]
-          heating: Database["public"]["Enums"]["heating"]
-          heating_fuel: Database["public"]["Enums"]["heating_fuel"]
-          heating_type: Database["public"]["Enums"]["heating_type"] | null
+          country: Database["public"]["Enums"]["property_country_enum"]
+          description: string | null
+          electric_gate: boolean | null
+          elevators: number | null
+          energy_class_grade:
+            | Database["public"]["Enums"]["property_energy_class_enum"]
+            | null
+          external_fixtures_glass_type:
+            | Database["public"]["Enums"]["property_external_fixtures_glass_type_enum"]
+            | null
+          external_fixtures_material:
+            | Database["public"]["Enums"]["property_external_fixtures_material_enum"]
+            | null
+          facing: Database["public"]["Enums"]["property_facing_enum"] | null
+          floor: Database["public"]["Enums"]["property_floor_enum"] | null
+          free_sides:
+            | Database["public"]["Enums"]["property_free_sides_enum"]
+            | null
+          furnishing:
+            | Database["public"]["Enums"]["property_furnishing_enum"]
+            | null
+          garage: Database["public"]["Enums"]["property_garage_enum"] | null
+          garden: Database["public"]["Enums"]["property_garden_enum"] | null
+          heating: Database["public"]["Enums"]["property_heating_enum"]
+          heating_fuel:
+            | Database["public"]["Enums"]["property_heating_fuel_enum"]
+            | null
+          heating_type:
+            | Database["public"]["Enums"]["property_heating_type_enum"]
+            | null
+          hot_tub: boolean | null
           id: string
           kitchens: number
-          mq: number
+          mansarda: number | null
+          multiple_floors: boolean | null
+          notes: string | null
+          optic_fiber: boolean | null
+          parking_spaces: number | null
           pool: boolean | null
-          postal_code: string
+          property_class:
+            | Database["public"]["Enums"]["property_class_enum"]
+            | null
+          province: string
+          region: string
+          reinforced_door: boolean | null
           rooms: number
-          state: string | null
+          sports_facility: number | null
           street_name: string
           street_number: string
-          subcategory: string
-          total_floors: number | null
-          updated_at: string
+          taverna: number | null
+          terraces: number | null
+          title: string | null
+          total_floors_building: number | null
+          tv_system:
+            | Database["public"]["Enums"]["property_tv_system_enum"]
+            | null
           user_id: string
+          video_intercom: boolean | null
+          wall_waredrobes: boolean | null
+          wheelchair_access: boolean | null
+          zip_code: string
         }
         Insert: {
-          air_conditioning: Database["public"]["Enums"]["air_conditioning"]
+          air_conditioning?:
+            | Database["public"]["Enums"]["property_air_conditioning_enum"]
+            | null
+          air_conditioning_type?:
+            | Database["public"]["Enums"]["property_air_conditioning_type_enum"]
+            | null
+          alarm?: boolean | null
+          balcony?: number | null
           bathrooms: number
-          category: string
+          cadastral_particle?: string | null
+          cadastral_section?: string | null
+          cadastral_sheet?: string | null
+          cadastral_subaltern?: string | null
+          cadestral_category?:
+            | Database["public"]["Enums"]["property_cadestral_category_enum"]
+            | null
+          cadestral_income?: number | null
+          cadestral_other?: string | null
+          cadestral_quote?: string | null
+          cantina?: number | null
+          chimney?: boolean | null
           city: string
-          condition: Database["public"]["Enums"]["condition"]
+          concierge_service?:
+            | Database["public"]["Enums"]["property_concierge_service_enum"]
+            | null
+          condition?:
+            | Database["public"]["Enums"]["property_condition_enum"]
+            | null
           construction_year?: number | null
-          country: string
-          created_at?: string
-          elevator: Database["public"]["Enums"]["elevator"]
-          energy_class: Database["public"]["Enums"]["energy_class"]
-          exposure: Database["public"]["Enums"]["exposure"]
-          external_fixtures_glass_type: Database["public"]["Enums"]["external_fixtures_glass_type"]
-          external_fixtures_material: Database["public"]["Enums"]["external_fixtures_material"]
-          floor?: number | null
-          furnishing: Database["public"]["Enums"]["furnishing"]
-          heating: Database["public"]["Enums"]["heating"]
-          heating_fuel: Database["public"]["Enums"]["heating_fuel"]
-          heating_type?: Database["public"]["Enums"]["heating_type"] | null
+          country: Database["public"]["Enums"]["property_country_enum"]
+          description?: string | null
+          electric_gate?: boolean | null
+          elevators?: number | null
+          energy_class_grade?:
+            | Database["public"]["Enums"]["property_energy_class_enum"]
+            | null
+          external_fixtures_glass_type?:
+            | Database["public"]["Enums"]["property_external_fixtures_glass_type_enum"]
+            | null
+          external_fixtures_material?:
+            | Database["public"]["Enums"]["property_external_fixtures_material_enum"]
+            | null
+          facing?: Database["public"]["Enums"]["property_facing_enum"] | null
+          floor?: Database["public"]["Enums"]["property_floor_enum"] | null
+          free_sides?:
+            | Database["public"]["Enums"]["property_free_sides_enum"]
+            | null
+          furnishing?:
+            | Database["public"]["Enums"]["property_furnishing_enum"]
+            | null
+          garage?: Database["public"]["Enums"]["property_garage_enum"] | null
+          garden?: Database["public"]["Enums"]["property_garden_enum"] | null
+          heating: Database["public"]["Enums"]["property_heating_enum"]
+          heating_fuel?:
+            | Database["public"]["Enums"]["property_heating_fuel_enum"]
+            | null
+          heating_type?:
+            | Database["public"]["Enums"]["property_heating_type_enum"]
+            | null
+          hot_tub?: boolean | null
           id?: string
           kitchens: number
-          mq: number
+          mansarda?: number | null
+          multiple_floors?: boolean | null
+          notes?: string | null
+          optic_fiber?: boolean | null
+          parking_spaces?: number | null
           pool?: boolean | null
-          postal_code: string
+          property_class?:
+            | Database["public"]["Enums"]["property_class_enum"]
+            | null
+          province: string
+          region: string
+          reinforced_door?: boolean | null
           rooms: number
-          state?: string | null
+          sports_facility?: number | null
           street_name: string
           street_number: string
-          subcategory: string
-          total_floors?: number | null
-          updated_at?: string
+          taverna?: number | null
+          terraces?: number | null
+          title?: string | null
+          total_floors_building?: number | null
+          tv_system?:
+            | Database["public"]["Enums"]["property_tv_system_enum"]
+            | null
           user_id: string
+          video_intercom?: boolean | null
+          wall_waredrobes?: boolean | null
+          wheelchair_access?: boolean | null
+          zip_code: string
         }
         Update: {
-          air_conditioning?: Database["public"]["Enums"]["air_conditioning"]
+          air_conditioning?:
+            | Database["public"]["Enums"]["property_air_conditioning_enum"]
+            | null
+          air_conditioning_type?:
+            | Database["public"]["Enums"]["property_air_conditioning_type_enum"]
+            | null
+          alarm?: boolean | null
+          balcony?: number | null
           bathrooms?: number
-          category?: string
+          cadastral_particle?: string | null
+          cadastral_section?: string | null
+          cadastral_sheet?: string | null
+          cadastral_subaltern?: string | null
+          cadestral_category?:
+            | Database["public"]["Enums"]["property_cadestral_category_enum"]
+            | null
+          cadestral_income?: number | null
+          cadestral_other?: string | null
+          cadestral_quote?: string | null
+          cantina?: number | null
+          chimney?: boolean | null
           city?: string
-          condition?: Database["public"]["Enums"]["condition"]
+          concierge_service?:
+            | Database["public"]["Enums"]["property_concierge_service_enum"]
+            | null
+          condition?:
+            | Database["public"]["Enums"]["property_condition_enum"]
+            | null
           construction_year?: number | null
-          country?: string
-          created_at?: string
-          elevator?: Database["public"]["Enums"]["elevator"]
-          energy_class?: Database["public"]["Enums"]["energy_class"]
-          exposure?: Database["public"]["Enums"]["exposure"]
-          external_fixtures_glass_type?: Database["public"]["Enums"]["external_fixtures_glass_type"]
-          external_fixtures_material?: Database["public"]["Enums"]["external_fixtures_material"]
-          floor?: number | null
-          furnishing?: Database["public"]["Enums"]["furnishing"]
-          heating?: Database["public"]["Enums"]["heating"]
-          heating_fuel?: Database["public"]["Enums"]["heating_fuel"]
-          heating_type?: Database["public"]["Enums"]["heating_type"] | null
+          country?: Database["public"]["Enums"]["property_country_enum"]
+          description?: string | null
+          electric_gate?: boolean | null
+          elevators?: number | null
+          energy_class_grade?:
+            | Database["public"]["Enums"]["property_energy_class_enum"]
+            | null
+          external_fixtures_glass_type?:
+            | Database["public"]["Enums"]["property_external_fixtures_glass_type_enum"]
+            | null
+          external_fixtures_material?:
+            | Database["public"]["Enums"]["property_external_fixtures_material_enum"]
+            | null
+          facing?: Database["public"]["Enums"]["property_facing_enum"] | null
+          floor?: Database["public"]["Enums"]["property_floor_enum"] | null
+          free_sides?:
+            | Database["public"]["Enums"]["property_free_sides_enum"]
+            | null
+          furnishing?:
+            | Database["public"]["Enums"]["property_furnishing_enum"]
+            | null
+          garage?: Database["public"]["Enums"]["property_garage_enum"] | null
+          garden?: Database["public"]["Enums"]["property_garden_enum"] | null
+          heating?: Database["public"]["Enums"]["property_heating_enum"]
+          heating_fuel?:
+            | Database["public"]["Enums"]["property_heating_fuel_enum"]
+            | null
+          heating_type?:
+            | Database["public"]["Enums"]["property_heating_type_enum"]
+            | null
+          hot_tub?: boolean | null
           id?: string
           kitchens?: number
-          mq?: number
+          mansarda?: number | null
+          multiple_floors?: boolean | null
+          notes?: string | null
+          optic_fiber?: boolean | null
+          parking_spaces?: number | null
           pool?: boolean | null
-          postal_code?: string
+          property_class?:
+            | Database["public"]["Enums"]["property_class_enum"]
+            | null
+          province?: string
+          region?: string
+          reinforced_door?: boolean | null
           rooms?: number
-          state?: string | null
+          sports_facility?: number | null
           street_name?: string
           street_number?: string
-          subcategory?: string
-          total_floors?: number | null
-          updated_at?: string
+          taverna?: number | null
+          terraces?: number | null
+          title?: string | null
+          total_floors_building?: number | null
+          tv_system?:
+            | Database["public"]["Enums"]["property_tv_system_enum"]
+            | null
           user_id?: string
+          video_intercom?: boolean | null
+          wall_waredrobes?: boolean | null
+          wheelchair_access?: boolean | null
+          zip_code?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "properties_category_fkey"
-            columns: ["category", "subcategory"]
-            isOneToOne: false
-            referencedRelation: "property_categories"
-            referencedColumns: ["category", "subcategory"]
-          },
           {
             foreignKeyName: "properties_user_id_fkey"
             columns: ["user_id"]
@@ -190,30 +360,107 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
-      air_conditioning: "Cold only" | "Hot only" | "Cold and hot" | "None"
-      condition:
+      property_air_conditioning_enum:
+        | "Autonomous"
+        | "Centralized"
+        | "Air conditioning system preparation"
+        | "None"
+      property_air_conditioning_type_enum: "Cold only" | "Hot only" | "Cold/Hot"
+      property_cadestral_category_enum:
+        | "A/1"
+        | "A/2"
+        | "A/3"
+        | "A/4"
+        | "A/5"
+        | "A/6"
+        | "A/7"
+        | "A/8"
+        | "A/9"
+        | "A/10"
+        | "A/11"
+        | "B/1"
+        | "B/2"
+        | "B/3"
+        | "B/4"
+        | "B/5"
+        | "B/6"
+        | "B/7"
+        | "B/8"
+        | "C/1"
+        | "C/2"
+        | "C/3"
+        | "C/4"
+        | "C/5"
+        | "C/6"
+        | "C/7"
+        | "D/1"
+        | "D/2"
+        | "D/3"
+        | "D/4"
+        | "D/5"
+        | "D/6"
+        | "D/7"
+        | "D/8"
+        | "D/9"
+        | "D/10"
+        | "D/11"
+        | "D/12"
+        | "E/1"
+        | "E/2"
+        | "E/3"
+        | "E/4"
+        | "E/5"
+        | "E/6"
+        | "E/7"
+        | "E/8"
+        | "E/9"
+        | "F/1"
+        | "F/2"
+        | "F/3"
+        | "F/4"
+        | "F/5"
+        | "F/6"
+        | "T"
+      property_category:
+        | "Residential"
+        | "Shed"
+        | "Shops"
+        | "Buildings"
+        | "Warehouse"
+        | "Garage"
+        | "Office"
+        | "Land"
+      property_class_enum: "Luxury" | "Elengant" | "Medium" | "Economy"
+      property_concierge_service_enum: "NoneFull day" | "half day"
+      property_condition_enum:
         | "New under construction"
         | "Excellent renovated"
         | "Good livable"
         | "To be renovated"
-      elevator: "None" | "Elevator" | "Goods Lift"
-      energy_class:
+      property_country_enum: "Italy" | "Spain"
+      property_energy_class_enum:
         | "Pending"
         | "Exempt"
         | "Unclassifiable"
-        | "A4"
-        | "A3"
-        | "A2"
-        | "A1"
-        | "A+"
-        | "A"
-        | "B"
-        | "C"
-        | "D"
-        | "E"
-        | "F"
-        | "G"
-      exposure:
+        | "2005_A+"
+        | "2005_A"
+        | "2005_B"
+        | "2005_C"
+        | "2005_D"
+        | "2005_E"
+        | "2005_F"
+        | "2005_G"
+        | "2013_A4"
+        | "2013_A3"
+        | "2013_A2"
+        | "2013_A1"
+        | "2013_B"
+        | "2013_C"
+        | "2013_D"
+        | "2013_E"
+        | "2013_F"
+        | "2013_G"
+      property_exposure_enum:
         | "North"
         | "South"
         | "East"
@@ -229,23 +476,105 @@ export interface Database {
         | "North East West"
         | "South East West"
         | "North South East West"
-      external_fixtures_glass_type: "Single" | "Double" | "Triple"
-      external_fixtures_material: "Wood" | "Metal" | "PVC" | "Hybrid"
-      furnishing:
+      property_external_fixtures_glass_type_enum: "Single" | "Double" | "Triple"
+      property_external_fixtures_material_enum: "Wood" | "Metal" | "PVC"
+      property_facing_enum: "Internal" | "External" | "Double"
+      property_floor_enum:
+        | "underground (-5)"
+        | "underground (-4)"
+        | "underground (-3)"
+        | "underground (-2)"
+        | "underground (-1)"
+        | "basement"
+        | "ground floor"
+        | "mezzanine"
+        | "raised floor"
+        | "1"
+        | "13"
+        | "14"
+        | "15"
+        | "16"
+        | "17"
+        | "18"
+        | "19"
+        | "20"
+        | "21"
+        | "22"
+        | "23"
+        | "24"
+        | "25"
+        | "26"
+        | "27"
+        | "28"
+        | "29"
+        | "30"
+        | "31"
+        | "32"
+        | "33"
+        | "34"
+        | "35"
+        | "36"
+        | "37"
+        | "38"
+        | "39"
+        | "40"
+        | "41"
+        | "42"
+        | "43"
+        | "44"
+        | "45"
+        | "46"
+        | "47"
+        | "48"
+        | "49"
+        | "50"
+        | "51"
+        | "52"
+        | "53"
+        | "54"
+        | "55"
+        | "56"
+        | "57"
+        | "58"
+        | "59"
+        | "60"
+      property_free_sides_enum:
+        | "One"
+        | "Two parallel"
+        | "Two at an angle"
+        | "Three"
+        | "Four"
+      property_furnishing_enum:
         | "Furnished"
+        | "Semi-furnished"
+        | "Semi-furnished with kitchen"
         | "Unfurnished"
-        | "Partially furnished"
-        | "Kitchen only"
-      heating: "Independent" | "Centralized" | "None"
-      heating_fuel:
-        | "GPL"
+      property_garage_enum:
+        | "None"
+        | "Single"
+        | "Double"
+        | "Triple"
+        | "Quadruple"
+        | "Box"
+        | "Carport"
+        | "Parking space"
+      property_garden_enum: "None" | "Shared" | "Private" | "Shared and Private"
+      property_heating_enum: "Independent" | "Centralized" | "None"
+      property_heating_fuel_enum:
         | "Gas"
-        | "Elettrico"
-        | "Ibrido"
-        | "Metano"
-        | "Geo-termico"
-      heating_type: "A Pavimento" | "A Pannelli" | "A Parete"
-      sex: "Male" | "Female" | "Other"
+        | "Methane"
+        | "LPG"
+        | "Diesel"
+        | "Pellets"
+        | "Wood"
+        | "Solar"
+        | "Photovoltaic"
+        | "District Heating"
+        | "Heat Pump"
+        | "Electric"
+      property_heating_type_enum: "Floor" | "Radiator" | "Air" | "Stove"
+      property_tv_system_enum: "Single" | "Centralized" | "satellite dish"
+      sex_enum: "Male" | "Female" | "Other"
     }
     CompositeTypes: {
       [_ in never]: never
