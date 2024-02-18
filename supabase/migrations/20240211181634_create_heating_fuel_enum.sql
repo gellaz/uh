@@ -1,16 +1,14 @@
 CREATE TYPE heating_fuel_enum AS enum(
-    'Gas',
-    'Metano',
-    'GPL',
-    'Gasolio',
-    'Pellet',
-    'Legna',
-    'Solare',
-    'Foto-voltaico',
-    'Teleriscaldamento',
-    'Pompa di calore',
-    'Elettrico',
+    'Gas', -- Gas
+    'Methane', -- Metano
+    'LPG', -- GPL
+    'Diesel', -- Gasolio
+    'Pellets', -- Pellet
+    'Wood', -- Legna
+    'Solar', -- Solare
+    'Photovoltaic', -- Fotovoltaico
+    'District Heating', -- Teleriscaldamento
+    'Heat Pump', -- Pompa di calore
+    'Electric' -- Elettrico
 );
 
--- 'Ibrido',
--- 'Geo-termico',

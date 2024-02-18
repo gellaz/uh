@@ -1,11 +1,7 @@
 CREATE TYPE air_conditioning_enum AS enum(
-    'Autonomo',
-    'Centralizzato',
-    'Predisposizione impianto',
-    'Assente',
+    'Autonomous', -- Autonomo
+    'Centralized', -- Centralizzato
+    'Air conditioning system preparation', -- Predisposizione impianto
+    'None', -- Assente
 );
 
--- 'Cold only',
--- 'Hot only',
--- 'Cold and hot',
--- 'None',

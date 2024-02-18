@@ -1,6 +1,6 @@
 CREATE TYPE elevator_enum AS enum(
-    'None',
-    'Elevator',
-    'Goods Lift'
+    'None', -- Assente
+    'Elevator', -- Ascensore
+    'Goods Lift' -- Montacarichi
 );
 
