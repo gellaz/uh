@@ -130,6 +130,7 @@ export interface Database {
           sports_facility: number | null
           street_name: string
           street_number: string
+          subcategory: Database["public"]["Enums"]["property_residential_subcategory_enum"]
           taverna: number | null
           terraces: number | null
           title: string | null
@@ -222,6 +223,7 @@ export interface Database {
           sports_facility?: number | null
           street_name: string
           street_number: string
+          subcategory: Database["public"]["Enums"]["property_residential_subcategory_enum"]
           taverna?: number | null
           terraces?: number | null
           title?: string | null
@@ -314,6 +316,7 @@ export interface Database {
           sports_facility?: number | null
           street_name?: string
           street_number?: string
+          subcategory?: Database["public"]["Enums"]["property_residential_subcategory_enum"]
           taverna?: number | null
           terraces?: number | null
           title?: string | null
@@ -421,15 +424,6 @@ export interface Database {
         | "F/5"
         | "F/6"
         | "T"
-      property_category:
-        | "Residential"
-        | "Shed"
-        | "Shops"
-        | "Buildings"
-        | "Warehouse"
-        | "Garage"
-        | "Office"
-        | "Land"
       property_class_enum: "Luxury" | "Elengant" | "Medium" | "Economy"
       property_concierge_service_enum: "NoneFull day" | "half day"
       property_condition_enum:
@@ -573,6 +567,33 @@ export interface Database {
         | "Heat Pump"
         | "Electric"
       property_heating_type_enum: "Floor" | "Radiator" | "Air" | "Stove"
+      property_residential_subcategory_enum:
+        | "Apartment"
+        | "Penthouse"
+        | "Mansard"
+        | "Single-family Townhouse"
+        | "Multi-family Townhouse"
+        | "Loft"
+        | "Open Space"
+        | "Attic"
+        | "Courtyard House"
+        | "Cabin"
+        | "Farmhouse"
+        | "Country House"
+        | "Chalet"
+        | "Dammuso"
+        | "Farmstead"
+        | "Large Farmhouse"
+        | "Nuraghe"
+        | "Refuge"
+        | "Rustic"
+        | "Stone House"
+        | "Trullo"
+        | "Detached Villa"
+        | "Semi-detached Villa"
+        | "Multi-family Villa"
+        | "Row Villa"
+        | "Apartment In Villa"
       property_tv_system_enum: "Single" | "Centralized" | "satellite dish"
       sex_enum: "Male" | "Female" | "Other"
     }

@@ -1,4 +1,36 @@
 --
+-- SOTTO CATEGORIA RESIDENZIALE
+--
+CREATE TYPE property_residential_subcategory_enum AS enum(
+    'Apartment', -- Appartamento
+    'Penthouse', -- Attico
+    'Mansard', -- Mansarda
+    'Single-family Townhouse', -- Terratetto unifamiliare
+    'Multi-family Townhouse', -- Terratetto plurifamiliare
+    'Loft', -- Loft
+    'Open Space', -- Open space
+    'Attic', -- Soffitta
+    'Courtyard House', -- Baglio
+    'Cabin', -- Baita
+    'Farmhouse', -- Casa colonica
+    'Country House', -- Casale
+    'Chalet', -- Chalet
+    'Dammuso', -- Dammuso (specific type of house found in Sicily)
+    'Farmstead', -- Maso (specific type of farm found in South Tyrol)
+    'Large Farmhouse', -- Masseria (large farmhouses in Puglia)
+    'Nuraghe', -- Nuraghe (ancient megalithic edifice found in Sardinia)
+    'Refuge', -- Rifugio
+    'Rustic', -- Rustico
+    'Stone House', -- Sasso
+    'Trullo', -- Trullo (a traditional Apulian stone dwelling with a conical roof)
+    'Detached Villa', -- Villa unifamiliare
+    'Semi-detached Villa', -- Villa bifamiliare
+    'Multi-family Villa', -- Villa plurifamiliare
+    'Row Villa', -- Villa a schiera
+    'Apartment In Villa' -- Appartamento in villa
+);
+
+--
 -- Stato/Condizioni immobile
 --
 CREATE TYPE property_condition_enum AS enum(
@@ -356,10 +388,10 @@ CREATE TYPE property_cadestral_category_enum AS enum(
 --
 -- PROPRIETÀ RESIDENZIALE
 --
-
 CREATE TABLE public.properties_residential(
     id uuid NOT NULL DEFAULT gen_random_uuid(),
     user_id uuid NOT NULL,
+    subcategory property_residential_subcategory_enum NOT NULL,
     -- SUPERFICIE: sezione da aggiungere vedi getrix
     -- COMPOSIZIONE
     rooms smallint NOT NULL,
@@ -433,6 +465,5 @@ CREATE TABLE public.properties_residential(
     -- fotografie, video, planimetrie, virtual tour, APE,
     CONSTRAINT properties_pkey PRIMARY KEY (id),
     CONSTRAINT properties_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
-    -- CONSTRAINT properties_category_fkey FOREIGN KEY (category, subcategory) REFERENCES property_categories(category, subcategory),
 );
 
