@@ -50,6 +50,471 @@ export interface Database {
           }
         ]
       }
+      properties_buildings: {
+        Row: {
+          air_conditioning:
+            | Database["public"]["Enums"]["property_air_conditioning_enum"]
+            | null
+          air_conditioning_type:
+            | Database["public"]["Enums"]["property_air_conditioning_type_enum"]
+            | null
+          alarm: boolean | null
+          bathrooms: number
+          bathrooms_wheelchair: number | null
+          building_usage:
+            | Database["public"]["Enums"]["building_usage_enum"][]
+            | null
+          cadastral_particle: string | null
+          cadastral_section: string | null
+          cadastral_sheet: string | null
+          cadastral_subaltern: string | null
+          cadestral_category:
+            | Database["public"]["Enums"]["property_cadestral_category_enum"]
+            | null
+          cadestral_income: number | null
+          cadestral_other: string | null
+          cadestral_quote: string | null
+          city: string
+          condition:
+            | Database["public"]["Enums"]["property_condition_enum"]
+            | null
+          construction_year: number | null
+          country: Database["public"]["Enums"]["property_country_enum"]
+          description: string | null
+          elevators: number | null
+          energy_class_grade:
+            | Database["public"]["Enums"]["property_energy_class_enum"]
+            | null
+          external_fixtures_glass_type:
+            | Database["public"]["Enums"]["property_external_fixtures_glass_type_enum"]
+            | null
+          external_fixtures_material:
+            | Database["public"]["Enums"]["property_external_fixtures_material_enum"]
+            | null
+          facing: Database["public"]["Enums"]["property_facing_enum"] | null
+          free_sides:
+            | Database["public"]["Enums"]["property_free_sides_enum"]
+            | null
+          garden: Database["public"]["Enums"]["property_garden_enum"] | null
+          heating: Database["public"]["Enums"]["property_heating_enum"]
+          heating_fuel:
+            | Database["public"]["Enums"]["property_heating_fuel_enum"]
+            | null
+          heating_type:
+            | Database["public"]["Enums"]["property_heating_type_enum"]
+            | null
+          id: string
+          mq: number
+          notes: string | null
+          parking_spaces_external: number | null
+          parking_spaces_garage: number | null
+          pool: boolean | null
+          property_class:
+            | Database["public"]["Enums"]["property_class_enum"]
+            | null
+          province: string
+          reception: boolean | null
+          region: string
+          rooms: number
+          sports_facility: number | null
+          street_name: string
+          street_number: string
+          title: string | null
+          total_floors_building: number | null
+          user_id: string
+          wheelchair_access: boolean | null
+          zip_code: string
+        }
+        Insert: {
+          air_conditioning?:
+            | Database["public"]["Enums"]["property_air_conditioning_enum"]
+            | null
+          air_conditioning_type?:
+            | Database["public"]["Enums"]["property_air_conditioning_type_enum"]
+            | null
+          alarm?: boolean | null
+          bathrooms: number
+          bathrooms_wheelchair?: number | null
+          building_usage?:
+            | Database["public"]["Enums"]["building_usage_enum"][]
+            | null
+          cadastral_particle?: string | null
+          cadastral_section?: string | null
+          cadastral_sheet?: string | null
+          cadastral_subaltern?: string | null
+          cadestral_category?:
+            | Database["public"]["Enums"]["property_cadestral_category_enum"]
+            | null
+          cadestral_income?: number | null
+          cadestral_other?: string | null
+          cadestral_quote?: string | null
+          city: string
+          condition?:
+            | Database["public"]["Enums"]["property_condition_enum"]
+            | null
+          construction_year?: number | null
+          country: Database["public"]["Enums"]["property_country_enum"]
+          description?: string | null
+          elevators?: number | null
+          energy_class_grade?:
+            | Database["public"]["Enums"]["property_energy_class_enum"]
+            | null
+          external_fixtures_glass_type?:
+            | Database["public"]["Enums"]["property_external_fixtures_glass_type_enum"]
+            | null
+          external_fixtures_material?:
+            | Database["public"]["Enums"]["property_external_fixtures_material_enum"]
+            | null
+          facing?: Database["public"]["Enums"]["property_facing_enum"] | null
+          free_sides?:
+            | Database["public"]["Enums"]["property_free_sides_enum"]
+            | null
+          garden?: Database["public"]["Enums"]["property_garden_enum"] | null
+          heating: Database["public"]["Enums"]["property_heating_enum"]
+          heating_fuel?:
+            | Database["public"]["Enums"]["property_heating_fuel_enum"]
+            | null
+          heating_type?:
+            | Database["public"]["Enums"]["property_heating_type_enum"]
+            | null
+          id?: string
+          mq: number
+          notes?: string | null
+          parking_spaces_external?: number | null
+          parking_spaces_garage?: number | null
+          pool?: boolean | null
+          property_class?:
+            | Database["public"]["Enums"]["property_class_enum"]
+            | null
+          province: string
+          reception?: boolean | null
+          region: string
+          rooms: number
+          sports_facility?: number | null
+          street_name: string
+          street_number: string
+          title?: string | null
+          total_floors_building?: number | null
+          user_id: string
+          wheelchair_access?: boolean | null
+          zip_code: string
+        }
+        Update: {
+          air_conditioning?:
+            | Database["public"]["Enums"]["property_air_conditioning_enum"]
+            | null
+          air_conditioning_type?:
+            | Database["public"]["Enums"]["property_air_conditioning_type_enum"]
+            | null
+          alarm?: boolean | null
+          bathrooms?: number
+          bathrooms_wheelchair?: number | null
+          building_usage?:
+            | Database["public"]["Enums"]["building_usage_enum"][]
+            | null
+          cadastral_particle?: string | null
+          cadastral_section?: string | null
+          cadastral_sheet?: string | null
+          cadastral_subaltern?: string | null
+          cadestral_category?:
+            | Database["public"]["Enums"]["property_cadestral_category_enum"]
+            | null
+          cadestral_income?: number | null
+          cadestral_other?: string | null
+          cadestral_quote?: string | null
+          city?: string
+          condition?:
+            | Database["public"]["Enums"]["property_condition_enum"]
+            | null
+          construction_year?: number | null
+          country?: Database["public"]["Enums"]["property_country_enum"]
+          description?: string | null
+          elevators?: number | null
+          energy_class_grade?:
+            | Database["public"]["Enums"]["property_energy_class_enum"]
+            | null
+          external_fixtures_glass_type?:
+            | Database["public"]["Enums"]["property_external_fixtures_glass_type_enum"]
+            | null
+          external_fixtures_material?:
+            | Database["public"]["Enums"]["property_external_fixtures_material_enum"]
+            | null
+          facing?: Database["public"]["Enums"]["property_facing_enum"] | null
+          free_sides?:
+            | Database["public"]["Enums"]["property_free_sides_enum"]
+            | null
+          garden?: Database["public"]["Enums"]["property_garden_enum"] | null
+          heating?: Database["public"]["Enums"]["property_heating_enum"]
+          heating_fuel?:
+            | Database["public"]["Enums"]["property_heating_fuel_enum"]
+            | null
+          heating_type?:
+            | Database["public"]["Enums"]["property_heating_type_enum"]
+            | null
+          id?: string
+          mq?: number
+          notes?: string | null
+          parking_spaces_external?: number | null
+          parking_spaces_garage?: number | null
+          pool?: boolean | null
+          property_class?:
+            | Database["public"]["Enums"]["property_class_enum"]
+            | null
+          province?: string
+          reception?: boolean | null
+          region?: string
+          rooms?: number
+          sports_facility?: number | null
+          street_name?: string
+          street_number?: string
+          title?: string | null
+          total_floors_building?: number | null
+          user_id?: string
+          wheelchair_access?: boolean | null
+          zip_code?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "properties_buildings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      properties_garage: {
+        Row: {
+          alarm: boolean | null
+          all_day_access: boolean | null
+          cadastral_particle: string | null
+          cadastral_section: string | null
+          cadastral_sheet: string | null
+          cadastral_subaltern: string | null
+          cadestral_category:
+            | Database["public"]["Enums"]["property_cadestral_category_enum"]
+            | null
+          cadestral_income: number | null
+          cadestral_other: string | null
+          cadestral_quote: string | null
+          car_parking_spaces: number | null
+          city: string
+          country: Database["public"]["Enums"]["property_country_enum"]
+          description: string | null
+          electric_car_charging_station: number | null
+          electric_parking_gate: boolean | null
+          floor: Database["public"]["Enums"]["property_floor_enum"] | null
+          id: string
+          motorcycle_parking_spaces: number | null
+          mq: number
+          notes: string | null
+          parking_gate_width: number | null
+          province: string
+          region: string
+          street_name: string
+          street_number: string
+          subcategory: Database["public"]["Enums"]["property_garage_subcategory_enum"]
+          title: string | null
+          user_id: string
+          video_survellance: boolean | null
+          wheelchair_access: boolean | null
+          zip_code: string
+        }
+        Insert: {
+          alarm?: boolean | null
+          all_day_access?: boolean | null
+          cadastral_particle?: string | null
+          cadastral_section?: string | null
+          cadastral_sheet?: string | null
+          cadastral_subaltern?: string | null
+          cadestral_category?:
+            | Database["public"]["Enums"]["property_cadestral_category_enum"]
+            | null
+          cadestral_income?: number | null
+          cadestral_other?: string | null
+          cadestral_quote?: string | null
+          car_parking_spaces?: number | null
+          city: string
+          country: Database["public"]["Enums"]["property_country_enum"]
+          description?: string | null
+          electric_car_charging_station?: number | null
+          electric_parking_gate?: boolean | null
+          floor?: Database["public"]["Enums"]["property_floor_enum"] | null
+          id?: string
+          motorcycle_parking_spaces?: number | null
+          mq: number
+          notes?: string | null
+          parking_gate_width?: number | null
+          province: string
+          region: string
+          street_name: string
+          street_number: string
+          subcategory: Database["public"]["Enums"]["property_garage_subcategory_enum"]
+          title?: string | null
+          user_id: string
+          video_survellance?: boolean | null
+          wheelchair_access?: boolean | null
+          zip_code: string
+        }
+        Update: {
+          alarm?: boolean | null
+          all_day_access?: boolean | null
+          cadastral_particle?: string | null
+          cadastral_section?: string | null
+          cadastral_sheet?: string | null
+          cadastral_subaltern?: string | null
+          cadestral_category?:
+            | Database["public"]["Enums"]["property_cadestral_category_enum"]
+            | null
+          cadestral_income?: number | null
+          cadestral_other?: string | null
+          cadestral_quote?: string | null
+          car_parking_spaces?: number | null
+          city?: string
+          country?: Database["public"]["Enums"]["property_country_enum"]
+          description?: string | null
+          electric_car_charging_station?: number | null
+          electric_parking_gate?: boolean | null
+          floor?: Database["public"]["Enums"]["property_floor_enum"] | null
+          id?: string
+          motorcycle_parking_spaces?: number | null
+          mq?: number
+          notes?: string | null
+          parking_gate_width?: number | null
+          province?: string
+          region?: string
+          street_name?: string
+          street_number?: string
+          subcategory?: Database["public"]["Enums"]["property_garage_subcategory_enum"]
+          title?: string | null
+          user_id?: string
+          video_survellance?: boolean | null
+          wheelchair_access?: boolean | null
+          zip_code?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "properties_garage_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      properties_parking_space: {
+        Row: {
+          alarm: boolean | null
+          all_day_access: boolean | null
+          cadastral_particle: string | null
+          cadastral_section: string | null
+          cadastral_sheet: string | null
+          cadastral_subaltern: string | null
+          cadestral_category:
+            | Database["public"]["Enums"]["property_cadestral_category_enum"]
+            | null
+          cadestral_income: number | null
+          cadestral_other: string | null
+          cadestral_quote: string | null
+          car_parking_spaces: number | null
+          city: string
+          country: Database["public"]["Enums"]["property_country_enum"]
+          description: string | null
+          electric_car_charging_station: number | null
+          floor: Database["public"]["Enums"]["property_floor_enum"] | null
+          id: string
+          motorcycle_parking_spaces: number | null
+          mq: number
+          notes: string | null
+          province: string
+          region: string
+          street_name: string
+          street_number: string
+          subcategory: Database["public"]["Enums"]["property_parking_space_subcategory_enum"]
+          title: string | null
+          user_id: string
+          video_survellance: boolean | null
+          wheelchair_access: boolean | null
+          zip_code: string
+        }
+        Insert: {
+          alarm?: boolean | null
+          all_day_access?: boolean | null
+          cadastral_particle?: string | null
+          cadastral_section?: string | null
+          cadastral_sheet?: string | null
+          cadastral_subaltern?: string | null
+          cadestral_category?:
+            | Database["public"]["Enums"]["property_cadestral_category_enum"]
+            | null
+          cadestral_income?: number | null
+          cadestral_other?: string | null
+          cadestral_quote?: string | null
+          car_parking_spaces?: number | null
+          city: string
+          country: Database["public"]["Enums"]["property_country_enum"]
+          description?: string | null
+          electric_car_charging_station?: number | null
+          floor?: Database["public"]["Enums"]["property_floor_enum"] | null
+          id?: string
+          motorcycle_parking_spaces?: number | null
+          mq: number
+          notes?: string | null
+          province: string
+          region: string
+          street_name: string
+          street_number: string
+          subcategory: Database["public"]["Enums"]["property_parking_space_subcategory_enum"]
+          title?: string | null
+          user_id: string
+          video_survellance?: boolean | null
+          wheelchair_access?: boolean | null
+          zip_code: string
+        }
+        Update: {
+          alarm?: boolean | null
+          all_day_access?: boolean | null
+          cadastral_particle?: string | null
+          cadastral_section?: string | null
+          cadastral_sheet?: string | null
+          cadastral_subaltern?: string | null
+          cadestral_category?:
+            | Database["public"]["Enums"]["property_cadestral_category_enum"]
+            | null
+          cadestral_income?: number | null
+          cadestral_other?: string | null
+          cadestral_quote?: string | null
+          car_parking_spaces?: number | null
+          city?: string
+          country?: Database["public"]["Enums"]["property_country_enum"]
+          description?: string | null
+          electric_car_charging_station?: number | null
+          floor?: Database["public"]["Enums"]["property_floor_enum"] | null
+          id?: string
+          motorcycle_parking_spaces?: number | null
+          mq?: number
+          notes?: string | null
+          province?: string
+          region?: string
+          street_name?: string
+          street_number?: string
+          subcategory?: Database["public"]["Enums"]["property_parking_space_subcategory_enum"]
+          title?: string | null
+          user_id?: string
+          video_survellance?: boolean | null
+          wheelchair_access?: boolean | null
+          zip_code?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "properties_parking_space_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       properties_residential: {
         Row: {
           air_conditioning:
@@ -115,6 +580,7 @@ export interface Database {
           id: string
           kitchens: number
           mansarda: number | null
+          mq: number
           multiple_floors: boolean | null
           notes: string | null
           optic_fiber: boolean | null
@@ -208,6 +674,7 @@ export interface Database {
           id?: string
           kitchens: number
           mansarda?: number | null
+          mq: number
           multiple_floors?: boolean | null
           notes?: string | null
           optic_fiber?: boolean | null
@@ -301,6 +768,7 @@ export interface Database {
           id?: string
           kitchens?: number
           mansarda?: number | null
+          mq?: number
           multiple_floors?: boolean | null
           notes?: string | null
           optic_fiber?: boolean | null
@@ -363,6 +831,14 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
+      building_usage_enum:
+        | "Industrial"
+        | "Residential"
+        | "Hotel"
+        | "Other"
+        | "Commercial"
+        | "Castel"
+        | "Office"
       property_air_conditioning_enum:
         | "Autonomous"
         | "Centralized"
@@ -552,6 +1028,7 @@ export interface Database {
         | "Box"
         | "Carport"
         | "Parking space"
+      property_garage_subcategory_enum: "Indipendent box" | "Shared box"
       property_garden_enum: "None" | "Shared" | "Private" | "Shared and Private"
       property_heating_enum: "Independent" | "Centralized" | "None"
       property_heating_fuel_enum:
@@ -567,6 +1044,10 @@ export interface Database {
         | "Heat Pump"
         | "Electric"
       property_heating_type_enum: "Floor" | "Radiator" | "Air" | "Stove"
+      property_parking_space_subcategory_enum:
+        | "Parking space in shared garage"
+        | "External parking space covered"
+        | "External parking space uncovered"
       property_residential_subcategory_enum:
         | "Apartment"
         | "Penthouse"

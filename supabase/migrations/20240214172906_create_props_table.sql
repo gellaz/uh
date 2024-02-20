@@ -326,7 +326,6 @@ CREATE TYPE property_heating_fuel_enum AS enum(
 --
 -- CATEGORIA CATASTALE
 --
-
 CREATE TYPE property_cadestral_category_enum AS enum(
     'A/1', -- Residenziale
     'A/2', -- Residenziale
@@ -468,3 +467,189 @@ CREATE TABLE public.properties_residential(
     CONSTRAINT properties_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
 );
 
+
+CREATE TYPE building_usage_enum AS enum(
+    'Industrial', -- industriale
+    'Residential', -- residenziale
+    'Hotel', -- Hotel
+    'Other', -- Altri
+    'Commercial', -- Commerciali
+    'Castel', -- Castelli
+    'Office' -- Ufficio
+);
+
+-- #############################################################
+--
+-- PROPRIETÀ EDIFICI
+--
+CREATE TABLE public.properties_buildings(
+    id uuid NOT NULL DEFAULT gen_random_uuid(),
+    user_id uuid NOT NULL,
+    -- SUPERFICIE: sezione da aggiungere vedi getrix
+    -- COMPOSIZIONE
+    mq smallint NOT NULL,
+    rooms smallint NOT NULL,
+    bathrooms smallint NOT NULL, -- può essere di vari tipi lo gestiamo con jsonb?
+    bathrooms_wheelchair smallint NULL,
+    garden property_garden_enum NULL,
+    parking_spaces_external smallint NULL,
+    parking_spaces_garage smallint NULL,
+    -- INDIRIZZO
+    street_name text NOT NULL,
+    street_number text NOT NULL,
+    city text NOT NULL,
+    zip_code text NOT NULL,
+    province text NOT NULL,
+    region text NOT NULL,
+    country property_country_enum NOT NULL,
+    -- AMENITIES / COMODITA'
+    external_fixtures_material property_external_fixtures_material_enum NULL,
+    external_fixtures_glass_type property_external_fixtures_glass_type_enum NULL,
+    reception boolean NULL,
+    alarm boolean NULL,
+    pool boolean NULL,
+    sports_facility smallint NULL, -- [Tennis, Calcetto, Pallavolo, Basket, Paddle, Altro]
+    -- BUILDING CARATTERISTICHE
+    construction_year smallint NULL,
+    property_class property_class_enum NULL,
+    condition property_condition_enum NULL,
+    building_usage building_usage_enum[] NULL,
+    total_floors_building smallint NULL,
+    elevators smallint NULL,
+    wheelchair_access boolean NULL,
+    free_sides property_free_sides_enum NULL, 
+    facing property_facing_enum NULL,
+    -- RISCALDAMENTO E CLIMATIZZAZIONE
+    heating property_heating_enum NOT NULL,
+    heating_type property_heating_type_enum NULL,
+    heating_fuel property_heating_fuel_enum NULL,
+    air_conditioning property_air_conditioning_enum NULL,
+    air_conditioning_type property_air_conditioning_type_enum NULL,
+    -- CERTIFICAZIONE ENRGETICA
+    energy_class_grade property_energy_class_enum NULL,
+    -- DATI CATASTALI
+    cadastral_section text NULL,
+    cadastral_sheet text NULL,
+    cadastral_particle text NULL,
+    cadastral_subaltern text NULL,
+    cadestral_category property_cadestral_category_enum NULL,
+    cadestral_income float NULL,
+    cadestral_quote text NULL,
+    cadestral_other text NULL,
+    -- DESCRIZIONE
+    description text NULL,
+    title text NULL,
+    notes text NULL,
+    -- MEDIA
+    -- fotografie, video, planimetrie, virtual tour, APE,
+    CONSTRAINT properties_buildings_pkey PRIMARY KEY (id),
+    CONSTRAINT properties_buildings_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+);
+
+-- #############################################################
+
+CREATE TYPE property_garage_subcategory_enum AS enum(
+    'Indipendent box', -- box indipendente
+    'Shared box' -- box in garage comune 
+);
+
+--
+-- GARAGE
+--
+CREATE TABLE public.properties_garage(
+    id uuid NOT NULL DEFAULT gen_random_uuid(),
+    user_id uuid NOT NULL,
+    subcategory property_garage_subcategory_enum NOT NULL,
+    -- COMPOSIZIONE
+    mq smallint NOT NULL,
+    floor property_floor_enum NULL,
+    parking_gate_width smallint NULL,
+    car_parking_spaces smallint NULL,
+    motorcycle_parking_spaces smallint NULL,
+    -- INDIRIZZO
+    street_name text NOT NULL,
+    street_number text NOT NULL,
+    city text NOT NULL,
+    zip_code text NOT NULL,
+    province text NOT NULL,
+    region text NOT NULL,
+    country property_country_enum NOT NULL,
+    -- BUILDING CARATTERISTICHE
+    wheelchair_access boolean NULL,
+    all_day_access boolean NULL,
+    electric_parking_gate boolean NULL,
+    electric_car_charging_station smallint NULL,
+    video_survellance boolean NULL, 
+    alarm boolean NULL,
+    -- DATI CATASTALI
+    cadastral_section text NULL,
+    cadastral_sheet text NULL,
+    cadastral_particle text NULL,
+    cadastral_subaltern text NULL,
+    cadestral_category property_cadestral_category_enum NULL,
+    cadestral_income float NULL,
+    cadestral_quote text NULL,
+    cadestral_other text NULL,
+    -- DESCRIZIONE
+    description text NULL,
+    title text NULL,
+    notes text NULL,
+    -- MEDIA
+    -- fotografie, video, planimetrie, virtual tour, APE,
+    CONSTRAINT properties_garage_pkey PRIMARY KEY (id),
+    CONSTRAINT properties_garage_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+);
+
+-- #############################################################
+
+CREATE TYPE property_parking_space_subcategory_enum AS enum(
+    'Parking space in shared garage', -- Posto in garage comune
+    'External parking space covered', -- Posto esterno coperto
+    'External parking space uncovered' -- Posto esterno scoperto
+
+);
+
+--
+-- GARAGE
+--
+CREATE TABLE public.properties_parking_space(
+    id uuid NOT NULL DEFAULT gen_random_uuid(),
+    user_id uuid NOT NULL,
+    subcategory property_parking_space_subcategory_enum NOT NULL,
+    -- COMPOSIZIONE
+    mq smallint NOT NULL,
+    floor property_floor_enum NULL,
+    car_parking_spaces smallint NULL,
+    motorcycle_parking_spaces smallint NULL,
+    -- INDIRIZZO
+    street_name text NOT NULL,
+    street_number text NOT NULL,
+    city text NOT NULL,
+    zip_code text NOT NULL,
+    province text NOT NULL,
+    region text NOT NULL,
+    country property_country_enum NOT NULL,
+    -- BUILDING CARATTERISTICHE
+    wheelchair_access boolean NULL,
+    all_day_access boolean NULL,
+    electric_car_charging_station smallint NULL,
+    video_survellance boolean NULL, 
+    alarm boolean NULL,
+    -- DATI CATASTALI
+    cadastral_section text NULL,
+    cadastral_sheet text NULL,
+    cadastral_particle text NULL,
+    cadastral_subaltern text NULL,
+    cadestral_category property_cadestral_category_enum NULL,
+    cadestral_income float NULL,
+    cadestral_quote text NULL,
+    cadestral_other text NULL,
+    -- DESCRIZIONE
+    description text NULL,
+    title text NULL,
+    notes text NULL,
+    -- MEDIA
+    -- fotografie, video, planimetrie, virtual tour, APE,
+    CONSTRAINT properties_parking_space_pkey PRIMARY KEY (id),
+    CONSTRAINT properties_parking_space_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+);
