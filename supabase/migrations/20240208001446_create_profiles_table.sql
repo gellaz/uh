@@ -1,9 +1,16 @@
+CREATE TYPE profile_sex_enum AS enum(
+    'MALE',
+    'FEMALE',
+    'OTHER'
+);
+
 CREATE TABLE public.profiles(
     id uuid NOT NULL,
     email text NOT NULL,
     first_name text NOT NULL,
     last_name text NOT NULL,
     birth_date date NOT NULL,
+    sex profile_sex_enum NULL,
     tax_id text NOT NULL,
     phone text NULL,
     email_secondary text NULL,
