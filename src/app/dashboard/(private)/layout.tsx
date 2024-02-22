@@ -1,10 +1,9 @@
-import AppBar from "@/components/AppBar";
 import Sidebar from "@/components/Sidebar";
 import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
-export default async function HomeLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -24,15 +23,24 @@ export default async function HomeLayout({
 
   if (profileErr || !profile) redirect("/login");
 
-  console.log(profile);
-
   return (
     <main className="flex flex-row h-screen w-screen">
-      <Sidebar />
-      <div className={"flex flex-col w-full"}>
-        <AppBar profile={profile} />
-        {children}
-      </div>
+      <Sidebar
+        items={[
+          {
+            href: "/dashboard",
+            text: "Dashboard",
+            icon: "teenyicons:pie-chart-solid",
+          },
+          {
+            href: "/dashboard/properties",
+            text: "Profile",
+            icon: "ci:building-01",
+          },
+        ]}
+        profile={profile}
+      />
+      {children}
     </main>
   );
 }
