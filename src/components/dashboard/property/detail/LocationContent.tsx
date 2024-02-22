@@ -1,5 +1,5 @@
 import { Address } from "@/types/properties";
-import Row from "@/components/property/detail/row";
+import Row from "@/components/dashboard/property/detail/row";
 
 export default function LocationContent(location: Address) {
   const gridStyle = "grid grid-cols-2 gap-10 h-full w-full p-4";

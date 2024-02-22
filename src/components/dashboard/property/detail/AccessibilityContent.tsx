@@ -1,5 +1,5 @@
 import { Accessibility } from "@/types/properties";
-import Row from "@/components/property/detail/row";
+import Row from "@/components/dashboard/property/detail/row";
 // import { MdOutlineElevator } from "react-icons/md";
 import { Accessibility as Wheelchair } from "lucide-react";
 

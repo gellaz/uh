@@ -1,5 +1,5 @@
 import { Heating } from "@/types/properties";
-import Row from "@/components/property/detail/row";
+import Row from "@/components/dashboard/property/detail/row";
 
 export default function HeatingContent(heating: Heating) {
   const mainStyle = "flex flex-col h-full w-full p-4 items-center";

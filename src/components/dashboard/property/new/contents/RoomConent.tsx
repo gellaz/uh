@@ -1,6 +1,6 @@
 import { Bath, Bed, BedDouble, Utensils } from "lucide-react";
 
-import InputRow from "@/components/property/new/inputRow";
+import InputRow from "@/components/dashboard/property/new/inputRow";
 
 export default function RoomsPage() {
   const formStyle = "col w-full h-full space-y-4 items-center justify-center";

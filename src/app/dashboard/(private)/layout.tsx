@@ -33,14 +33,19 @@ export default async function DashboardLayout({
             icon: "teenyicons:pie-chart-solid",
           },
           {
+            href: "/dashboard/explore",
+            text: "Explore",
+            icon: "zondicons:explore",
+          },
+          {
             href: "/dashboard/properties",
-            text: "Profile",
+            text: "Properties",
             icon: "ci:building-01",
           },
         ]}
         profile={profile}
       />
-      {children}
+      <div className="px-6 py-4">{children}</div>
     </main>
   );
 }

@@ -9,7 +9,7 @@ import {
 
 import BreadcrumbStepper from "@/components/BreadcrumbStepper";
 import { FormStepProvider } from "@/context/FormStepContext";
-import NewPropertyForm from "@/components/property/new/NewPropertyForm";
+import NewPropertyForm from "@/components/dashboard/property/new/NewPropertyForm";
 import { fetchPropertyCategories } from "@/actions/property";
 
 const formSteps = [

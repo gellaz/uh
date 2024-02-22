@@ -7,8 +7,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import InputRow from "@/components/property/new/inputRow";
-import Row from "@/components/property/detail/row";
+import InputRow from "@/components/dashboard/property/new/inputRow";
+import Row from "@/components/dashboard/property/detail/row";
 
 function RenderSelect(values: string[]) {
   return (

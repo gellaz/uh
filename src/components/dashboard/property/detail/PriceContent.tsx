@@ -1,5 +1,5 @@
 import { Price } from "@/types/properties";
-import Row from "@/components/property/detail/row";
+import Row from "@/components/dashboard/property/detail/row";
 
 export default function PriceContent(price: Price) {
   const mainStyle = "flex flex-col h-full w-full overflow-hidden p-4";

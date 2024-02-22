@@ -54,8 +54,8 @@ export default function Sidebar({ items, profile }: SidebarProps) {
                 <li
                   className={`relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group ${
                     isActive
-                      ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800"
-                      : "hover:bg-indigo-50 text-gray-600"
+                      ? "bg-gradient-to-tr from-orange-200 to-orange-100 text-orange-800"
+                      : "hover:bg-orange-50 text-gray-600"
                   }`}
                 >
                   <Icon icon={icon} height={22} width={22} />

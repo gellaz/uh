@@ -1,7 +1,7 @@
 import { Bath, BedDouble, Ruler, Utensils } from "lucide-react";
 
 import { Property } from "@/types/properties";
-import Row from "@/components/property/detail/row";
+import Row from "@/components/dashboard/property/detail/row";
 
 export default function GeneralContent(property: Property) {
   const mainStyle =
