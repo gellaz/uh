@@ -24,7 +24,7 @@ export default async function DashboardLayout({
   if (profileErr || !profile) redirect("/login");
 
   return (
-    <main className="flex flex-row h-screen w-screen">
+    <main className="flex">
       <Sidebar
         items={[
           {
@@ -45,7 +45,7 @@ export default async function DashboardLayout({
         ]}
         profile={profile}
       />
-      <div className="px-6 py-4">{children}</div>
+      <div className="p-6">{children}</div>
     </main>
   );
 }

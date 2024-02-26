@@ -4,7 +4,9 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 import { Button } from "@/components/ui/button";
 import { Icon } from "@iconify-icon/react";
+import Image from "next/image";
 import Link from "next/link";
+import { Separator } from "./ui/separator";
 import { capitalizeInitials } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -29,14 +31,8 @@ export default function Sidebar({ items, profile }: SidebarProps) {
   return (
     <aside className="h-screen">
       <nav className="h-full flex flex-col bg-white border-r shadow-sm">
-        <div className="p-4 pb-2 flex justify-between items-center">
-          <img
-            src="https://img.logoipsum.com/243.svg"
-            className={`overflow-hidden transition-all ${
-              expanded ? "w-32" : "w-0"
-            }`}
-            alt=""
-          />
+        <div className="flex flex-col p-4 gap-4">
+          {/* Toggle button */}
           <Button onClick={toggleExpanded} variant={"ghost"} size={"icon"}>
             {expanded ? (
               <Icon icon={"lucide:chevron-first"} height={18} width={18} />
@@ -44,11 +40,27 @@ export default function Sidebar({ items, profile }: SidebarProps) {
               <Icon icon={"lucide:chevron-last"} height={18} width={18} />
             )}
           </Button>
+          {/* Logo container */}
+          <div className="flex gap-4 items-end">
+            <Image
+              src="/logo.svg"
+              className="overflow-hidden transition-all ml-1"
+              alt="UrbanHunt Logo"
+              width={30}
+              height={30}
+            />
+            {expanded && (
+              <span className="font-extrabold text-xl">UrbanHunt</span>
+            )}
+          </div>
+        </div>
+        <div className="px-2 py-4">
+          <Separator />
         </div>
 
         <ul className="flex-1 px-3">
           {items.map(({ href, text, icon }) => {
-            const isActive = pathname === href;
+            const isActive = pathname == href;
             return (
               <Link href={href} key={href}>
                 <li
