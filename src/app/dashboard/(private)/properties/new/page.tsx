@@ -37,7 +37,10 @@ export default async function NewPropertyPage() {
   return (
     <FormStepProvider steps={formSteps}>
       <div className="flex flex-col space-y-4">
-        <BreadcrumbStepper />
+        <div className="w-full">
+          <BreadcrumbStepper />
+        </div>
+
         <NewPropertyForm residentialSubcategories={residentialSubcategories} />
       </div>
     </FormStepProvider>

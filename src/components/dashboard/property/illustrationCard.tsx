@@ -1,26 +1,18 @@
-import { ReactElement } from "react"
+import { ReactElement } from "react";
 
 interface IllustrationCardProps {
-    title: string,
-    message: string,
-    element?: ReactElement,
+  title: string;
+  message: string;
+  element?: ReactElement;
 }
 export default function IllustrationCard(prop: IllustrationCardProps) {
-    const cardStyle = 'border rounded-md p-4'
-    const columnStyle = 'flex flex-col space-y-1'
-    const titleStyle = 'text-base font-medium'
-    const messageStyle = 'text-sm font-normal'
-    const iconSize = 16
-
-    return (
-        <div className={cardStyle + ' flex flex-col space-y-4'}>
-            <div className={columnStyle}>
-                <p className={titleStyle}>{prop.title}</p>
-                <p className={messageStyle}>{prop.message}</p>
-            </div>
-            {
-                prop.element
-            }
-        </div>
-    )
+  return (
+    <div className="border rounded-md p-4 flex flex-col space-y-4">
+      <div className="flex flex-col space-y-1">
+        <p className="text-base font-medium">{prop.title}</p>
+        <p className="text-sm font-normal">{prop.message}</p>
+      </div>
+      {prop.element}
+    </div>
+  );
 }
