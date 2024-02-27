@@ -52,3 +52,23 @@ If you wish to just develop locally and not deploy to Vercel, [follow the steps 
    ```bash
    npx supabse migration new <migration_name>
    ```
+
+## Run Locally
+
+1. Reset supabase local database
+
+   ```bash
+   supabase db reset
+   ```
+
+2. Start your local database
+
+   ```bash
+   supabase start
+   ```
+
+3. Open supabase local database - website
+
+   ```bash
+   supabase status
+   ```
