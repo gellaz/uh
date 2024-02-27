@@ -2,6 +2,7 @@ import Sidebar from "@/components/Sidebar";
 import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import { sidebarItems } from "@/components/sidebar-items";
 
 export default async function DashboardLayout({
   children,
@@ -25,27 +26,8 @@ export default async function DashboardLayout({
 
   return (
     <main className="flex">
-      <Sidebar
-        items={[
-          {
-            href: "/dashboard",
-            text: "Dashboard",
-            icon: "teenyicons:pie-chart-solid",
-          },
-          {
-            href: "/dashboard/explore",
-            text: "Explore",
-            icon: "zondicons:explore",
-          },
-          {
-            href: "/dashboard/properties",
-            text: "Properties",
-            icon: "ci:building-01",
-          },
-        ]}
-        profile={profile}
-      />
-      <div className="p-6">{children}</div>
+      <Sidebar items={sidebarItems} profile={profile} />
+      <div className="p-4 flex-grow h-screen">{children}</div>
     </main>
   );
 }
