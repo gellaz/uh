@@ -7,7 +7,7 @@ declare global {
   export type Database = DB;
 
   export type Profile = DB["public"]["Tables"]["profiles"]["Row"];
-  export type Sex = DB["public"]["Enums"]["sex"];
+  export type Sex = DB["public"]["Enums"]["profile_sex_enum"];
 
   export type PropertyCategory =
     DB["public"]["Tables"]["property_categories"]["Row"];

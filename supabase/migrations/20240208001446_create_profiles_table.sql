@@ -1,7 +1,7 @@
 CREATE TYPE profile_sex_enum AS enum(
-    'MALE',
-    'FEMALE',
-    'OTHER'
+    'Male',
+    'Female',
+    'Other'
 );
 
 CREATE TABLE public.profiles(

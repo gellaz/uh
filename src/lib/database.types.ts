@@ -842,7 +842,7 @@ export type Database = {
         | "Commercial"
         | "Castel"
         | "Office"
-      profile_sex_enum: "MALE" | "FEMALE" | "OTHER"
+      profile_sex_enum: "Male" | "Female" | "Other"
       property_air_conditioning_enum:
         | "Autonomous"
         | "Centralized"
