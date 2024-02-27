@@ -182,7 +182,7 @@ CREATE TYPE property_tv_system_enum AS enum(
 -- servizio portineria 
 --
 CREATE TYPE property_concierge_service_enum AS enum(
-    'None' -- assente
+    'None', -- assente
     'Full day', -- intera giornata
     'half day' -- mezza giornata 
 );

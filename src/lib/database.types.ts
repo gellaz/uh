@@ -905,7 +905,7 @@ export type Database = {
         | "F/6"
         | "T"
       property_class_enum: "Luxury" | "Elengant" | "Medium" | "Economy"
-      property_concierge_service_enum: "NoneFull day" | "half day"
+      property_concierge_service_enum: "None" | "Full day" | "half day"
       property_condition_enum:
         | "New under construction"
         | "Excellent renovated"
