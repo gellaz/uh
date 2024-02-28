@@ -118,7 +118,7 @@ export const propertyGardenEnum = z.enum([
   "Shared and Private",
 ]);
 
-export const propertyGargareEnum = z.enum([
+export const propertyGarageEnum = z.enum([
   "None",
   "Single",
   "Double",
@@ -262,7 +262,7 @@ export const propertyHeatingFuelEnum = z.enum([
   "Electric",
 ]);
 
-export const propertyCadestralCategoryEnum = z.enum([
+export const propertyCadastralCategoryEnum = z.enum([
   "A/1",
   "A/2",
   "A/3",
@@ -340,8 +340,78 @@ export const propertyParkingSpaceSubcategoryEnum = z.enum([
   "External parking space uncovered",
 ]);
 
-export type PropertyAirConditioningEnum = z.infer<
-  typeof propertyAirConditioningEnum
->;
+export const propertyResidentialSchema = z.object({
+  // Subcategory
+  subcategory: propertyResidentialSubcategoryEnum,
+  // Composition
+  mq: z.number(),
+  rooms: z.number(),
+  bathrooms: z.number(),
+  kitchens: z.number(),
+  garden: propertyGardenEnum,
+  garage: propertyGarageEnum,
+  parking_spaces: z.number(),
+  terraces: z.number(),
+  balcony: z.number(),
+  cantina: z.number(),
+  mansarda: z.number(),
+  taverna: z.number(),
+  floor: propertyFloorEnum,
+  multiple_floors: z.boolean(),
+  // Location
+  street_name: z.string(),
+  street_number: z.string(),
+  city: z.string(),
+  zip_code: z.string(),
+  province: z.string(),
+  region: z.string(),
+  country: propertyCountryEnum,
+  // Features
+  furnishing: propertyFurnishingEnum.optional(),
+  wall_waredrobes: z.boolean().optional(),
+  external_fixtures_material: propertyExternalFixturesMaterialEnum.optional(),
+  external_fixtures_glass_type:
+    propertyExternalFixturesGlassTypeEnum.optional(),
+  tv_system: propertyTvSystemEnum.optional(),
+  concierge_service: propertyConciergeServiceEnum.optional(),
+  reinforced_door: z.boolean().optional(),
+  alarm: z.boolean().optional(),
+  electric_gate: z.boolean().optional(),
+  video_intercom: z.boolean().optional(),
+  optic_fiber: z.boolean().optional(),
+  chimney: z.boolean().optional(),
+  hot_tub: z.boolean().optional(),
+  pool: z.boolean().optional(),
+  sports_facility: z.number(),
+  condition: propertyConditionEnum.optional(),
+  class: propertyClassEnum.optional(),
+  exposure: propertyExposureEnum.optional(),
+  heating: propertyHeatingEnum,
+  heating_type: propertyHeatingTypeEnum.optional(),
+  heating_fuel: propertyHeatingFuelEnum.optional(),
+  air_conditioning: propertyAirConditioningEnum.optional(),
+  air_conditioning_type: propertyAirConditioningTypeEnum.optional(),
+  energy_class: propertyEnergyClassEnum,
+  // Building
+  construction_year: z.number().optional(),
+  total_floors_building: z.number().optional(),
+  elevators: z.number().optional(),
+  wheelchair_access: z.boolean().optional(),
+  free_sides: propertyFreeSidesEnum.optional(),
+  facing: propertyFacingEnum.optional(),
+  // Cadestral
+  cadastral_section: z.string().optional(),
+  cadastral_sheet: z.string().optional(),
+  cadastral_particle: z.string().optional(),
+  cadastral_subaltern: z.string().optional(),
+  cadastral_category: propertyCadastralCategoryEnum.optional(),
+  cadastral_income: z.number().optional(),
+  cadastral_quote: z.string().optional(),
+  cadastral_other: z.string().optional(),
+  // Description
+  description: z.string().optional(),
+  title: z.string().optional(),
+  notes: z.string().optional(),
+});
 
-export type BuildingUsageEnum = z.infer<typeof buildingUsageEnumSchema>;
+export type PropertyResidential = z.infer<typeof propertyResidentialSchema>;
