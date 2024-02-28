@@ -428,7 +428,7 @@ CREATE TABLE public.properties_residential(
     chimney boolean NULL,
     hot_tub boolean NULL,
     pool boolean NULL,
-    sports_facility smallint NULL, -- [Tennis, Calcetto, Pallavolo, Basket, Paddle, Altro]
+    sports_facility smallint NULL,
     -- BUILDING CARATTERISTICHE
     construction_year smallint NULL,
     property_class property_class_enum NULL,
@@ -453,10 +453,10 @@ CREATE TABLE public.properties_residential(
     cadastral_sheet text NULL,
     cadastral_particle text NULL,
     cadastral_subaltern text NULL,
-    cadestral_category property_cadestral_category_enum NULL,
-    cadestral_income float NULL,
-    cadestral_quote text NULL,
-    cadestral_other text NULL,
+    cadastral_category property_cadestral_category_enum NULL,
+    cadastral_income float NULL,
+    cadastral_quote text NULL,
+    cadastral_other text NULL,
     -- DESCRIZIONE
     description text NULL,
     title text NULL,

@@ -529,16 +529,16 @@ export type Database = {
           alarm: boolean | null
           balcony: number | null
           bathrooms: number
+          cadastral_category:
+            | Database["public"]["Enums"]["property_cadestral_category_enum"]
+            | null
+          cadastral_income: number | null
+          cadastral_other: string | null
           cadastral_particle: string | null
+          cadastral_quote: string | null
           cadastral_section: string | null
           cadastral_sheet: string | null
           cadastral_subaltern: string | null
-          cadestral_category:
-            | Database["public"]["Enums"]["property_cadestral_category_enum"]
-            | null
-          cadestral_income: number | null
-          cadestral_other: string | null
-          cadestral_quote: string | null
           cantina: number | null
           chimney: boolean | null
           city: string
@@ -623,16 +623,16 @@ export type Database = {
           alarm?: boolean | null
           balcony?: number | null
           bathrooms: number
+          cadastral_category?:
+            | Database["public"]["Enums"]["property_cadestral_category_enum"]
+            | null
+          cadastral_income?: number | null
+          cadastral_other?: string | null
           cadastral_particle?: string | null
+          cadastral_quote?: string | null
           cadastral_section?: string | null
           cadastral_sheet?: string | null
           cadastral_subaltern?: string | null
-          cadestral_category?:
-            | Database["public"]["Enums"]["property_cadestral_category_enum"]
-            | null
-          cadestral_income?: number | null
-          cadestral_other?: string | null
-          cadestral_quote?: string | null
           cantina?: number | null
           chimney?: boolean | null
           city: string
@@ -717,16 +717,16 @@ export type Database = {
           alarm?: boolean | null
           balcony?: number | null
           bathrooms?: number
+          cadastral_category?:
+            | Database["public"]["Enums"]["property_cadestral_category_enum"]
+            | null
+          cadastral_income?: number | null
+          cadastral_other?: string | null
           cadastral_particle?: string | null
+          cadastral_quote?: string | null
           cadastral_section?: string | null
           cadastral_sheet?: string | null
           cadastral_subaltern?: string | null
-          cadestral_category?:
-            | Database["public"]["Enums"]["property_cadestral_category_enum"]
-            | null
-          cadestral_income?: number | null
-          cadestral_other?: string | null
-          cadestral_quote?: string | null
           cantina?: number | null
           chimney?: boolean | null
           city?: string
