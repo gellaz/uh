@@ -13,9 +13,8 @@ export default function RegisterStepperPrivate({
   step,
 }: RegisterStepperPrivateProps) {
   function textClass(stepNumber: number) {
-    return `font-medium leading-tight ${
-      step === stepNumber ? "text-orange-500" : "text-gray-500"
-    }`;
+    return `font-medium leading-tight ${step === stepNumber ? "text-orange-500" : "text-gray-500"
+      }`;
   }
 
   function iconBg(stepNumber: number) {
@@ -43,7 +42,7 @@ export default function RegisterStepperPrivate({
                 <item.Icon className="h-5 w-5" />
               </span>
 
-              <h3 className="ml-2">{item.text}</h3>
+              <h6 className="ml-2">{item.text}</h6>
             </div>
           </li>
         ))}
