@@ -2,7 +2,7 @@ import Sidebar from "@/components/Sidebar";
 import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import { sidebarItems } from "@/components/sidebar-items";
+import { sidebarItems } from "@/constants/sidebar-items";
 
 export default async function DashboardLayout({
   children,

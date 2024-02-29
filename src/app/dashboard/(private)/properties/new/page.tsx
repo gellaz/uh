@@ -23,11 +23,17 @@ const formSteps = [
 
 export default function NewPropertyPage() {
   return (
-    <FormStepProvider steps={formSteps}>
-      <div className="flex flex-col">
-        <BreadcrumbStepper />
-        <NewPropertyForm residentialSubcategories={["A", "B"]} />
+    <div className="col space-y-6">
+      <div>
+        <h4>New property</h4>
+        <p className="text-pretty">Please fill out the form below to add a new property</p>
       </div>
-    </FormStepProvider>
+      <FormStepProvider steps={formSteps}>
+        <div className="col space-y-6">
+          <BreadcrumbStepper />
+          <NewPropertyForm residentialSubcategories={["A", "B"]} />
+        </div>
+      </FormStepProvider>
+    </div>
   );
 }

@@ -1,5 +1,14 @@
 import { z } from "zod";
 
+export const PropertyCategorySchema = z.enum([
+  "Residential",
+  "Commercial",
+  "Garage",
+  "Land",
+  "Parking Space",
+  "Other",
+]);
+
 export const PropertyTypeSchema = z.enum([
   "APARTMENT",
   "PENTHOUSE",

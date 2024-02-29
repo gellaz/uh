@@ -2,12 +2,12 @@ export const sidebarItems = [
   {
     href: "/dashboard",
     text: "Dashboard",
-    icon: "teenyicons:pie-chart-solid",
+    icon: "lucide:layout-dashboard",
   },
   {
     href: "/dashboard/explore",
     text: "Explore",
-    icon: "zondicons:explore",
+    icon: "material-symbols:travel-explore-rounded",
   },
   {
     href: "/dashboard/properties",
