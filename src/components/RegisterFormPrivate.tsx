@@ -135,10 +135,10 @@ export default function RegisterFormPrivate({
     step === 1
       ? stepOneSchema
       : step === 2
-      ? stepTwoBaseSchema
-      : step === 3
-      ? stepThreeBaseSchema
-      : combinedSchema;
+        ? stepTwoBaseSchema
+        : step === 3
+          ? stepThreeBaseSchema
+          : combinedSchema;
 
   const defaultFormValues = {
     email: "",
@@ -195,7 +195,7 @@ export default function RegisterFormPrivate({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full space-y-4"
+          className="w-full space-y-6"
         >
           {step === 1 && (
             // Step 1: Email, Password, Confirm Password
@@ -220,7 +220,7 @@ export default function RegisterFormPrivate({
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm">Password (*)</FormLabel>
+                    <FormLabel>Password (*)</FormLabel>
                     <FormControl>
                       <PasswordInput placeholder="Password" {...field} />
                     </FormControl>
@@ -377,7 +377,7 @@ export default function RegisterFormPrivate({
               <FormField
                 control={form.control}
                 name="email"
-                render={({}) => (
+                render={({ }) => (
                   <FormItem>
                     <FormLabel>Primary contact email</FormLabel>
                     <FormControl>
@@ -420,22 +420,22 @@ export default function RegisterFormPrivate({
           {step === 4 && (
             // Step 4: Terms & Conditions
             <>
-              <p className="text-center">
-                Read the terms and conditions here carefully
+              <p className="text-pretty">
+                Read the terms and conditions carefully before proceeding. By clicking "Create account", you agree to abide by the terms and conditions outlined in the document.
               </p>
               {/** acceptTerms */}
               <FormField
                 control={form.control}
                 name="acceptTerms"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem >
                     <FormControl>
                       <Checkbox
                         checked={field.value}
                         onCheckedChange={field.onChange}
                       />
                     </FormControl>
-                    <span className="ml-4 text-sm">
+                    <span className="ml-2 text-sm ">
                       Accept terms and conditions
                     </span>
                     <FormMessage className="text-xs" />
@@ -452,7 +452,7 @@ export default function RegisterFormPrivate({
               <Button
                 variant={"secondary"}
                 onClick={handleBackClick}
-                className="flex-grow"
+                className="flex-1"
               >
                 Back
               </Button>
@@ -460,18 +460,18 @@ export default function RegisterFormPrivate({
             {step < 4 ? (
               <Button
                 type="submit"
-                className={step > 1 ? "ml-4 flex-grow" : "w-1/2"}
+                className={step > 1 ? "ml-4 flex-1" : "w-1/2"}
               >
-                Continue
+                Next
               </Button>
             ) : (
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <Button
                     type="submit"
-                    className={step > 1 ? "ml-4 flex-grow" : "w-1/2"}
+                    className={step > 1 ? "ml-4 flex-1" : "w-1/2"}
                   >
-                    Sign Up
+                    Create account
                   </Button>
                 </AlertDialogTrigger>
                 {registrationComplete && (

@@ -50,7 +50,11 @@ export default function Sidebar({ items, profile }: SidebarProps) {
               height={30}
             />
             {expanded && (
-              <span className="font-extrabold text-xl">UrbanHunt</span>
+              <span className="font-extrabold text-xl">
+                <h5>
+                  UrbanHunt
+                </h5>
+              </span>
             )}
           </div>
         </div>
@@ -64,15 +68,16 @@ export default function Sidebar({ items, profile }: SidebarProps) {
             return (
               <Link href={href} key={href}>
                 <li
-                  className={`relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group ${
-                    isActive
-                      ? "bg-gradient-to-tr from-orange-200 to-orange-100 text-orange-800"
-                      : "hover:bg-orange-50 text-gray-600"
-                  }`}
+                  className={`relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group ${isActive
+                    ? "bg-gradient-to-tr from-orange-200 to-orange-100 text-orange-800"
+                    : "hover:bg-orange-50 text-gray-600"
+                    }`}
                 >
                   <Icon icon={icon} height={22} width={22} />
                   <span className={`ml-3 ${expanded ? "inline" : "hidden"}`}>
-                    {text}
+                    <p>
+                      {text}
+                    </p>
                   </span>
                 </li>
               </Link>
@@ -94,10 +99,10 @@ export default function Sidebar({ items, profile }: SidebarProps) {
           `}
           >
             <div className="leading-4">
-              <h4 className="font-semibold text-md">
+              <p className="font-medium">
                 {profile.first_name} {profile.last_name}
-              </h4>
-              <span className="text-xs text-gray-600">{profile.email}</span>
+              </p>
+              <span className="text-xs text-slate-500">{profile.email}</span>
             </div>
             <Icon icon={"lucide:more-vertical"} height={22} width={22} />
           </div>

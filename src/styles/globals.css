@@ -51,40 +51,45 @@
 
 @layer base {
   h1 {
-    @apply text-2xl font-semibold;
+    @apply text-[31.25px] font-extrabold;
   }
 
   h2 {
-    @apply text-2xl font-medium;
+    @apply text-[31.25px] font-semibold;
   }
 
   h3 {
-    @apply text-xl font-semibold;
+    @apply text-[31.25px] font-medium;
   }
 
   h4 {
-    @apply text-xl font-medium;
+    @apply text-[25px] font-bold;
   }
 
   h5 {
-    @apply text-lg font-semibold;
+    @apply text-[25px] font-medium;
   }
 
   h6 {
-    @apply text-lg font-medium;
+    @apply text-[20px] font-medium;
   }
 
   p {
-    @apply text-base font-normal;
+    @apply text-[16px] font-normal;
   }
 
   label {
-    @apply text-xs;
+    @apply text-[12.8px];
+  }
+
+  .xs-text{
+    @apply text-[10.24px];
   }
 
   body {
     @apply bg-primary-foreground text-foreground overflow-hidden w-full h-full;
   }
+
 
   main {
     @apply bg-background;
