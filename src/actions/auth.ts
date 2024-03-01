@@ -1,10 +1,13 @@
 "use server";
 
-import { IRegister } from "@/validation/auth";
 import { cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/actions";
+import { registerFormSchema } from "@/lib/validation";
+import { z } from "zod";
 
-export async function signUp(registerSchema: IRegister) {
+export async function signUp(
+  registerSchema: z.infer<typeof registerFormSchema>
+) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
