@@ -135,10 +135,10 @@ export default function RegisterFormPrivate({
     step === 1
       ? stepOneSchema
       : step === 2
-        ? stepTwoBaseSchema
-        : step === 3
-          ? stepThreeBaseSchema
-          : combinedSchema;
+      ? stepTwoBaseSchema
+      : step === 3
+      ? stepThreeBaseSchema
+      : combinedSchema;
 
   const defaultFormValues = {
     email: "",
@@ -358,9 +358,9 @@ export default function RegisterFormPrivate({
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="MALE">Male</SelectItem>
-                          <SelectItem value="FEMALE">Female</SelectItem>
-                          <SelectItem value="OTHER">Other</SelectItem>
+                          <SelectItem value="Male">Male</SelectItem>
+                          <SelectItem value="Female">Female</SelectItem>
+                          <SelectItem value="Other">Other</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage className="text-xs" />
@@ -377,7 +377,7 @@ export default function RegisterFormPrivate({
               <FormField
                 control={form.control}
                 name="email"
-                render={({ }) => (
+                render={({}) => (
                   <FormItem>
                     <FormLabel>Primary contact email</FormLabel>
                     <FormControl>
@@ -421,14 +421,16 @@ export default function RegisterFormPrivate({
             // Step 4: Terms & Conditions
             <>
               <p className="text-pretty">
-                Read the terms and conditions carefully before proceeding. By clicking "Create account", you agree to abide by the terms and conditions outlined in the document.
+                Read the terms and conditions carefully before proceeding. By
+                clicking "Create account", you agree to abide by the terms and
+                conditions outlined in the document.
               </p>
               {/** acceptTerms */}
               <FormField
                 control={form.control}
                 name="acceptTerms"
                 render={({ field }) => (
-                  <FormItem >
+                  <FormItem>
                     <FormControl>
                       <Checkbox
                         checked={field.value}
