@@ -1,4 +1,4 @@
-import UploadMediaDiv from "@/components/uploadMediaDiv";
+import UploadMediaDiv from "@/components/UploadMediaDiv";
 
 export default function MediaPage() {
   const divStyle = "row w-full h-full space-x-6";

@@ -1,37 +1,35 @@
-'use client'
+"use client";
 
+import { ChevronRight } from "lucide-react";
+import { FormStepProvider } from "@/context/FormStepContext";
+import PropertyResidentialForm from "@/components/forms/PropertyResidentialForm";
 import VerticalStepper from "@/components/dashboard/property/new/VerticalStepper";
 import { formSteps } from "@/constants/newPropertyResidentialSteps";
-import { FormStepProvider } from "@/context/FormStepContext";
-import { ChevronRight } from "lucide-react";
 import { useState } from "react";
-
 
 export default function NewPropertyPage() {
   const [step, setStep] = useState(0);
 
-
   return (
     <div className="col space-y-4">
-      <div >
+      <div>
         <h4>New residential property</h4>
         <p className="text-pretty">
           Please fill out the form below to add a new property
         </p>
       </div>
-
-      {/* LEFT SIDE */}
-      <div className="row w-full h-full space-x-4">
-        <div className="col w-[28%]">
-          <FormStepProvider steps={formSteps}>
+      <FormStepProvider steps={formSteps}>
+        {/* LEFT SIDE */}
+        <div className="row w-full h-full space-x-4">
+          <div className="col w-[24%]">
             <VerticalStepper />
-          </FormStepProvider>
-
+          </div>
+          {/* RIGHT SIDE */}
+          <div className="col flex-1">
+            <PropertyResidentialForm />
+          </div>
         </div>
-
-        {/* RIGHT SIDE */}
-        <div className="bg-yellow-100 col flex-1"></div>
-      </div>
+      </FormStepProvider>
     </div>
   );
 
@@ -50,7 +48,6 @@ export default function NewPropertyPage() {
         return "text-red-600";
       default:
         return "text-black";
-
     }
   }
 }

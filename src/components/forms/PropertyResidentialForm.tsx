@@ -16,6 +16,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  propertyResidentialSchema,
+  propertyResidentialSubcategoryEnum,
+} from "@/lib/validation";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,7 +28,7 @@ import { useFormStep } from "@/context/FormStepContext";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const formSchema = z.object({
+/* const formSchema = z.object({
   category: z.literal("Residential"),
   subcategory: z.string().min(1, "Subcategory must be not empty"),
   street_name: z.string().min(1, "Street name must be no"),
@@ -102,50 +106,66 @@ const formSchema = z.object({
   pool: z.boolean(),
   construction_year: z.number().min(0),
 });
-
-interface NewPropertyFormSchema {
+ */
+/* interface NewPropertyFormSchema {
   residentialSubcategories: string[];
-}
+} */
 
-export default function PropertyResidentialForm({
-  residentialSubcategories,
-}: NewPropertyFormSchema) {
+export default function PropertyResidentialForm() {
   const { currentStepIndex, nextStep, prevStep, totalSteps } = useFormStep();
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof propertyResidentialSchema>>({
+    resolver: zodResolver(propertyResidentialSchema),
     defaultValues: {
-      category: "Residential",
       subcategory: undefined,
-      street_name: undefined,
-      street_number: undefined,
-      postal_code: undefined,
-      city: undefined,
-      state: undefined,
-      country: undefined,
       mq: undefined,
-      floor: undefined,
-      total_floors: undefined,
       rooms: undefined,
-      kitchens: undefined,
       bathrooms: undefined,
-      heating: undefined,
-      heating_fuel: undefined,
-      heating_type: undefined,
-      air_conditioning: undefined,
-      energy_class: undefined,
+      kitchens: undefined,
+      garden: undefined,
+      garage: undefined,
+      parking_spaces: undefined,
+      terraces: undefined,
+      balcony: undefined,
+      cantina: undefined,
+      mansarda: undefined,
+      taverna: undefined,
+      floor: undefined,
+      multiple_floors: undefined,
       furnishing: undefined,
+      wall_waredrobes: undefined,
       external_fixtures_material: undefined,
       external_fixtures_glass_type: undefined,
-      condition: undefined,
-      exposure: undefined,
-      elevator: undefined,
+      tv_system: undefined,
+      concierge_service: undefined,
+      reinforced_door: undefined,
+      alarm: undefined,
+      electric_gate: undefined,
+      video_intercom: undefined,
+      optic_fiber: undefined,
+      chimney: undefined,
+      hot_tub: undefined,
       pool: undefined,
+      sports_facility: undefined,
+      condition: undefined,
+      class: undefined,
+      exposure: undefined,
+      heating: undefined,
+      heating_type: undefined,
+      heating_fuel: undefined,
+      air_conditioning: undefined,
+      air_conditioning_type: undefined,
+      energy_class: undefined,
       construction_year: undefined,
+      total_floors_building: undefined,
+      elevators: undefined,
+      wheelchair_access: undefined,
+      free_sides: undefined,
+      facing: undefined,
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof propertyResidentialSchema>) {
     console.log(values);
   }
 
@@ -171,7 +191,9 @@ export default function PropertyResidentialForm({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {residentialSubcategories.map((subcategory) => (
+                      {Object.values(
+                        propertyResidentialSubcategoryEnum.Values
+                      ).map((subcategory) => (
                         <SelectItem key={subcategory} value={subcategory}>
                           {subcategory}
                         </SelectItem>
@@ -212,14 +234,28 @@ export default function PropertyResidentialForm({
                 )}
               />
             </div>
+            {/** City */}
+            <FormField
+              control={form.control}
+              name="city"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>City</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Insert city" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <div className="grid grid-cols-4 gap-2">
-              {/** Postal code */}
+              {/** ZIP code */}
               <FormField
                 control={form.control}
-                name="postal_code"
+                name="zip_code"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Postal code</FormLabel>
+                    <FormLabel>ZIP code</FormLabel>
                     <FormControl>
                       <Input placeholder="40100" {...field} />
                     </FormControl>
@@ -227,29 +263,29 @@ export default function PropertyResidentialForm({
                   </FormItem>
                 )}
               />
-              {/** City */}
+              {/** Province */}
               <FormField
                 control={form.control}
-                name="city"
+                name="province"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>City</FormLabel>
+                    <FormLabel>Province</FormLabel>
                     <FormControl>
-                      <Input placeholder="Insert city" {...field} />
+                      <Input placeholder="Insert province" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              {/** State */}
+              {/** Region */}
               <FormField
                 control={form.control}
-                name="state"
+                name="region"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>State</FormLabel>
+                    <FormLabel>Region</FormLabel>
                     <FormControl>
-                      <Input placeholder="Insert state" {...field} />
+                      <Input placeholder="Insert region" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -306,7 +342,7 @@ export default function PropertyResidentialForm({
               {/** Total floors */}
               <FormField
                 control={form.control}
-                name="total_floors"
+                name="total_floors_building"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Total floors</FormLabel>
@@ -697,14 +733,11 @@ export default function PropertyResidentialForm({
               {/** Elevator */}
               <FormField
                 control={form.control}
-                name="elevator"
+                name="elevators"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Elevator</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
+                    <Select onValueChange={field.onChange} defaultValue={"ss"}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select elevator" />
