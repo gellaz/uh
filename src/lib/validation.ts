@@ -1,5 +1,14 @@
 import { z } from "zod";
 
+export const propertyCategorySchema = z.enum([
+  "Residential",
+  "Commercial",
+  "Garage",
+  "Land",
+  "Parking Space",
+  "Other",
+]);
+
 /**
  * Profile sex enum schema
  */
