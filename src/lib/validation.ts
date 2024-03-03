@@ -1,8 +1,58 @@
 import { z } from "zod";
 
-// ENUMS
-
+/**
+ * Profile sex enum schema
+ */
 export const profileSexEnumSchema = z.enum(["Male", "Female", "Other"]);
+
+/**
+ * Login form schema
+ */
+export const loginFormSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(4),
+});
+
+/**
+ * Register form schema
+ */
+export const registerFormSchema = z.object({
+  email: z.string().email(),
+  password: z
+    .string()
+    .min(8, { message: "Password must be at least 8 characters long" })
+    .max(100, { message: "Password must be maximum 100 characters long" }),
+  confirmPassword: z.string(),
+  firstName: z.string().trim().min(1, { message: "First name is required" }),
+  lastName: z.string().trim().min(1, { message: "Last name is required" }),
+  taxId: z.string().trim().min(1, { message: "Tax ID is required" }),
+  birthDate: z.coerce
+    .date()
+    .min(new Date(1920, 0, 1), {
+      message: "Birth date cannot go past January 1 1920",
+    })
+    .max(new Date(), { message: "Date must be in the past" })
+    .refine(
+      (date) => {
+        const ageDifMs = Date.now() - date.getTime();
+        const ageDate = new Date(ageDifMs);
+
+        const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+
+        return age >= 18;
+      },
+      { message: "You must be 18 years or older" }
+    ),
+  sex: profileSexEnumSchema,
+  secondaryEmail: z
+    .string()
+    .email({ message: "Invalid secondary email address" })
+    .optional()
+    .or(z.literal("")),
+  phoneNumber: z.string().optional(),
+});
+
+// ENUMS
 
 export const propertyResidentialSubcategoryEnum = z.enum([
   "Apartment",
@@ -340,25 +390,7 @@ export const propertyParkingSpaceSubcategoryEnum = z.enum([
   "External parking space uncovered",
 ]);
 
-export const propertyResidentialSchema = z.object({
-  // Subcategory
-  subcategory: propertyResidentialSubcategoryEnum,
-  // Composition
-  mq: z.number(),
-  rooms: z.number(),
-  bathrooms: z.number(),
-  kitchens: z.number(),
-  garden: propertyGardenEnum,
-  garage: propertyGarageEnum,
-  parking_spaces: z.number(),
-  terraces: z.number(),
-  balcony: z.number(),
-  cantina: z.number(),
-  mansarda: z.number(),
-  taverna: z.number(),
-  floor: propertyFloorEnum,
-  multiple_floors: z.boolean(),
-  // Location
+export const propertyLocationSchema = z.object({
   street_name: z.string(),
   street_number: z.string(),
   city: z.string(),
@@ -366,52 +398,85 @@ export const propertyResidentialSchema = z.object({
   province: z.string(),
   region: z.string(),
   country: propertyCountryEnum,
-  // Features
-  furnishing: propertyFurnishingEnum.optional(),
-  wall_waredrobes: z.boolean().optional(),
-  external_fixtures_material: propertyExternalFixturesMaterialEnum.optional(),
-  external_fixtures_glass_type:
-    propertyExternalFixturesGlassTypeEnum.optional(),
-  tv_system: propertyTvSystemEnum.optional(),
-  concierge_service: propertyConciergeServiceEnum.optional(),
-  reinforced_door: z.boolean().optional(),
-  alarm: z.boolean().optional(),
-  electric_gate: z.boolean().optional(),
-  video_intercom: z.boolean().optional(),
-  optic_fiber: z.boolean().optional(),
-  chimney: z.boolean().optional(),
-  hot_tub: z.boolean().optional(),
-  pool: z.boolean().optional(),
-  sports_facility: z.number(),
-  condition: propertyConditionEnum.optional(),
-  class: propertyClassEnum.optional(),
-  exposure: propertyExposureEnum.optional(),
-  heating: propertyHeatingEnum,
-  heating_type: propertyHeatingTypeEnum.optional(),
-  heating_fuel: propertyHeatingFuelEnum.optional(),
-  air_conditioning: propertyAirConditioningEnum.optional(),
-  air_conditioning_type: propertyAirConditioningTypeEnum.optional(),
-  energy_class: propertyEnergyClassEnum,
-  // Building
-  construction_year: z.number().optional(),
-  total_floors_building: z.number().optional(),
-  elevators: z.number().optional(),
-  wheelchair_access: z.boolean().optional(),
-  free_sides: propertyFreeSidesEnum.optional(),
-  facing: propertyFacingEnum.optional(),
-  // Cadestral
-  cadastral_section: z.string().optional(),
-  cadastral_sheet: z.string().optional(),
-  cadastral_particle: z.string().optional(),
-  cadastral_subaltern: z.string().optional(),
-  cadastral_category: propertyCadastralCategoryEnum.optional(),
-  cadastral_income: z.number().optional(),
-  cadastral_quote: z.string().optional(),
-  cadastral_other: z.string().optional(),
-  // Description
-  description: z.string().optional(),
-  title: z.string().optional(),
-  notes: z.string().optional(),
 });
 
-export type PropertyResidential = z.infer<typeof propertyResidentialSchema>;
+export const propertyCadastralSchema = z.object({
+  cadastral_section: z.string(),
+  cadastral_sheet: z.string(),
+  cadastral_particle: z.string(),
+  cadastral_subaltern: z.string(),
+  cadastral_category: propertyCadastralCategoryEnum,
+  cadastral_income: z.number(),
+  cadastral_quote: z.string(),
+  cadastral_other: z.string(),
+});
+
+export const propertyDescriptionSchema = z.object({
+  description: z.string(),
+  title: z.string(),
+  notes: z.string(),
+});
+
+export const propertyResidentialSchema = z
+  .object({
+    // Subcategory
+    subcategory: propertyResidentialSubcategoryEnum,
+    // Composition
+    mq: z.number(),
+    rooms: z.number(),
+    bathrooms: z.number(),
+    kitchens: z.number(),
+    garden: propertyGardenEnum,
+    garage: propertyGarageEnum,
+    parking_spaces: z.number(),
+    terraces: z.number(),
+    balcony: z.number(),
+    cantina: z.number(),
+    mansarda: z.number(),
+    taverna: z.number(),
+    floor: propertyFloorEnum,
+    multiple_floors: z.boolean(),
+    // Features
+    furnishing: propertyFurnishingEnum.optional(),
+    wall_waredrobes: z.boolean().optional(),
+    external_fixtures_material: propertyExternalFixturesMaterialEnum.optional(),
+    external_fixtures_glass_type:
+      propertyExternalFixturesGlassTypeEnum.optional(),
+    tv_system: propertyTvSystemEnum.optional(),
+    concierge_service: propertyConciergeServiceEnum.optional(),
+    reinforced_door: z.boolean().optional(),
+    alarm: z.boolean().optional(),
+    electric_gate: z.boolean().optional(),
+    video_intercom: z.boolean().optional(),
+    optic_fiber: z.boolean().optional(),
+    chimney: z.boolean().optional(),
+    hot_tub: z.boolean().optional(),
+    pool: z.boolean().optional(),
+    sports_facility: z.number(),
+    condition: propertyConditionEnum.optional(),
+    class: propertyClassEnum.optional(),
+    exposure: propertyExposureEnum.optional(),
+    heating: propertyHeatingEnum,
+    heating_type: propertyHeatingTypeEnum.optional(),
+    heating_fuel: propertyHeatingFuelEnum.optional(),
+    air_conditioning: propertyAirConditioningEnum.optional(),
+    air_conditioning_type: propertyAirConditioningTypeEnum.optional(),
+    energy_class: propertyEnergyClassEnum,
+    // Building
+    construction_year: z.number().optional(),
+    total_floors_building: z.number().optional(),
+    elevators: z.number().optional(),
+    wheelchair_access: z.boolean().optional(),
+    free_sides: propertyFreeSidesEnum.optional(),
+    facing: propertyFacingEnum.optional(),
+  })
+  .merge(propertyLocationSchema)
+  .merge(propertyCadastralSchema)
+  .merge(propertyDescriptionSchema);
+
+export type PropertyResidentialInput = z.input<
+  typeof propertyResidentialSchema
+>;
+export type PropertyResidentialOutput = z.output<
+  typeof propertyResidentialSchema
+>;

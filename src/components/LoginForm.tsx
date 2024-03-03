@@ -1,7 +1,5 @@
 "use client";
 
-import PasswordInput from "@/components/PasswordInput";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -10,32 +8,30 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { createClient } from "@/utils/supabase/client";
-import { loginSchema, type ILogin } from "@/validation/auth";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 
-const formSchema = z.object({
-  email: z.string().email({ message: "Insert a valid email" }),
-  password: z.string().min(0, { message: "Insert your password" }),
-});
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import PasswordInput from "@/components/PasswordInput";
+import { createClient } from "@/utils/supabase/client";
+import { loginFormSchema } from "@/lib/validation";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function LoginForm() {
   const supabase = createClient();
   const router = useRouter();
 
-  const form = useForm<ILogin>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<z.infer<typeof loginFormSchema>>({
+    resolver: zodResolver(loginFormSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof loginFormSchema>) {
     const { error } = await supabase.auth.signInWithPassword(values);
 
     if (error) {

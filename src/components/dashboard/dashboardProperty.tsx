@@ -1,7 +1,7 @@
 import { ChevronRight } from "lucide-react";
 
 interface DashboardPropertyProps {
-  property: Property;
+  property: PropertyResidential;
 }
 
 export default function DashboardProperty(props: DashboardPropertyProps) {

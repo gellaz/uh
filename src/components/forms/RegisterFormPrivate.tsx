@@ -1,7 +1,7 @@
 "use client";
 
-import { signUp } from "@/actions/auth";
-import PasswordInput from "@/components/PasswordInput";
+import * as z from "zod";
+
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -12,9 +12,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -23,7 +20,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
@@ -36,16 +32,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { CalendarIcon } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import PasswordInput from "@/components/PasswordInput";
+import React from "react";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/client";
-import { type IRegister } from "@/validation/auth";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import React from "react";
+import { registerFormSchema } from "@/lib/validation";
+import { signUp } from "@/actions/auth";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const stepOneBaseSchema = z.object({
   email: z.string().email(),
@@ -77,7 +79,7 @@ const stepTwoBaseSchema = z.object({
       },
       { message: "You must be 18 years or older" }
     ),
-  sex: z.enum(["MALE", "FEMALE", "OTHER"]),
+  sex: z.enum(["Male", "Female", "Other"]),
 });
 
 const stepThreeBaseSchema = z.object({
@@ -133,10 +135,10 @@ export default function RegisterFormPrivate({
     step === 1
       ? stepOneSchema
       : step === 2
-        ? stepTwoBaseSchema
-        : step === 3
-          ? stepThreeBaseSchema
-          : combinedSchema;
+      ? stepTwoBaseSchema
+      : step === 3
+      ? stepThreeBaseSchema
+      : combinedSchema;
 
   const defaultFormValues = {
     email: "",
@@ -164,17 +166,17 @@ export default function RegisterFormPrivate({
     setStep(step - 1);
   }
 
-  async function validateForm(values: IRegister) {
+  async function validateForm(values: z.infer<typeof registerFormSchema>) {
     const isFormValid = await form.trigger();
     return isFormValid;
   }
 
-  async function submitForm(values: IRegister) {
+  async function submitForm(values: z.infer<typeof registerFormSchema>) {
     setRegistrationComplete(true);
     signUp(values);
   }
 
-  async function onSubmit(values: IRegister) {
+  async function onSubmit(values: z.infer<typeof registerFormSchema>) {
     console.log(values);
 
     if (step < 4) {
@@ -356,9 +358,9 @@ export default function RegisterFormPrivate({
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="MALE">Male</SelectItem>
-                          <SelectItem value="FEMALE">Female</SelectItem>
-                          <SelectItem value="OTHER">Other</SelectItem>
+                          <SelectItem value="Male">Male</SelectItem>
+                          <SelectItem value="Female">Female</SelectItem>
+                          <SelectItem value="Other">Other</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage className="text-xs" />
@@ -375,7 +377,7 @@ export default function RegisterFormPrivate({
               <FormField
                 control={form.control}
                 name="email"
-                render={({ }) => (
+                render={({}) => (
                   <FormItem>
                     <FormLabel>Primary contact email</FormLabel>
                     <FormControl>
@@ -419,14 +421,16 @@ export default function RegisterFormPrivate({
             // Step 4: Terms & Conditions
             <>
               <p className="text-pretty">
-                Read the terms and conditions carefully before proceeding. By clicking "Create account", you agree to abide by the terms and conditions outlined in the document.
+                Read the terms and conditions carefully before proceeding. By
+                clicking "Create account", you agree to abide by the terms and
+                conditions outlined in the document.
               </p>
               {/** acceptTerms */}
               <FormField
                 control={form.control}
                 name="acceptTerms"
                 render={({ field }) => (
-                  <FormItem >
+                  <FormItem>
                     <FormControl>
                       <Checkbox
                         checked={field.value}
