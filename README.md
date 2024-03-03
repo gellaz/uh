@@ -72,3 +72,9 @@ If you wish to just develop locally and not deploy to Vercel, [follow the steps 
    ```bash
    supabase status
    ```
+
+## Copy/Paste Tailwind component libraries
+
+- [Flowbite](https://flowbite.com/docs/getting-started/introduction/)
+- [HyperUI](https://www.hyperui.dev/)
+- [Preline](https://preline.co/docs/index.html)
