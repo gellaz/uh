@@ -107,7 +107,7 @@ interface NewPropertyFormSchema {
   residentialSubcategories: string[];
 }
 
-export default function NewPropertyForm({
+export default function PropertyResidentialForm({
   residentialSubcategories,
 }: NewPropertyFormSchema) {
   const { currentStepIndex, nextStep, prevStep, totalSteps } = useFormStep();
