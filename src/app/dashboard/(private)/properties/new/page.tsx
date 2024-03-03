@@ -1,33 +1,23 @@
 import BreadcrumbStepper from "@/components/BreadcrumbStepper";
-import { FormStepProvider } from "@/context/FormStepContext";
-import NewPropertyForm from "@/components/dashboard/property/new/NewPropertyForm";
+import { FormStep, FormStepProvider } from "@/context/FormStepContext";
+import PropertyResidentialForm from "@/components/forms/PropertyResidentialForm";
 import React from "react";
+import { formSteps } from "@/constants/newPropertyResidentialSteps";
 
-const formSteps = [
-  {
-    title: "General Info",
-  },
-  {
-    title: "Location",
-  },
-  {
-    title: "Features",
-  },
-  {
-    title: "Additional Info",
-  },
-  {
-    title: "Media",
-  },
-];
 
 export default function NewPropertyPage() {
   return (
-    <FormStepProvider steps={formSteps}>
-      <div className="flex flex-col">
-        <BreadcrumbStepper />
-        <NewPropertyForm residentialSubcategories={["A", "B"]} />
+    <div className="col space-y-6">
+      <div>
+        <h4>New property</h4>
+        <p className="text-pretty">Please fill out the form below to add a new property</p>
       </div>
-    </FormStepProvider>
+      <FormStepProvider steps={formSteps}>
+        <div className="col space-y-6">
+          <BreadcrumbStepper />
+          <PropertyResidentialForm residentialSubcategories={["A", "B"]} />
+        </div>
+      </FormStepProvider>
+    </div>
   );
 }

@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import RegisterFormPrivate from "@/components/RegisterFormPrivate";
+import RegisterFormPrivate from "@/components/forms/RegisterFormPrivate";
 import RegisterStepperPrivate from "@/components/RegisterStepperPrivate";
 import { Separator } from "@/components/ui/separator";
 import { UserPlusIcon } from "lucide-react";

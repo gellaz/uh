@@ -107,7 +107,7 @@ interface NewPropertyFormSchema {
   residentialSubcategories: string[];
 }
 
-export default function NewPropertyForm({
+export default function PropertyResidentialForm({
   residentialSubcategories,
 }: NewPropertyFormSchema) {
   const { currentStepIndex, nextStep, prevStep, totalSteps } = useFormStep();
@@ -159,8 +159,8 @@ export default function NewPropertyForm({
               control={form.control}
               name="subcategory"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Subcategory</FormLabel>
+                <FormItem className="row h-fit space-x-4 items-center justify-center">
+                  <FormLabel className="text-base">Subcategory</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
