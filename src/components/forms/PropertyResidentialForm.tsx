@@ -17,6 +17,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
+  propertyGarageEnum,
+  propertyGardenEnum,
   propertyResidentialSchema,
   propertyResidentialSubcategoryEnum,
 } from "@/lib/validation";
@@ -27,89 +29,6 @@ import { useForm } from "react-hook-form";
 import { useFormStep } from "@/context/FormStepContext";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-/* const formSchema = z.object({
-  category: z.literal("Residential"),
-  subcategory: z.string().min(1, "Subcategory must be not empty"),
-  street_name: z.string().min(1, "Street name must be no"),
-  street_number: z.string().min(1, "s"),
-  postal_code: z.string().min(1, "s"),
-  city: z.string().min(1, "s"),
-  state: z.string().min(1, "s"),
-  country: z.string().min(1, "s"),
-  mq: z.string().min(1, "s"),
-  floor: z.number().min(0),
-  total_floors: z.number().min(0),
-  rooms: z.number().min(0),
-  kitchens: z.number().min(0, { message: "" }),
-  bathrooms: z.number().min(0, { message: "" }),
-  heating: z.enum(["None", "Independent", "Centralized"]),
-  heating_fuel: z.enum([
-    "GPL",
-    "Gas",
-    "Elettrico",
-    "Ibrido",
-    "Metano",
-    "Geo-termico",
-  ]),
-  heating_type: z.enum(["A Pavimento", "A Pannelli", "A Parete"]),
-  air_conditioning: z.enum(["Cold only", "Hot only", "Cold and hot", "None"]),
-  energy_class: z.enum([
-    "Pending",
-    "Exempt",
-    "Unclassifiable",
-    "A4",
-    "A3",
-    "A2",
-    "A1",
-    "A+",
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-  ]),
-  furnishing: z.enum([
-    "Furnished",
-    "Unfurnished",
-    "Partially furnished",
-    "Kitchen only",
-  ]),
-  external_fixtures_material: z.enum(["Wood", "Metal", "PVC", "Hybrid"]),
-  external_fixtures_glass_type: z.enum(["Single", "Double", "Triple"]),
-  condition: z.enum([
-    "New under construction",
-    "Excellent renovated",
-    "Good livable",
-    "To be renovated",
-  ]),
-  exposure: z.enum([
-    "North",
-    "South",
-    "East",
-    "West",
-    "North South",
-    "North East",
-    "North West",
-    "South East",
-    "South West",
-    "East West",
-    "North South East",
-    "North South West",
-    "North East West",
-    "South East West",
-    "North South East West",
-  ]),
-  elevator: z.enum(["None", "Elevator", "Goods Lift"]),
-  pool: z.boolean(),
-  construction_year: z.number().min(0),
-});
- */
-/* interface NewPropertyFormSchema {
-  residentialSubcategories: string[];
-} */
 
 export default function PropertyResidentialForm() {
   const { currentStepIndex, nextStep, prevStep, totalSteps } = useFormStep();
@@ -204,6 +123,253 @@ export default function PropertyResidentialForm() {
                 </FormItem>
               )}
             />
+          </>
+        )}
+        {currentStepIndex === 1 && (
+          <>
+            {/** Mq */}
+            <FormField
+              control={form.control}
+              name="mq"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Area (mq)</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Insert area" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex space-x-4 items-center">
+              {/** Rooms */}
+              <FormField
+                control={form.control}
+                name="rooms"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Rooms</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Number of rooms"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/** Bathrooms */}
+              <FormField
+                control={form.control}
+                name="bathrooms"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Bathrooms</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Number of bathrooms"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/** Kitchens */}
+              <FormField
+                control={form.control}
+                name="kitchens"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Kitchens</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Number of kitchens"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="flex space-x-4 items-center">
+              {/** Garden */}
+              <FormField
+                control={form.control}
+                name="garden"
+                render={({ field }) => (
+                  <FormItem className="row h-fit space-x-4 items-center justify-center">
+                    <FormLabel className="text-base">Garden</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a property subcategory" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {Object.values(propertyGardenEnum.Values).map(
+                          (subcategory) => (
+                            <SelectItem key={subcategory} value={subcategory}>
+                              {subcategory}
+                            </SelectItem>
+                          )
+                        )}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/** Garage */}
+              <FormField
+                control={form.control}
+                name="garden"
+                render={({ field }) => (
+                  <FormItem className="row h-fit space-x-4 items-center justify-center">
+                    <FormLabel className="text-base">Garage</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a property subcategory" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {Object.values(propertyGarageEnum.Values).map(
+                          (subcategory) => (
+                            <SelectItem key={subcategory} value={subcategory}>
+                              {subcategory}
+                            </SelectItem>
+                          )
+                        )}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            {/** Parking spaces */}
+            <FormField
+              control={form.control}
+              name="parking_spaces"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Parking Spaces</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Insert number of parking spaces"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/** Terraces */}
+            <FormField
+              control={form.control}
+              name="terraces"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Terraces</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Insert terraces"
+                      type="number"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/** Balcony */}
+            <FormField
+              control={form.control}
+              name="balcony"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Balcony</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Insert balconies"
+                      type="number"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/** Cantina */}
+            <FormField
+              control={form.control}
+              name="cantina"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Cantina</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Insert balconies"
+                      type="number"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/** Mansarda */}
+            <FormField
+              control={form.control}
+              name="mansarda"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Mansarda</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Insert mansarda"
+                      type="number"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/** Taverna */}
+            <FormField
+              control={form.control}
+              name="taverna"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Taverna</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Insert taverna"
+                      type="number"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </>
+        )}
+        {currentStepIndex === 5 && (
+          <>
             <div className="grid grid-cols-2 gap-2">
               {/** Street name */}
               <FormField
@@ -308,23 +474,9 @@ export default function PropertyResidentialForm() {
             </div>
           </>
         )}
-        {currentStepIndex === 1 && (
+        {currentStepIndex === 2 && (
           <>
             <div className="grid grid-cols-4 gap-2">
-              {/** Mq */}
-              <FormField
-                control={form.control}
-                name="mq"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Area (mq)</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Insert area" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
               {/** Floor */}
               <FormField
                 control={form.control}
@@ -353,60 +505,7 @@ export default function PropertyResidentialForm() {
                   </FormItem>
                 )}
               />
-              {/** Rooms */}
-              <FormField
-                control={form.control}
-                name="rooms"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Rooms</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        placeholder="Number of rooms"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {/** Kitchens */}
-              <FormField
-                control={form.control}
-                name="kitchens"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Kitchens</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        placeholder="Number of kitchens"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {/** Bathrooms */}
-              <FormField
-                control={form.control}
-                name="bathrooms"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Bathrooms</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        placeholder="Number of bathrooms"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+
               {/** Heating */}
               <FormField
                 control={form.control}
@@ -591,7 +690,7 @@ export default function PropertyResidentialForm() {
             </div>
           </>
         )}
-        {currentStepIndex === 2 && (
+        {currentStepIndex === 3 && (
           <>
             <div className="grid grid-cols-3 gap-2">
               {/** External fixtures material */}
