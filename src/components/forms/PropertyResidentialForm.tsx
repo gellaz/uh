@@ -18,6 +18,10 @@ import {
 import {
   propertyGarageEnum,
   propertyGardenEnum,
+  propertyHeatingEnum,
+  propertyHeatingFuelEnum,
+  propertyHeatingTypeEnum,
+  propertyParkingSpaceSubcategoryEnum,
   propertyResidentialSchema,
   propertyResidentialSubcategoryEnum,
 } from "@/lib/validation";
@@ -30,7 +34,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { RadioGroup } from "@radix-ui/react-dropdown-menu";
 import { RadioGroupItem } from "@radix-ui/react-radio-group";
 import { Card } from "../ui/card";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Heater, LocateFixed, Sun, Wind, Zap } from "lucide-react";
 import TabGroup from "../TabGroup";
 
 export default function PropertyResidentialForm() {
@@ -93,262 +97,557 @@ export default function PropertyResidentialForm() {
   }
 
   const getFormContent = () => {
-    const cardStyle =
-      "row p-2 items-center justify-start space-x-2 cursor-pointer transition-all duration-150 ease-in-out shadow-none ";
-    const emojiDivStyle =
-      "flex items-center justify-center w-10 h-10 rounded-full ";
-    const emoji = ["🏠", "🏘️", "🏡", "🌳", "🅿️", "🏬"];
 
 
     switch (currentStepIndex) {
       case 0:
+        const cardStyle =
+          "row p-2 items-center justify-start space-x-2 cursor-pointer transition-all duration-150 ease-in-out shadow-none ";
+        const emojiDivStyle =
+          "flex items-center justify-center w-10 h-10 rounded-full ";
+        const emoji = () => {
+          const array = Object.values(propertyResidentialSubcategoryEnum.Values);
+          const emojiArray = Array(array.length).fill("🏠");
+          return emojiArray;
+        };
         // SUBCATEGORY
-        const selection = 0
+        const selection = 0;
 
         return (
           <div className="space-y-4 h-full ">
-            <Input placeholder="Search here for sub category..." className="text-sm" />
+            <Input
+              placeholder="Search here for sub category..."
+              className="text-sm"
+            />
             <div className="grid grid-cols-3 gap-2 ">
-              {
-                Object.values(propertyResidentialSubcategoryEnum.Values).sort().map(
-                  (item, index) => (
-                    <Card
-                      key={item}
-                      // onClick={() => categoryCardTapped(index)}
+              {Object.values(propertyResidentialSubcategoryEnum.Values)
+                .sort()
+                .map((item, index) => (
+                  <Card
+                    key={item}
+                    // onClick={() => categoryCardTapped(index)}
+                    className={
+                      cardStyle +
+                      (selection === index
+                        ? "bg-orange-500 text-white"
+                        : "bg-white  hover:bg-orange-100")
+                    }
+                  >
+                    <div
                       className={
-                        cardStyle +
-                        (selection === index
-                          ? "bg-orange-500 text-white"
-                          : "bg-white  hover:bg-orange-100")
+                        emojiDivStyle +
+                        (selection == index ? "bg-orange-300" : "bg-orange-100")
                       }
                     >
-                      <div
-                        className={
-                          emojiDivStyle + (selection == index ? "bg-orange-300" : "bg-orange-100")
-                        }
-                      >
-                        <h5>{emoji[index]}</h5>
-                      </div>
-                      <p className="text-pretty">{item}</p>
-                    </Card>
-                    // <li
-                    //   key={subcategory}
-                    //   className="row w-full space-x-4 items-center border rounded-md">
-                    //   <img src="" alt="subcategory" className="w-1/3 h-full bg-slate-200 text-xs font-extralight" />
-                    //   <p className="text-base p-2">{subcategory}</p>
-                    // </li>
-                  )
-                )
-              }
+                      <h5>{emoji()[index]}</h5>
+                    </div>
+                    <p className="text-pretty">{item}</p>
+                  </Card>
+                ))}
             </div>
           </div>
-
         );
       case 1:
         // COMPOSIZIONE
-        return <div className="col space-y-6">
-          <div className="row h-fit space-x-4 items-center">
-            {/* MQ */}
+        return (
+          <div className="col space-y-6">
+            <div className="grid grid-cols-4 gap-4">
+              {/* MQ */}
+              <FormField
+                control={form.control}
+                name="mq"
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel>Area (mq)</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Insert area" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/** Rooms */}
+              <FormField
+                control={form.control}
+                name="rooms"
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel>Rooms</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Number of rooms"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/** Bathrooms */}
+              <FormField
+                control={form.control}
+                name="bathrooms"
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel>Bathrooms</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Number of bathrooms"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/** Kitchens */}
+              <FormField
+                control={form.control}
+                name="kitchens"
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel>Kitchens</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Number of kitchens"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            {/** Garden */}
             <FormField
               control={form.control}
-              name="mq"
+              name="garden"
               render={({ field }) => (
-                <FormItem className="flex-1">
-                  <FormLabel>Area (mq)</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Insert area" {...field} />
-                  </FormControl>
+                <FormItem className="row h-fit w-full space-x-4 items-baseline justify-start">
+                  <FormLabel>Garden</FormLabel>
+                  <TabGroup
+                    tabs={Object.values(propertyGardenEnum.Values)}
+                    role={"garden"}
+                  />
                   <FormMessage />
                 </FormItem>
               )}
             />
-            {/** Rooms */}
+            {/** Garage */}
             <FormField
               control={form.control}
-              name="rooms"
+              name="garage"
               render={({ field }) => (
-                <FormItem className="flex-1">
-                  <FormLabel>Rooms</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      placeholder="Number of rooms"
-                      {...field}
-                    />
-                  </FormControl>
+                <FormItem className="row h-fit w-full space-x-4 items-baseline justify-start">
+                  <FormLabel>Garage</FormLabel>
+                  <TabGroup
+                    tabs={Object.values(propertyGarageEnum.Values)}
+                    role={"garage"}
+                  />
                   <FormMessage />
                 </FormItem>
               )}
             />
-            {/** Bathrooms */}
+            {/** Parking spaces */}
             <FormField
               control={form.control}
-              name="bathrooms"
+              name="parking_spaces"
               render={({ field }) => (
-                <FormItem className="flex-1">
-                  <FormLabel>Bathrooms</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      placeholder="Number of bathrooms"
-                      {...field}
-                    />
-                  </FormControl>
+                <FormItem className="row h-fit w-full space-x-4 items-baseline justify-start">
+                  <FormLabel>Parking space</FormLabel>
+                  <TabGroup
+                    tabs={Object.values(
+                      propertyParkingSpaceSubcategoryEnum.Values
+                    )}
+                    role={""}
+                  />
                   <FormMessage />
                 </FormItem>
               )}
             />
-            {/** Kitchens */}
-            <FormField
-              control={form.control}
-              name="kitchens"
-              render={({ field }) => (
-                <FormItem className="flex-1">
-                  <FormLabel>Kitchens</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      placeholder="Number of kitchens"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-3 gap-4">
+              {/* Terraces */}
+              <FormField
+                control={form.control}
+                name="terraces"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Terraces</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Insert terraces"
+                        type="number"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* Balcony */}
+              <FormField
+                control={form.control}
+                name="balcony"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Balcony</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Insert balconies"
+                        type="number"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* Cantina */}
+              <FormField
+                control={form.control}
+                name="cantina"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Cantina</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Insert balconies"
+                        type="number"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* Mansarda */}
+              <FormField
+                control={form.control}
+                name="mansarda"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Mansarda</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Insert mansarda"
+                        type="number"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* Taverna */}
+              <FormField
+                control={form.control}
+                name="taverna"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Taverna</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Insert taverna"
+                        type="number"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
           </div>
-          {/** Garden */}
+        );
+      case 2:
+        // ADDRESS
+        return (
+          <div className="row space-x-4">
+            <div className="w-full bg-slate-100 rounded-lg" />
+            <div className="col space-y-4">
+              <FormField
+                control={form.control}
+                name="street_name"
+                render={({ field }) => (
+                  <FormItem className="h-fit w-full">
+                    <FormLabel>Street name</FormLabel>
+                    <Input placeholder="Street name" {...field} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* STREET NUMBER */}
+              <FormField
+                control={form.control}
+                name="street_number"
+                render={({ field }) => (
+                  <FormItem className="h-fit">
+                    <FormLabel>Street number</FormLabel>
+                    <Input placeholder="Street number" {...field} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* CITY */}
+              <FormField
+                control={form.control}
+                name="city"
+                render={({ field }) => (
+                  <FormItem className="h-fit">
+                    <FormLabel>City</FormLabel>
+                    <Input placeholder="City" {...field} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* ZIPCODE */}
+              <FormField
+                control={form.control}
+                name="zip_code"
+                render={({ field }) => (
+                  <FormItem className="h-fit">
+                    <FormLabel>Zipcode</FormLabel>
+                    <Input placeholder="Zipcode" {...field} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* PROVINCE */}
+              <FormField
+                control={form.control}
+                name="province"
+                render={({ field }) => (
+                  <FormItem className="h-fit">
+                    <FormLabel>Province</FormLabel>
+                    <Input placeholder="Province" {...field} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* REGION */}
+              <FormField
+                control={form.control}
+                name="region"
+                render={({ field }) => (
+                  <FormItem className="h-fit">
+                    <FormLabel>Region</FormLabel>
+                    <Input placeholder="Region" {...field} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <Button asChild variant={"outline"}>
+                <div className="row space-x-2">
+                  <LocateFixed size={16} />
+                  <p>Use your location</p>
+                </div>
+                {/* {"Use your location"} */}
+              </Button>
+            </div>
+          </div>
+        );
+      case 3:
+        const icons = [<Zap className="text-primary" size={32} />, <Sun className="text-primary" size={32} />]
+        const iconStyle = "flex items-center justify-center w-12 h-12 rounded-full ";
+        const heatingTypeIcons = [<Wind className="text-primary" size={32} />, <Heater className="text-primary" size={32} />]
+
+        return <div className="col space-y-6">
+          {/** Heating */}
           <FormField
             control={form.control}
-            name="garden"
+            name="heating"
             render={({ field }) => (
-              <FormItem className="row h-fit w-full space-x-4 items-baseline justify-start">
-                <FormLabel>Garden</FormLabel>
-                <TabGroup tabs={Object.values(propertyGardenEnum.Values)} />
+              <FormItem className="row h-fit space-x-4 items-baseline ">
+                <FormLabel>Heating</FormLabel>
+                <TabGroup tabs={Object.values(propertyHeatingEnum.Values).sort()} role={field.name} />
                 <FormMessage />
               </FormItem>
             )}
           />
-          {/** Garage */}
+          {/** Heating fuel */}
           <FormField
             control={form.control}
-            name="garage"
-            render={({ field }) => (
-              <FormItem className="row h-fit w-full space-x-4 items-baseline justify-start">
-                <FormLabel>Garage</FormLabel>
-                <TabGroup tabs={Object.values(propertyGarageEnum.Values)} />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {/** Parking spaces */}
-          <FormField
-            control={form.control}
-            name="parking_spaces"
+            name="heating_fuel"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Parking Spaces</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Insert number of parking spaces"
-                    {...field}
-                  />
-                </FormControl>
+                <FormLabel>Heating fuel</FormLabel>
+                <div className="grid grid-cols-6 gap-4">
+                  {
+                    Object.values(propertyHeatingFuelEnum.Values).sort().map((item, index) => (
+                      <Card
+                        key={item}
+                        className="col w-full h-[120px] px-2 py-4 items-center space-y-2 justify-between cursor-pointer transition-all duration-150 ease-in-out shadow-none hover:border-primary"
+                      >
+                        <div
+                          className={
+                            iconStyle +
+                            (field.value === item
+                              ? "bg-orange-300"
+                              : "bg-orange-100")
+                          }
+                        >
+                          <Zap className="text-primary" size={32} />
+                        </div>
+                        <p className="text-pretty">{item}</p>
+                      </Card>
+                    ))
+                  }
+                </div>
                 <FormMessage />
               </FormItem>
             )}
           />
-          {/** Terraces */}
+          {/** Heating type */}
           <FormField
             control={form.control}
-            name="terraces"
+            name="heating_type"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Terraces</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Insert terraces"
-                    type="number"
-                    {...field}
-                  />
-                </FormControl>
+                <FormLabel>Heating type</FormLabel>
+                <div className="grid grid-cols-6 gap-4">
+                  {
+                    Object.values(propertyHeatingTypeEnum.Values).sort().map((item, index) => (
+                      <Card
+                        key={item}
+                        className="col w-full h-[120px] px-2 py-4 items-center space-y-2 justify-between cursor-pointer transition-all duration-150 ease-in-out shadow-none hover:border-primary"
+                      >
+                        <div
+                          className={
+                            iconStyle +
+                            (field.value === item
+                              ? "bg-orange-300"
+                              : "bg-orange-100")
+                          }
+                        >
+                          {heatingTypeIcons[index]}
+                        </div>
+                        <p className="text-pretty">{item}</p>
+                      </Card>
+                    ))
+                  }
+                </div>
+                {/* <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select heating type" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="A Pavimento">A Pavimento</SelectItem>
+                    <SelectItem value="A Pannelli">A Pannelli</SelectItem>
+                    <SelectItem value="A Parete">A Parete</SelectItem>
+                  </SelectContent>
+                </Select> */}
                 <FormMessage />
               </FormItem>
             )}
           />
-          {/** Balcony */}
+          {/** Air conditioning */}
           <FormField
             control={form.control}
-            name="balcony"
+            name="air_conditioning"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Balcony</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Insert balconies"
-                    type="number"
-                    {...field}
-                  />
-                </FormControl>
+                <FormLabel>Air conditioning</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select air conditioning" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="Cold only">Cold only</SelectItem>
+                    <SelectItem value="Hot only">Hot only</SelectItem>
+                    <SelectItem value="Cold and hot">Cold and hot</SelectItem>
+                    <SelectItem value="None">None</SelectItem>
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
           />
-          {/** Cantina */}
+          {/** Energy class */}
           <FormField
             control={form.control}
-            name="cantina"
+            name="energy_class"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Cantina</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Insert balconies"
-                    type="number"
-                    {...field}
-                  />
-                </FormControl>
+                <FormLabel>Energy class</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select energy class" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="Pending">Pending</SelectItem>
+                    <SelectItem value="Exempt">Exempt</SelectItem>
+                    <SelectItem value="Unclassifiable">
+                      Unclassifiable
+                    </SelectItem>
+                    <SelectItem value="A4">A4</SelectItem>
+                    <SelectItem value="A3">A3</SelectItem>
+                    <SelectItem value="A2">A2</SelectItem>
+                    <SelectItem value="A1">A1</SelectItem>
+                    <SelectItem value="A+">A+</SelectItem>
+                    <SelectItem value="A">A</SelectItem>
+                    <SelectItem value="B">B</SelectItem>
+                    <SelectItem value="C">C</SelectItem>
+                    <SelectItem value="D">D</SelectItem>
+                    <SelectItem value="E">E</SelectItem>
+                    <SelectItem value="F">F</SelectItem>
+                    <SelectItem value="G">G</SelectItem>
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
           />
-          {/** Mansarda */}
+          {/** Furnishing */}
           <FormField
             control={form.control}
-            name="mansarda"
+            name="furnishing"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Mansarda</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Insert mansarda"
-                    type="number"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {/** Taverna */}
-          <FormField
-            control={form.control}
-            name="taverna"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Taverna</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Insert taverna"
-                    type="number"
-                    {...field}
-                  />
-                </FormControl>
+                <FormLabel>Furnishing</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select furnishing" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="Furnished">Furnished</SelectItem>
+                    <SelectItem value="Unfurnished">Unfurnished</SelectItem>
+                    <SelectItem value="Partially furnished">
+                      Partially furnished
+                    </SelectItem>
+                    <SelectItem value="Kitchen only">Kitchen only</SelectItem>
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
           />
         </div>;
+
+
       default:
         return <>DEFAULT</>;
     }
@@ -362,589 +661,65 @@ export default function PropertyResidentialForm() {
             <h6 className="font-medium">{currentStep.title}</h6>
             <p className="font-light">{currentStep.description}</p>
           </div>
-          <div className="row h-fit w-1/4 space-x-2 ">
-            <Button asChild variant={"secondary"} onClick={prevStep} className="flex-1">
+          <div className="row h-fit w-fit space-x-2 ">
+            <Button
+              asChild
+              variant={"secondary"}
+              onClick={prevStep}
+              className="rounded-full w-10 h-10 px-[10px]"
+            >
               <ArrowLeft />
             </Button>
-            <Button asChild variant={"secondary"} onClick={nextStep} className="flex-1">
+            <Button
+              asChild
+              variant={"secondary"}
+              onClick={nextStep}
+              className="rounded-full w-10 h-10 px-[10px]"
+            >
               <ArrowRight />
             </Button>
           </div>
         </div>
-        <form onSubmit={(e) => e.preventDefault()} className=" w-full h-full overflow-clip">{getFormContent()}</form>
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className=" w-full h-full overflow-clip"
+        >
+          {getFormContent()}
+        </form>
       </Form>
     </div>
   );
 }
 
-
-// {currentStepIndex === 1 && (
-// <>
-//   {/** Mq */}
-//   <FormField
-//     control={form.control}
-//     name="mq"
-//     render={({ field }) => (
-//       <FormItem>
-//         <FormLabel>Area (mq)</FormLabel>
-//         <FormControl>
-//           <Input placeholder="Insert area" {...field} />
-//         </FormControl>
-//         <FormMessage />
-//       </FormItem>
-//     )}
-//   />
-//   <div className="flex space-x-4 items-center">
-//     {/** Rooms */}
-//     <FormField
-//       control={form.control}
-//       name="rooms"
-//       render={({ field }) => (
-//         <FormItem>
-//           <FormLabel>Rooms</FormLabel>
-//           <FormControl>
-//             <Input
-//               type="number"
-//               placeholder="Number of rooms"
-//               {...field}
-//             />
-//           </FormControl>
-//           <FormMessage />
-//         </FormItem>
-//       )}
-//     />
-//     {/** Bathrooms */}
-//     <FormField
-//       control={form.control}
-//       name="bathrooms"
-//       render={({ field }) => (
-//         <FormItem>
-//           <FormLabel>Bathrooms</FormLabel>
-//           <FormControl>
-//             <Input
-//               type="number"
-//               placeholder="Number of bathrooms"
-//               {...field}
-//             />
-//           </FormControl>
-//           <FormMessage />
-//         </FormItem>
-//       )}
-//     />
-//     {/** Kitchens */}
-//     <FormField
-//       control={form.control}
-//       name="kitchens"
-//       render={({ field }) => (
-//         <FormItem>
-//           <FormLabel>Kitchens</FormLabel>
-//           <FormControl>
-//             <Input
-//               type="number"
-//               placeholder="Number of kitchens"
-//               {...field}
-//             />
-//           </FormControl>
-//           <FormMessage />
-//         </FormItem>
-//       )}
-//     />
-//   </div>
-//   <div className="flex space-x-4 items-center">
-//     {/** Garden */}
-//     <FormField
-//       control={form.control}
-//       name="garden"
-//       render={({ field }) => (
-//         <FormItem className="row h-fit space-x-4 items-center justify-center">
-//           <FormLabel className="text-base">Garden</FormLabel>
-//           <Select
-//             onValueChange={field.onChange}
-//             defaultValue={field.value}
-//           >
-//             <FormControl>
-//               <SelectTrigger>
-//                 <SelectValue placeholder="Select a property subcategory" />
-//               </SelectTrigger>
-//             </FormControl>
-//             <SelectContent>
-//               {Object.values(propertyGardenEnum.Values).map(
-//                 (subcategory) => (
-//                   <SelectItem key={subcategory} value={subcategory}>
-//                     {subcategory}
-//                   </SelectItem>
-//                 )
-//               )}
-//             </SelectContent>
-//           </Select>
-//           <FormMessage />
-//         </FormItem>
-//       )}
-//     />
-//     {/** Garage */}
-//     <FormField
-//       control={form.control}
-//       name="garden"
-//       render={({ field }) => (
-//         <FormItem className="row h-fit space-x-4 items-center justify-center">
-//           <FormLabel className="text-base">Garage</FormLabel>
-//           <Select
-//             onValueChange={field.onChange}
-//             defaultValue={field.value}
-//           >
-//             <FormControl>
-//               <SelectTrigger>
-//                 <SelectValue placeholder="Select a property subcategory" />
-//               </SelectTrigger>
-//             </FormControl>
-//             <SelectContent>
-//               {Object.values(propertyGarageEnum.Values).map(
-//                 (subcategory) => (
-//                   <SelectItem key={subcategory} value={subcategory}>
-//                     {subcategory}
-//                   </SelectItem>
-//                 )
-//               )}
-//             </SelectContent>
-//           </Select>
-//           <FormMessage />
-//         </FormItem>
-//       )}
-//     />
-//   </div>
-//   {/** Parking spaces */}
-//   <FormField
-//     control={form.control}
-//     name="parking_spaces"
-//     render={({ field }) => (
-//       <FormItem>
-//         <FormLabel>Parking Spaces</FormLabel>
-//         <FormControl>
-//           <Input
-//             placeholder="Insert number of parking spaces"
-//             {...field}
-//           />
-//         </FormControl>
-//         <FormMessage />
-//       </FormItem>
-//     )}
-//   />
-//   {/** Terraces */}
-//   <FormField
-//     control={form.control}
-//     name="terraces"
-//     render={({ field }) => (
-//       <FormItem>
-//         <FormLabel>Terraces</FormLabel>
-//         <FormControl>
-//           <Input
-//             placeholder="Insert terraces"
-//             type="number"
-//             {...field}
-//           />
-//         </FormControl>
-//         <FormMessage />
-//       </FormItem>
-//     )}
-//   />
-//   {/** Balcony */}
-//   <FormField
-//     control={form.control}
-//     name="balcony"
-//     render={({ field }) => (
-//       <FormItem>
-//         <FormLabel>Balcony</FormLabel>
-//         <FormControl>
-//           <Input
-//             placeholder="Insert balconies"
-//             type="number"
-//             {...field}
-//           />
-//         </FormControl>
-//         <FormMessage />
-//       </FormItem>
-//     )}
-//   />
-//   {/** Cantina */}
-//   <FormField
-//     control={form.control}
-//     name="cantina"
-//     render={({ field }) => (
-//       <FormItem>
-//         <FormLabel>Cantina</FormLabel>
-//         <FormControl>
-//           <Input
-//             placeholder="Insert balconies"
-//             type="number"
-//             {...field}
-//           />
-//         </FormControl>
-//         <FormMessage />
-//       </FormItem>
-//     )}
-//   />
-//   {/** Mansarda */}
-//   <FormField
-//     control={form.control}
-//     name="mansarda"
-//     render={({ field }) => (
-//       <FormItem>
-//         <FormLabel>Mansarda</FormLabel>
-//         <FormControl>
-//           <Input
-//             placeholder="Insert mansarda"
-//             type="number"
-//             {...field}
-//           />
-//         </FormControl>
-//         <FormMessage />
-//       </FormItem>
-//     )}
-//   />
-//   {/** Taverna */}
-//   <FormField
-//     control={form.control}
-//     name="taverna"
-//     render={({ field }) => (
-//       <FormItem>
-//         <FormLabel>Taverna</FormLabel>
-//         <FormControl>
-//           <Input
-//             placeholder="Insert taverna"
-//             type="number"
-//             {...field}
-//           />
-//         </FormControl>
-//         <FormMessage />
-//       </FormItem>
-//     )}
-//   />
-// </>
-// )}
-// {currentStepIndex === 2 && (
-//   <>
-//     <div className="w-full h-1/2 bg-blue-500 rounded-md">MAP</div>
-//     <div className="grid grid-cols-4 gap-2">
-//       {/** Street name */}
-//       <div className="col-span-2">
-//         <FormField
-//           control={form.control}
-//           name="street_name"
-//           render={({ field }) => (
-//             <FormItem>
-//               <FormLabel>Street name</FormLabel>
-//               <FormControl>
-//                 <Input placeholder="Via Giuseppe Verdi" {...field} />
-//               </FormControl>
-//               <FormMessage />
-//             </FormItem>
-//           )}
-//         />
-//       </div>
-
-//       {/** Street number */}
-//       <FormField
-//         control={form.control}
-//         name="street_number"
-//         render={({ field }) => (
-//           <FormItem>
-//             <FormLabel>Street number</FormLabel>
-//             <FormControl>
-//               <Input placeholder="Via Giuseppe Verdi" {...field} />
-//             </FormControl>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-//       {/** City */}
-//       <FormField
-//         control={form.control}
-//         name="city"
-//         render={({ field }) => (
-//           <FormItem>
-//             <FormLabel>City</FormLabel>
-//             <FormControl>
-//               <Input placeholder="Insert city" {...field} />
-//             </FormControl>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-//       {/** ZIP code */}
-//       <FormField
-//         control={form.control}
-//         name="zip_code"
-//         render={({ field }) => (
-//           <FormItem>
-//             <FormLabel>ZIP code</FormLabel>
-//             <FormControl>
-//               <Input placeholder="40100" {...field} />
-//             </FormControl>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-//       {/** Province */}
-//       <FormField
-//         control={form.control}
-//         name="province"
-//         render={({ field }) => (
-//           <FormItem>
-//             <FormLabel>Province</FormLabel>
-//             <FormControl>
-//               <Input placeholder="Insert province" {...field} />
-//             </FormControl>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-//       {/** Region */}
-//       <FormField
-//         control={form.control}
-//         name="region"
-//         render={({ field }) => (
-//           <FormItem>
-//             <FormLabel>Region</FormLabel>
-//             <FormControl>
-//               <Input placeholder="Insert region" {...field} />
-//             </FormControl>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-//       {/** Country */}
-//       <FormField
-//         control={form.control}
-//         name="country"
-//         render={({ field }) => (
-//           <FormItem>
-//             <FormLabel>Country</FormLabel>
-//             <FormControl>
-//               <Input placeholder="Insert country" {...field} />
-//             </FormControl>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-//     </div>
-//   </>
-// )}
 // {currentStepIndex === 3 && (
-//   <>
-//     <div className="grid grid-cols-4 gap-2">
-//       {/** Floor */}
-//       <FormField
-//         control={form.control}
-//         name="floor"
-//         render={({ field }) => (
-//           <FormItem>
-//             <FormLabel>Floor</FormLabel>
-//             <FormControl>
-//               <Input placeholder="Insert floor" {...field} />
-//             </FormControl>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-//       {/** Total floors */}
-//       <FormField
-//         control={form.control}
-//         name="total_floors_building"
-//         render={({ field }) => (
-//           <FormItem>
-//             <FormLabel>Total floors</FormLabel>
-//             <FormControl>
-//               <Input placeholder="Insert total floors" {...field} />
-//             </FormControl>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-
-//       {/** Heating */}
-//       <FormField
-//         control={form.control}
-//         name="heating"
-//         render={({ field }) => (
-//           <FormItem>
-//             <FormLabel>Heating</FormLabel>
-//             <Select
-//               onValueChange={field.onChange}
-//               defaultValue={field.value}
-//             >
-//               <FormControl>
-//                 <SelectTrigger>
-//                   <SelectValue placeholder="Select heating" />
-//                 </SelectTrigger>
-//               </FormControl>
-//               <SelectContent>
-//                 {["None", "Independent", "Centralized"].map((item) => (
-//                   <SelectItem value={item}>{item}</SelectItem>
-//                 ))}
-//               </SelectContent>
-//             </Select>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-//       {/** Heating fuel */}
-//       <FormField
-//         control={form.control}
-//         name="heating_fuel"
-//         render={({ field }) => (
-//           <FormItem>
-//             <FormLabel>Heating fuel</FormLabel>
-//             <Select
-//               onValueChange={field.onChange}
-//               defaultValue={field.value}
-//             >
-//               <FormControl>
-//                 <SelectTrigger>
-//                   <SelectValue placeholder="Select heating fuel" />
-//                 </SelectTrigger>
-//               </FormControl>
-//               <SelectContent>
-//                 <SelectItem value="GPL">GPL</SelectItem>
-//                 <SelectItem value="Gas">Gas</SelectItem>
-//                 <SelectItem value="Elettrico">Elettrico</SelectItem>
-//                 <SelectItem value="Ibrido">Ibrido</SelectItem>
-//                 <SelectItem value="Metano">Metano</SelectItem>
-//                 <SelectItem value="Geo-termico">Geo-termico</SelectItem>
-//               </SelectContent>
-//             </Select>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-//       {/** Heating type */}
-//       <FormField
-//         control={form.control}
-//         name="heating_type"
-//         render={({ field }) => (
-//           <FormItem>
-//             <FormLabel>Heating type</FormLabel>
-//             <Select
-//               onValueChange={field.onChange}
-//               defaultValue={field.value}
-//             >
-//               <FormControl>
-//                 <SelectTrigger>
-//                   <SelectValue placeholder="Select heating type" />
-//                 </SelectTrigger>
-//               </FormControl>
-//               <SelectContent>
-//                 <SelectItem value="A Pavimento">A Pavimento</SelectItem>
-//                 <SelectItem value="A Pannelli">A Pannelli</SelectItem>
-//                 <SelectItem value="A Parete">A Parete</SelectItem>
-//               </SelectContent>
-//             </Select>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-//       {/** Air conditioning */}
-//       <FormField
-//         control={form.control}
-//         name="air_conditioning"
-//         render={({ field }) => (
-//           <FormItem>
-//             <FormLabel>Air conditioning</FormLabel>
-//             <Select
-//               onValueChange={field.onChange}
-//               defaultValue={field.value}
-//             >
-//               <FormControl>
-//                 <SelectTrigger>
-//                   <SelectValue placeholder="Select air conditioning" />
-//                 </SelectTrigger>
-//               </FormControl>
-//               <SelectContent>
-//                 <SelectItem value="Cold only">Cold only</SelectItem>
-//                 <SelectItem value="Hot only">Hot only</SelectItem>
-//                 <SelectItem value="Cold and hot">
-//                   Cold and hot
-//                 </SelectItem>
-//                 <SelectItem value="None">None</SelectItem>
-//               </SelectContent>
-//             </Select>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-//       {/** Energy class */}
-//       <FormField
-//         control={form.control}
-//         name="energy_class"
-//         render={({ field }) => (
-//           <FormItem>
-//             <FormLabel>Energy class</FormLabel>
-//             <Select
-//               onValueChange={field.onChange}
-//               defaultValue={field.value}
-//             >
-//               <FormControl>
-//                 <SelectTrigger>
-//                   <SelectValue placeholder="Select energy class" />
-//                 </SelectTrigger>
-//               </FormControl>
-//               <SelectContent>
-//                 <SelectItem value="Pending">Pending</SelectItem>
-//                 <SelectItem value="Exempt">Exempt</SelectItem>
-//                 <SelectItem value="Unclassifiable">
-//                   Unclassifiable
-//                 </SelectItem>
-//                 <SelectItem value="A4">A4</SelectItem>
-//                 <SelectItem value="A3">A3</SelectItem>
-//                 <SelectItem value="A2">A2</SelectItem>
-//                 <SelectItem value="A1">A1</SelectItem>
-//                 <SelectItem value="A+">A+</SelectItem>
-//                 <SelectItem value="A">A</SelectItem>
-//                 <SelectItem value="B">B</SelectItem>
-//                 <SelectItem value="C">C</SelectItem>
-//                 <SelectItem value="D">D</SelectItem>
-//                 <SelectItem value="E">E</SelectItem>
-//                 <SelectItem value="F">F</SelectItem>
-//                 <SelectItem value="G">G</SelectItem>
-//               </SelectContent>
-//             </Select>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-//       {/** Furnishing */}
-//       <FormField
-//         control={form.control}
-//         name="furnishing"
-//         render={({ field }) => (
-//           <FormItem>
-//             <FormLabel>Furnishing</FormLabel>
-//             <Select
-//               onValueChange={field.onChange}
-//               defaultValue={field.value}
-//             >
-//               <FormControl>
-//                 <SelectTrigger>
-//                   <SelectValue placeholder="Select furnishing" />
-//                 </SelectTrigger>
-//               </FormControl>
-//               <SelectContent>
-//                 <SelectItem value="Furnished">Furnished</SelectItem>
-//                 <SelectItem value="Unfurnished">Unfurnished</SelectItem>
-//                 <SelectItem value="Partially furnished">
-//                   Partially furnished
-//                 </SelectItem>
-//                 <SelectItem value="Kitchen only">
-//                   Kitchen only
-//                 </SelectItem>
-//               </SelectContent>
-//             </Select>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-//     </div>
-//   </>
-// )}
+//   {/** Floor */}
+//   <FormField
+//   control={form.control}
+//   name="floor"
+//   render={({ field }) => (
+//     <FormItem>
+//       <FormLabel>Floor</FormLabel>
+//       <FormControl>
+//         <Input placeholder="Insert floor" {...field} />
+//       </FormControl>
+//       <FormMessage />
+//     </FormItem>
+//   )}
+// />
+// {/** Total floors */}
+// <FormField
+//   control={form.control}
+//   name="total_floors_building"
+//   render={({ field }) => (
+//     <FormItem>
+//       <FormLabel>Total floors</FormLabel>
+//       <FormControl>
+//         <Input placeholder="Insert total floors" {...field} />
+//       </FormControl>
+//       <FormMessage />
+//     </FormItem>
+//   )}
+// />
 // {currentStepIndex === 4 && (
 //   <>
 //     <div className="grid grid-cols-3 gap-2">

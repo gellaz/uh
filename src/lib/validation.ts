@@ -394,9 +394,9 @@ export const propertyGarageSubcategoryEnum = z.enum([
 ]);
 
 export const propertyParkingSpaceSubcategoryEnum = z.enum([
-  "Parking space in shared garage",
-  "External parking space covered",
-  "External parking space uncovered",
+  "Shared garage",
+  "Covered (external)",
+  "Uncovered (external)",
 ]);
 
 export const propertyLocationSchema = z.object({
