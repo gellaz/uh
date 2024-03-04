@@ -3,7 +3,45 @@
 import { FormStepProvider } from "@/context/FormStepContext";
 import PropertyResidentialForm from "@/components/forms/PropertyResidentialForm";
 import VerticalStepper from "@/components/dashboard/property/new/VerticalStepper";
-import { formSteps } from "@/constants/newPropertyResidentialSteps";
+
+export const formSteps = [
+  {
+    title: "Subcategory",
+    status: 0,
+  },
+  {
+    title: "Composition",
+    status: 0,
+  },
+  {
+    title: "Location",
+    status: 0,
+  },
+  {
+    title: "Heating and AC",
+    status: 0,
+  },
+  {
+    title: "Energy certification",
+    status: 0,
+  },
+  {
+    title: "Amenities",
+    status: 0,
+  },
+  {
+    title: "Features",
+    status: 0,
+  },
+  {
+    title: "Cadastral",
+    status: 0,
+  },
+  {
+    title: "Media",
+    status: 0,
+  },
+];
 
 export default function NewPropertyPage() {
   return (
@@ -17,7 +55,7 @@ export default function NewPropertyPage() {
       <FormStepProvider steps={formSteps}>
         {/* LEFT SIDE */}
         <div className="row w-full h-full space-x-4">
-          <div className="col w-[24%]">
+          <div className="col w-1/4">
             <VerticalStepper />
           </div>
           {/* RIGHT SIDE */}

@@ -368,23 +368,27 @@ export default function PropertyResidentialForm() {
             />
           </>
         )}
-        {currentStepIndex === 5 && (
+        {currentStepIndex === 2 && (
           <>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="w-full h-1/2 bg-blue-500 rounded-md">MAP</div>
+            <div className="grid grid-cols-4 gap-2">
               {/** Street name */}
-              <FormField
-                control={form.control}
-                name="street_name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Street name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Via Giuseppe Verdi" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <div className="col-span-2">
+                <FormField
+                  control={form.control}
+                  name="street_name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Street name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Via Giuseppe Verdi" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
               {/** Street number */}
               <FormField
                 control={form.control}
@@ -399,22 +403,20 @@ export default function PropertyResidentialForm() {
                   </FormItem>
                 )}
               />
-            </div>
-            {/** City */}
-            <FormField
-              control={form.control}
-              name="city"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>City</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Insert city" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className="grid grid-cols-4 gap-2">
+              {/** City */}
+              <FormField
+                control={form.control}
+                name="city"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>City</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Insert city" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               {/** ZIP code */}
               <FormField
                 control={form.control}
@@ -474,7 +476,7 @@ export default function PropertyResidentialForm() {
             </div>
           </>
         )}
-        {currentStepIndex === 2 && (
+        {currentStepIndex === 3 && (
           <>
             <div className="grid grid-cols-4 gap-2">
               {/** Floor */}
@@ -690,7 +692,7 @@ export default function PropertyResidentialForm() {
             </div>
           </>
         )}
-        {currentStepIndex === 3 && (
+        {currentStepIndex === 4 && (
           <>
             <div className="grid grid-cols-3 gap-2">
               {/** External fixtures material */}
