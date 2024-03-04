@@ -3,45 +3,7 @@
 import { FormStepProvider, useFormStep } from "@/context/FormStepContext";
 import PropertyResidentialForm from "@/components/forms/PropertyResidentialForm";
 import VerticalStepper from "@/components/dashboard/property/new/VerticalStepper";
-
-export const formSteps = [
-  {
-    title: "Subcategory",
-    status: 0,
-  },
-  {
-    title: "Composition",
-    status: 0,
-  },
-  {
-    title: "Location",
-    status: 0,
-  },
-  {
-    title: "Heating and AC",
-    status: 0,
-  },
-  {
-    title: "Energy certification",
-    status: 0,
-  },
-  {
-    title: "Amenities",
-    status: 0,
-  },
-  {
-    title: "Features",
-    status: 0,
-  },
-  {
-    title: "Cadastral",
-    status: 0,
-  },
-  {
-    title: "Media",
-    status: 0,
-  },
-];
+import { formSteps } from "@/constants/newPropertyResidentialSteps";
 
 export default function NewPropertyPage() {
   return (
@@ -54,16 +16,9 @@ export default function NewPropertyPage() {
       </div>
       <FormStepProvider steps={formSteps}>
         {/* LEFT SIDE */}
-<<<<<<< Updated upstream
-        <div className="row w-full h-full space-x-4">
-          <div className="col w-1/4">
-            <VerticalStepper />
-          </div>
-=======
         <div className="row w-full h-full space-x-6">
-          <VerticalStepper className="col w-[32%] bg-yellow-100" />
+          <VerticalStepper className="col w-[32%]" />
 
->>>>>>> Stashed changes
           {/* RIGHT SIDE */}
           <PropertyResidentialForm />
         </div>
