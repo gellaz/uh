@@ -31,6 +31,7 @@ import { RadioGroup } from "@radix-ui/react-dropdown-menu";
 import { RadioGroupItem } from "@radix-ui/react-radio-group";
 import { Card } from "../ui/card";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import TabGroup from "../TabGroup";
 
 export default function PropertyResidentialForm() {
   const { currentStepIndex, nextStep, prevStep, totalSteps, currentStep } =
@@ -101,9 +102,9 @@ export default function PropertyResidentialForm() {
 
     switch (currentStepIndex) {
       case 0:
+        // SUBCATEGORY
         const selection = 0
 
-        {/* SUBCATEGORY */ }
         return (
           <div className="space-y-4 h-full ">
             <Input placeholder="Search here for sub category..." className="text-sm" />
@@ -144,7 +145,210 @@ export default function PropertyResidentialForm() {
 
         );
       case 1:
-        return <div>BBB</div>;
+        // COMPOSIZIONE
+        return <div className="col space-y-6">
+          <div className="row h-fit space-x-4 items-center">
+            {/* MQ */}
+            <FormField
+              control={form.control}
+              name="mq"
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormLabel>Area (mq)</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Insert area" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/** Rooms */}
+            <FormField
+              control={form.control}
+              name="rooms"
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormLabel>Rooms</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="Number of rooms"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/** Bathrooms */}
+            <FormField
+              control={form.control}
+              name="bathrooms"
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormLabel>Bathrooms</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="Number of bathrooms"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/** Kitchens */}
+            <FormField
+              control={form.control}
+              name="kitchens"
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormLabel>Kitchens</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="Number of kitchens"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          {/** Garden */}
+          <FormField
+            control={form.control}
+            name="garden"
+            render={({ field }) => (
+              <FormItem className="row h-fit w-full space-x-4 items-baseline justify-start">
+                <FormLabel>Garden</FormLabel>
+                <TabGroup tabs={Object.values(propertyGardenEnum.Values)} />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {/** Garage */}
+          <FormField
+            control={form.control}
+            name="garage"
+            render={({ field }) => (
+              <FormItem className="row h-fit w-full space-x-4 items-baseline justify-start">
+                <FormLabel>Garage</FormLabel>
+                <TabGroup tabs={Object.values(propertyGarageEnum.Values)} />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {/** Parking spaces */}
+          <FormField
+            control={form.control}
+            name="parking_spaces"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Parking Spaces</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Insert number of parking spaces"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {/** Terraces */}
+          <FormField
+            control={form.control}
+            name="terraces"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Terraces</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Insert terraces"
+                    type="number"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {/** Balcony */}
+          <FormField
+            control={form.control}
+            name="balcony"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Balcony</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Insert balconies"
+                    type="number"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {/** Cantina */}
+          <FormField
+            control={form.control}
+            name="cantina"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Cantina</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Insert balconies"
+                    type="number"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {/** Mansarda */}
+          <FormField
+            control={form.control}
+            name="mansarda"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Mansarda</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Insert mansarda"
+                    type="number"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {/** Taverna */}
+          <FormField
+            control={form.control}
+            name="taverna"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Taverna</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Insert taverna"
+                    type="number"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>;
       default:
         return <>DEFAULT</>;
     }
@@ -173,15 +377,87 @@ export default function PropertyResidentialForm() {
   );
 }
 
-// {currentStepIndex === 0 && (
-//   <>
-//     {/** Subcategory */}
+
+// {currentStepIndex === 1 && (
+// <>
+//   {/** Mq */}
+//   <FormField
+//     control={form.control}
+//     name="mq"
+//     render={({ field }) => (
+//       <FormItem>
+//         <FormLabel>Area (mq)</FormLabel>
+//         <FormControl>
+//           <Input placeholder="Insert area" {...field} />
+//         </FormControl>
+//         <FormMessage />
+//       </FormItem>
+//     )}
+//   />
+//   <div className="flex space-x-4 items-center">
+//     {/** Rooms */}
 //     <FormField
 //       control={form.control}
-//       name="subcategory"
+//       name="rooms"
+//       render={({ field }) => (
+//         <FormItem>
+//           <FormLabel>Rooms</FormLabel>
+//           <FormControl>
+//             <Input
+//               type="number"
+//               placeholder="Number of rooms"
+//               {...field}
+//             />
+//           </FormControl>
+//           <FormMessage />
+//         </FormItem>
+//       )}
+//     />
+//     {/** Bathrooms */}
+//     <FormField
+//       control={form.control}
+//       name="bathrooms"
+//       render={({ field }) => (
+//         <FormItem>
+//           <FormLabel>Bathrooms</FormLabel>
+//           <FormControl>
+//             <Input
+//               type="number"
+//               placeholder="Number of bathrooms"
+//               {...field}
+//             />
+//           </FormControl>
+//           <FormMessage />
+//         </FormItem>
+//       )}
+//     />
+//     {/** Kitchens */}
+//     <FormField
+//       control={form.control}
+//       name="kitchens"
+//       render={({ field }) => (
+//         <FormItem>
+//           <FormLabel>Kitchens</FormLabel>
+//           <FormControl>
+//             <Input
+//               type="number"
+//               placeholder="Number of kitchens"
+//               {...field}
+//             />
+//           </FormControl>
+//           <FormMessage />
+//         </FormItem>
+//       )}
+//     />
+//   </div>
+//   <div className="flex space-x-4 items-center">
+//     {/** Garden */}
+//     <FormField
+//       control={form.control}
+//       name="garden"
 //       render={({ field }) => (
 //         <FormItem className="row h-fit space-x-4 items-center justify-center">
-//           <FormLabel className="text-base">Subcategory</FormLabel>
+//           <FormLabel className="text-base">Garden</FormLabel>
 //           <Select
 //             onValueChange={field.onChange}
 //             defaultValue={field.value}
@@ -192,263 +468,158 @@ export default function PropertyResidentialForm() {
 //               </SelectTrigger>
 //             </FormControl>
 //             <SelectContent>
-//               {Object.values(
-//                 propertyResidentialSubcategoryEnum.Values
-//               ).map((subcategory) => (
-//                 <SelectItem key={subcategory} value={subcategory}>
-//                   {subcategory}
-//                 </SelectItem>
-//               ))}
+//               {Object.values(propertyGardenEnum.Values).map(
+//                 (subcategory) => (
+//                   <SelectItem key={subcategory} value={subcategory}>
+//                     {subcategory}
+//                   </SelectItem>
+//                 )
+//               )}
 //             </SelectContent>
 //           </Select>
 //           <FormMessage />
 //         </FormItem>
 //       )}
 //     />
-//   </>
-// )}
-// {currentStepIndex === 1 && (
-//   <>
-//     {/** Mq */}
+//     {/** Garage */}
 //     <FormField
 //       control={form.control}
-//       name="mq"
+//       name="garden"
 //       render={({ field }) => (
-//         <FormItem>
-//           <FormLabel>Area (mq)</FormLabel>
-//           <FormControl>
-//             <Input placeholder="Insert area" {...field} />
-//           </FormControl>
-//           <FormMessage />
-//         </FormItem>
-//       )}
-//     />
-//     <div className="flex space-x-4 items-center">
-//       {/** Rooms */}
-//       <FormField
-//         control={form.control}
-//         name="rooms"
-//         render={({ field }) => (
-//           <FormItem>
-//             <FormLabel>Rooms</FormLabel>
+//         <FormItem className="row h-fit space-x-4 items-center justify-center">
+//           <FormLabel className="text-base">Garage</FormLabel>
+//           <Select
+//             onValueChange={field.onChange}
+//             defaultValue={field.value}
+//           >
 //             <FormControl>
-//               <Input
-//                 type="number"
-//                 placeholder="Number of rooms"
-//                 {...field}
-//               />
+//               <SelectTrigger>
+//                 <SelectValue placeholder="Select a property subcategory" />
+//               </SelectTrigger>
 //             </FormControl>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-//       {/** Bathrooms */}
-//       <FormField
-//         control={form.control}
-//         name="bathrooms"
-//         render={({ field }) => (
-//           <FormItem>
-//             <FormLabel>Bathrooms</FormLabel>
-//             <FormControl>
-//               <Input
-//                 type="number"
-//                 placeholder="Number of bathrooms"
-//                 {...field}
-//               />
-//             </FormControl>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-//       {/** Kitchens */}
-//       <FormField
-//         control={form.control}
-//         name="kitchens"
-//         render={({ field }) => (
-//           <FormItem>
-//             <FormLabel>Kitchens</FormLabel>
-//             <FormControl>
-//               <Input
-//                 type="number"
-//                 placeholder="Number of kitchens"
-//                 {...field}
-//               />
-//             </FormControl>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-//     </div>
-//     <div className="flex space-x-4 items-center">
-//       {/** Garden */}
-//       <FormField
-//         control={form.control}
-//         name="garden"
-//         render={({ field }) => (
-//           <FormItem className="row h-fit space-x-4 items-center justify-center">
-//             <FormLabel className="text-base">Garden</FormLabel>
-//             <Select
-//               onValueChange={field.onChange}
-//               defaultValue={field.value}
-//             >
-//               <FormControl>
-//                 <SelectTrigger>
-//                   <SelectValue placeholder="Select a property subcategory" />
-//                 </SelectTrigger>
-//               </FormControl>
-//               <SelectContent>
-//                 {Object.values(propertyGardenEnum.Values).map(
-//                   (subcategory) => (
-//                     <SelectItem key={subcategory} value={subcategory}>
-//                       {subcategory}
-//                     </SelectItem>
-//                   )
-//                 )}
-//               </SelectContent>
-//             </Select>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-//       {/** Garage */}
-//       <FormField
-//         control={form.control}
-//         name="garden"
-//         render={({ field }) => (
-//           <FormItem className="row h-fit space-x-4 items-center justify-center">
-//             <FormLabel className="text-base">Garage</FormLabel>
-//             <Select
-//               onValueChange={field.onChange}
-//               defaultValue={field.value}
-//             >
-//               <FormControl>
-//                 <SelectTrigger>
-//                   <SelectValue placeholder="Select a property subcategory" />
-//                 </SelectTrigger>
-//               </FormControl>
-//               <SelectContent>
-//                 {Object.values(propertyGarageEnum.Values).map(
-//                   (subcategory) => (
-//                     <SelectItem key={subcategory} value={subcategory}>
-//                       {subcategory}
-//                     </SelectItem>
-//                   )
-//                 )}
-//               </SelectContent>
-//             </Select>
-//             <FormMessage />
-//           </FormItem>
-//         )}
-//       />
-//     </div>
-//     {/** Parking spaces */}
-//     <FormField
-//       control={form.control}
-//       name="parking_spaces"
-//       render={({ field }) => (
-//         <FormItem>
-//           <FormLabel>Parking Spaces</FormLabel>
-//           <FormControl>
-//             <Input
-//               placeholder="Insert number of parking spaces"
-//               {...field}
-//             />
-//           </FormControl>
+//             <SelectContent>
+//               {Object.values(propertyGarageEnum.Values).map(
+//                 (subcategory) => (
+//                   <SelectItem key={subcategory} value={subcategory}>
+//                     {subcategory}
+//                   </SelectItem>
+//                 )
+//               )}
+//             </SelectContent>
+//           </Select>
 //           <FormMessage />
 //         </FormItem>
 //       )}
 //     />
-//     {/** Terraces */}
-//     <FormField
-//       control={form.control}
-//       name="terraces"
-//       render={({ field }) => (
-//         <FormItem>
-//           <FormLabel>Terraces</FormLabel>
-//           <FormControl>
-//             <Input
-//               placeholder="Insert terraces"
-//               type="number"
-//               {...field}
-//             />
-//           </FormControl>
-//           <FormMessage />
-//         </FormItem>
-//       )}
-//     />
-//     {/** Balcony */}
-//     <FormField
-//       control={form.control}
-//       name="balcony"
-//       render={({ field }) => (
-//         <FormItem>
-//           <FormLabel>Balcony</FormLabel>
-//           <FormControl>
-//             <Input
-//               placeholder="Insert balconies"
-//               type="number"
-//               {...field}
-//             />
-//           </FormControl>
-//           <FormMessage />
-//         </FormItem>
-//       )}
-//     />
-//     {/** Cantina */}
-//     <FormField
-//       control={form.control}
-//       name="cantina"
-//       render={({ field }) => (
-//         <FormItem>
-//           <FormLabel>Cantina</FormLabel>
-//           <FormControl>
-//             <Input
-//               placeholder="Insert balconies"
-//               type="number"
-//               {...field}
-//             />
-//           </FormControl>
-//           <FormMessage />
-//         </FormItem>
-//       )}
-//     />
-//     {/** Mansarda */}
-//     <FormField
-//       control={form.control}
-//       name="mansarda"
-//       render={({ field }) => (
-//         <FormItem>
-//           <FormLabel>Mansarda</FormLabel>
-//           <FormControl>
-//             <Input
-//               placeholder="Insert mansarda"
-//               type="number"
-//               {...field}
-//             />
-//           </FormControl>
-//           <FormMessage />
-//         </FormItem>
-//       )}
-//     />
-//     {/** Taverna */}
-//     <FormField
-//       control={form.control}
-//       name="taverna"
-//       render={({ field }) => (
-//         <FormItem>
-//           <FormLabel>Taverna</FormLabel>
-//           <FormControl>
-//             <Input
-//               placeholder="Insert taverna"
-//               type="number"
-//               {...field}
-//             />
-//           </FormControl>
-//           <FormMessage />
-//         </FormItem>
-//       )}
-//     />
-//   </>
+//   </div>
+//   {/** Parking spaces */}
+//   <FormField
+//     control={form.control}
+//     name="parking_spaces"
+//     render={({ field }) => (
+//       <FormItem>
+//         <FormLabel>Parking Spaces</FormLabel>
+//         <FormControl>
+//           <Input
+//             placeholder="Insert number of parking spaces"
+//             {...field}
+//           />
+//         </FormControl>
+//         <FormMessage />
+//       </FormItem>
+//     )}
+//   />
+//   {/** Terraces */}
+//   <FormField
+//     control={form.control}
+//     name="terraces"
+//     render={({ field }) => (
+//       <FormItem>
+//         <FormLabel>Terraces</FormLabel>
+//         <FormControl>
+//           <Input
+//             placeholder="Insert terraces"
+//             type="number"
+//             {...field}
+//           />
+//         </FormControl>
+//         <FormMessage />
+//       </FormItem>
+//     )}
+//   />
+//   {/** Balcony */}
+//   <FormField
+//     control={form.control}
+//     name="balcony"
+//     render={({ field }) => (
+//       <FormItem>
+//         <FormLabel>Balcony</FormLabel>
+//         <FormControl>
+//           <Input
+//             placeholder="Insert balconies"
+//             type="number"
+//             {...field}
+//           />
+//         </FormControl>
+//         <FormMessage />
+//       </FormItem>
+//     )}
+//   />
+//   {/** Cantina */}
+//   <FormField
+//     control={form.control}
+//     name="cantina"
+//     render={({ field }) => (
+//       <FormItem>
+//         <FormLabel>Cantina</FormLabel>
+//         <FormControl>
+//           <Input
+//             placeholder="Insert balconies"
+//             type="number"
+//             {...field}
+//           />
+//         </FormControl>
+//         <FormMessage />
+//       </FormItem>
+//     )}
+//   />
+//   {/** Mansarda */}
+//   <FormField
+//     control={form.control}
+//     name="mansarda"
+//     render={({ field }) => (
+//       <FormItem>
+//         <FormLabel>Mansarda</FormLabel>
+//         <FormControl>
+//           <Input
+//             placeholder="Insert mansarda"
+//             type="number"
+//             {...field}
+//           />
+//         </FormControl>
+//         <FormMessage />
+//       </FormItem>
+//     )}
+//   />
+//   {/** Taverna */}
+//   <FormField
+//     control={form.control}
+//     name="taverna"
+//     render={({ field }) => (
+//       <FormItem>
+//         <FormLabel>Taverna</FormLabel>
+//         <FormControl>
+//           <Input
+//             placeholder="Insert taverna"
+//             type="number"
+//             {...field}
+//           />
+//         </FormControl>
+//         <FormMessage />
+//       </FormItem>
+//     )}
+//   />
+// </>
 // )}
 // {currentStepIndex === 2 && (
 //   <>
