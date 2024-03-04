@@ -8,17 +8,26 @@ import {
   useState,
 } from "react";
 
+export enum FormStepperStatusEnum {
+  PENDING,
+  ACTIVE,
+  COMPLETED,
+  ERROR,
+}
+
 export interface FormStep {
   title: string;
   description?: string;
+  status: FormStepperStatusEnum;
 }
+
 
 const FormStepContext = createContext({
   currentStepIndex: 0,
-  setCurrentStepIndex: (index: number) => {},
-  goToStep: (index: number) => {},
-  nextStep: () => {},
-  prevStep: () => {},
+  setCurrentStepIndex: (index: number) => { },
+  goToStep: (index: number) => { },
+  nextStep: () => { },
+  prevStep: () => { },
   steps: [] as FormStep[],
   totalSteps: 0,
 });
@@ -40,7 +49,13 @@ export function FormStepProvider({
   const goToStep = useCallback(
     (index: number) => {
       const targetStepIndex = Math.min(Math.max(index, 0), totalSteps - 1); // Clamp the value between 0 and totalSteps - 1
+      const previousStatus = steps[index].status;
       setCurrentStepIndex(targetStepIndex);
+
+      // TO-DO: 
+      // here we should change the target step status to ACTIVE and update the previous step status to its previous status
+      steps[targetStepIndex].status = FormStepperStatusEnum.ACTIVE;
+      steps[index].status = previousStatus;
     },
     [totalSteps]
   );
