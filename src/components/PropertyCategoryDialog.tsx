@@ -17,11 +17,11 @@ import { Icon } from "@iconify-icon/react";
 import { propertyCategorySchema } from "@/lib/validation";
 import { useRouter } from "next/navigation";
 
-export default function PropertyCategortDialog() {
+export default function PropertyCategoryDialog() {
   const categoriesZod = Object.values(propertyCategorySchema.Values);
   const emoji = ["🏠", "🏢", "🚘", "🌳", "🅿️", "🏬"];
   const cardStyle =
-    "row p-4 items-center justify-start space-x-2 cursor-pointer transition-all duration-150 ease-in-out ";
+    "row px-4 py-2 items-center justify-start space-x-2 cursor-pointer transition-all duration-150 ease-in-out ";
   const emojiDivStyle =
     "flex items-center justify-center w-12 h-12 rounded-full ";
   const [selection, setSelection] = useState<number>();

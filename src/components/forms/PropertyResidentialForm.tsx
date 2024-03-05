@@ -16,6 +16,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
+  propertyAirConditioningTypeEnum,
+  propertyEnergyClassEnum,
   propertyGarageEnum,
   propertyGardenEnum,
   propertyHeatingEnum,
@@ -36,6 +38,9 @@ import { RadioGroupItem } from "@radix-ui/react-radio-group";
 import { Card } from "../ui/card";
 import { ArrowLeft, ArrowRight, Heater, LocateFixed, Sun, Wind, Zap } from "lucide-react";
 import TabGroup from "../TabGroup";
+import { Separator } from "@radix-ui/react-separator";
+import CardOption from "../CardOption";
+import { SelectGroup, SelectLabel } from "@radix-ui/react-select";
 
 export default function PropertyResidentialForm() {
   const { currentStepIndex, nextStep, prevStep, totalSteps, currentStep } =
@@ -96,9 +101,9 @@ export default function PropertyResidentialForm() {
     console.log(values);
   }
 
+  const separatorStyle = "h-[1px] bg-slate-200";
+  const rowStyle = "row space-x-6 items-baseline justify-between";
   const getFormContent = () => {
-
-
     switch (currentStepIndex) {
       case 0:
         const cardStyle =
@@ -221,12 +226,13 @@ export default function PropertyResidentialForm() {
                 )}
               />
             </div>
+            <Separator className={separatorStyle} />
             {/** Garden */}
             <FormField
               control={form.control}
               name="garden"
               render={({ field }) => (
-                <FormItem className="row h-fit w-full space-x-4 items-baseline justify-start">
+                <FormItem className="row h-fit w-full space-x-4 items-baseline justify-between">
                   <FormLabel>Garden</FormLabel>
                   <TabGroup
                     tabs={Object.values(propertyGardenEnum.Values)}
@@ -236,12 +242,13 @@ export default function PropertyResidentialForm() {
                 </FormItem>
               )}
             />
+            <Separator className={separatorStyle} />
             {/** Garage */}
             <FormField
               control={form.control}
               name="garage"
               render={({ field }) => (
-                <FormItem className="row h-fit w-full space-x-4 items-baseline justify-start">
+                <FormItem className="row h-fit w-full space-x-4 items-baseline justify-between">
                   <FormLabel>Garage</FormLabel>
                   <TabGroup
                     tabs={Object.values(propertyGarageEnum.Values)}
@@ -251,12 +258,13 @@ export default function PropertyResidentialForm() {
                 </FormItem>
               )}
             />
+            <Separator className={separatorStyle} />
             {/** Parking spaces */}
             <FormField
               control={form.control}
               name="parking_spaces"
               render={({ field }) => (
-                <FormItem className="row h-fit w-full space-x-4 items-baseline justify-start">
+                <FormItem className="row h-fit w-full space-x-4 items-baseline justify-between">
                   <FormLabel>Parking space</FormLabel>
                   <TabGroup
                     tabs={Object.values(
@@ -461,7 +469,7 @@ export default function PropertyResidentialForm() {
             control={form.control}
             name="heating"
             render={({ field }) => (
-              <FormItem className="row h-fit space-x-4 items-baseline ">
+              <FormItem className={rowStyle}>
                 <FormLabel>Heating</FormLabel>
                 <TabGroup tabs={Object.values(propertyHeatingEnum.Values).sort()} role={field.name} />
                 <FormMessage />
@@ -478,22 +486,11 @@ export default function PropertyResidentialForm() {
                 <div className="grid grid-cols-6 gap-4">
                   {
                     Object.values(propertyHeatingFuelEnum.Values).sort().map((item, index) => (
-                      <Card
-                        key={item}
-                        className="col w-full h-[120px] px-2 py-4 items-center space-y-2 justify-between cursor-pointer transition-all duration-150 ease-in-out shadow-none hover:border-primary"
-                      >
-                        <div
-                          className={
-                            iconStyle +
-                            (field.value === item
-                              ? "bg-orange-300"
-                              : "bg-orange-100")
-                          }
-                        >
-                          <Zap className="text-primary" size={32} />
-                        </div>
-                        <p className="text-pretty">{item}</p>
-                      </Card>
+                      CardOption({
+                        item,
+                        color: "bg-orange-100",
+                        icon: <Zap className="text-primary" size={32} />,
+                      })
                     ))
                   }
                 </div>
@@ -510,41 +507,15 @@ export default function PropertyResidentialForm() {
                 <FormLabel>Heating type</FormLabel>
                 <div className="grid grid-cols-6 gap-4">
                   {
-                    Object.values(propertyHeatingTypeEnum.Values).sort().map((item, index) => (
-                      <Card
-                        key={item}
-                        className="col w-full h-[120px] px-2 py-4 items-center space-y-2 justify-between cursor-pointer transition-all duration-150 ease-in-out shadow-none hover:border-primary"
-                      >
-                        <div
-                          className={
-                            iconStyle +
-                            (field.value === item
-                              ? "bg-orange-300"
-                              : "bg-orange-100")
-                          }
-                        >
-                          {heatingTypeIcons[index]}
-                        </div>
-                        <p className="text-pretty">{item}</p>
-                      </Card>
+                    Object.values(propertyHeatingTypeEnum.Values).sort().map((item) => (
+                      CardOption({
+                        item,
+                        color: "bg-orange-100",
+                        icon: <Zap className="text-primary" size={32} />,
+                      })
                     ))
                   }
                 </div>
-                {/* <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select heating type" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="A Pavimento">A Pavimento</SelectItem>
-                    <SelectItem value="A Pannelli">A Pannelli</SelectItem>
-                    <SelectItem value="A Parete">A Parete</SelectItem>
-                  </SelectContent>
-                </Select> */}
                 <FormMessage />
               </FormItem>
             )}
@@ -554,24 +525,14 @@ export default function PropertyResidentialForm() {
             control={form.control}
             name="air_conditioning"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className={rowStyle}>
                 <FormLabel>Air conditioning</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select air conditioning" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="Cold only">Cold only</SelectItem>
-                    <SelectItem value="Hot only">Hot only</SelectItem>
-                    <SelectItem value="Cold and hot">Cold and hot</SelectItem>
-                    <SelectItem value="None">None</SelectItem>
-                  </SelectContent>
-                </Select>
+                <FormControl>
+                  <TabGroup
+                    tabs={Object.values(propertyAirConditioningTypeEnum.Values)}
+                    role={"garden"}
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
@@ -581,40 +542,63 @@ export default function PropertyResidentialForm() {
             control={form.control}
             name="energy_class"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className={rowStyle}>
                 <FormLabel>Energy class</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <FormControl>
+                  <FormControl className="w-1/4">
                     <SelectTrigger>
                       <SelectValue placeholder="Select energy class" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="Pending">Pending</SelectItem>
-                    <SelectItem value="Exempt">Exempt</SelectItem>
-                    <SelectItem value="Unclassifiable">
-                      Unclassifiable
-                    </SelectItem>
-                    <SelectItem value="A4">A4</SelectItem>
-                    <SelectItem value="A3">A3</SelectItem>
-                    <SelectItem value="A2">A2</SelectItem>
-                    <SelectItem value="A1">A1</SelectItem>
-                    <SelectItem value="A+">A+</SelectItem>
-                    <SelectItem value="A">A</SelectItem>
-                    <SelectItem value="B">B</SelectItem>
-                    <SelectItem value="C">C</SelectItem>
-                    <SelectItem value="D">D</SelectItem>
-                    <SelectItem value="E">E</SelectItem>
-                    <SelectItem value="F">F</SelectItem>
-                    <SelectItem value="G">G</SelectItem>
+                    <SelectGroup>
+                      {
+                        Object.values(propertyEnergyClassEnum.Values).sort().slice(-3).map(function (item) {
+
+                          return (
+                            <SelectItem value={item}>{item}</SelectItem>
+                          );
+                        })
+                      }
+                    </SelectGroup>
+                    <SelectGroup>
+                      <SelectLabel className="pl-2">
+                        <Separator className="h-[0.8px] w-full bg-black/70 my-2" />
+                        2005
+                      </SelectLabel>
+                      {
+                        Object.values(propertyEnergyClassEnum.Values).sort().filter((item) => item.includes("2005")).map(function (item) {
+
+                          const value = item.replace("2005_", "");
+                          return (
+                            <SelectItem value={value}>{value}</SelectItem>
+                          );
+                        })
+                      }
+                    </SelectGroup>
+                    <SelectGroup>
+                      <SelectLabel className="pl-2">
+                        <Separator className="h-[0.8px] w-full bg-black/70 my-2" />
+                        2013
+                      </SelectLabel>
+                      {
+                        Object.values(propertyEnergyClassEnum.Values).sort().filter((item) => item.includes("2013")).map(function (item) {
+                          const value = item.replace("2013_", "");
+                          return (
+                            <SelectItem value={value}>{value}</SelectItem>
+                          );
+                        })
+                      }
+                    </SelectGroup>
                   </SelectContent>
                 </Select>
                 <FormMessage />
               </FormItem>
-            )}
+            )
+            }
           />
           {/** Furnishing */}
           <FormField
@@ -645,9 +629,7 @@ export default function PropertyResidentialForm() {
               </FormItem>
             )}
           />
-        </div>;
-
-
+        </div >;
       default:
         return <>DEFAULT</>;
     }
