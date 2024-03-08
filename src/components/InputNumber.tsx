@@ -2,6 +2,9 @@
 
 import * as React from "react";
 
+import { MinusIcon, PlusIcon } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
@@ -45,26 +48,14 @@ const InputNumber = React.forwardRef<HTMLInputElement, InputNumberProps>(
 
     return (
       <div className={cn("relative inline-flex items-center", className)}>
-        <button
-          type="button"
-          className="absolute left-0 z-10 h-full rounded-l-md bg-slate-300 p-2 text-gray-900 hover:bg-slate-200 dark:bg-gray-700 dark:text-white"
+        <Button
+          variant="outline"
+          size="icon"
           onClick={handleDecrement}
+          className="absolute left-0 z-10 h-full rounded-l-md rounded-r-none p-2"
         >
-          {/* Decrement Icon */}
-          <svg
-            className="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 12h12"
-            />
-          </svg>
-        </button>
+          <MinusIcon className="h-4 w-4" />
+        </Button>
         <Input
           ref={ref}
           type="text"
@@ -73,26 +64,14 @@ const InputNumber = React.forwardRef<HTMLInputElement, InputNumberProps>(
           onChange={handleChange}
           {...props}
         />
-        <button
-          type="button"
-          className="absolute right-0 z-10 h-full rounded-r-md bg-slate-300 p-2 text-gray-900 hover:bg-slate-200 dark:bg-gray-700 dark:text-white"
+        <Button
+          variant="outline"
+          size="icon"
           onClick={handleIncrement}
+          className="absolute right-0 z-10 h-full rounded-l-none rounded-r-md p-2"
         >
-          {/* Increment Icon */}
-          <svg
-            className="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 6v12m6-6H6"
-            />
-          </svg>
-        </button>
+          <PlusIcon className="h-4 w-4" />
+        </Button>
       </div>
     );
   }
