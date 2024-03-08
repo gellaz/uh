@@ -1,15 +1,13 @@
 "use server";
 
-import { cookies } from "next/headers";
-import { createClient } from "@/utils/supabase/actions";
+import { createClient } from "@/utils/supabase/server";
 import { registerFormSchema } from "@/lib/validation";
 import { z } from "zod";
 
 export async function signUp(
   registerSchema: z.infer<typeof registerFormSchema>
 ) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
 
   const { data, error } = await supabase.auth.signUp({
     email: registerSchema.email,
@@ -34,4 +32,30 @@ export async function signUp(
   }
 
   return data;
+}
+
+/**
+ * Returns the profile of the currently logged in user
+ * @returns {Promise<Profile>}
+ */
+export async function getProfile(): Promise<Profile> {
+  const supabase = createClient();
+
+  const { data: userData, error: userError } = await supabase.auth.getUser();
+
+  if (userError) {
+    throw userError;
+  }
+
+  const { data: profileData, error: profileError } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", userData.user.id)
+    .single();
+
+  if (profileError) {
+    throw profileError;
+  }
+
+  return profileData;
 }

@@ -1,11 +1,9 @@
 "use server";
 
-import { cookies } from "next/headers";
-import { createClient } from "@/utils/supabase/actions";
+import { createClient } from "@/utils/supabase/server";
 
-export async function getProperties(): Promise<Property[]> {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+export async function getProperties() {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from("properties")
     .select("*")
@@ -20,8 +18,7 @@ export async function getProperties(): Promise<Property[]> {
 }
 
 export async function getPropertyWithId(id: string) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
   const { data, error } = await supabase
     .from("properties")
     .select("*")
@@ -42,8 +39,7 @@ export async function getPropertyWithId(id: string) {
  * @returns The property categories
  */
 export async function fetchPropertyCategories(): Promise<PropertyCategory[]> {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
   const { data, error } = await supabase
     .from("property_categories")
     .select("*");

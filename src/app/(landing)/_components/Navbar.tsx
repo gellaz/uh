@@ -1,5 +1,17 @@
 "use client";
 
+import { ArrowRight, LayoutDashboardIcon, LogOutIcon } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -8,12 +20,17 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 
-import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import NavbarUserMenu from "./NavbarUserMenu";
+import { capitalizeInitials } from "@/lib/utils";
 
-export default function Navbar() {
+interface NavbarProps {
+  profile?: Profile;
+}
+
+export default function Navbar({ profile }: NavbarProps) {
   return (
     <nav className="fixed start-0 top-0 z-20 w-full border-b border-gray-200 bg-white dark:border-gray-600 dark:bg-gray-900">
       <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
@@ -33,12 +50,16 @@ export default function Navbar() {
           </span>
         </a>
         <div className="flex space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
-          <Button asChild>
-            <Link href={"/dashboard/login"}>
-              Login
-              <ArrowRight size={16} className="ml-2" />
-            </Link>
-          </Button>
+          {profile ? (
+            <NavbarUserMenu profile={profile} />
+          ) : (
+            <Button asChild>
+              <Link href={"/dashboard/login"}>
+                Login
+                <ArrowRight size={16} className="ml-2" />
+              </Link>
+            </Button>
+          )}
         </div>
         <div
           className="hidden w-full items-center justify-between md:order-1 md:flex md:w-auto"

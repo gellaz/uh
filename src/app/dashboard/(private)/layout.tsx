@@ -1,5 +1,4 @@
-import Sidebar from "@/components/Sidebar";
-import { cookies } from "next/headers";
+import Sidebar from "@/app/dashboard/(private)/_components/Sidebar";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { sidebarItems } from "@/constants/sidebar-items";
@@ -9,12 +8,13 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
 
   const { data, error } = await supabase.auth.getUser();
 
-  if (error || !data?.user) redirect("/login");
+  if (error || !data?.user) {
+    redirect("/login");
+  }
 
   const { data: profile, error: profileErr } = await supabase
     .from("profiles")
