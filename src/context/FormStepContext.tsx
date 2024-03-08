@@ -21,13 +21,12 @@ export interface FormStep {
   status: FormStepperStatusEnum;
 }
 
-
 const FormStepContext = createContext({
   currentStepIndex: 0,
-  setCurrentStepIndex: (index: number) => { },
-  goToStep: (index: number) => { },
-  nextStep: () => { },
-  prevStep: () => { },
+  setCurrentStepIndex: (index: number) => {},
+  goToStep: (index: number) => {},
+  nextStep: () => {},
+  prevStep: () => {},
   steps: [] as FormStep[],
   totalSteps: 0,
 });
@@ -52,7 +51,7 @@ export function FormStepProvider({
       const previousStatus = steps[index].status;
       setCurrentStepIndex(targetStepIndex);
 
-      // TO-DO: 
+      // TO-DO:
       // here we should change the target step status to ACTIVE and update the previous step status to its previous status
       steps[targetStepIndex].status = FormStepperStatusEnum.ACTIVE;
       steps[index].status = previousStatus;
