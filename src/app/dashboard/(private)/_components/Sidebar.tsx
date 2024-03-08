@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Icon } from "@iconify-icon/react";
 import Image from "next/image";
 import Link from "next/link";
-import { Separator } from "./ui/separator";
+import { Separator } from "@/components/ui/separator";
 import { capitalizeInitials } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
