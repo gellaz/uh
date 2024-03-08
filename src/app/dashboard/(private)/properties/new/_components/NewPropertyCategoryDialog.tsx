@@ -95,20 +95,20 @@ export default function NewPropertyCategoryDialog() {
             Choose the category that best describe your property
           </DialogDescription>
         </DialogHeader>
-        <div className="grid grid-cols-3 gap-2 h-fit">
+        <div className="grid h-fit grid-cols-3 gap-2">
           {propertyCategoryItems.map((item, index) => {
             return (
               <Card
                 key={index}
                 onClick={() => categoryCardTapped(index)}
-                className={`row px-4 py-2 items-center justify-start space-x-2 cursor-pointer transition-all duration-150 ease-in-out ${
+                className={`row cursor-pointer items-center justify-start space-x-2 px-4 py-2 transition-all duration-150 ease-in-out ${
                   selectedItemIndex == index
                     ? "bg-primary text-white"
                     : "hover:bg-primary/50"
                 }`}
               >
                 <div
-                  className={`flex items-center justify-center w-12 h-12 rounded-full ${
+                  className={`flex h-12 w-12 items-center justify-center rounded-full ${
                     selectedItemIndex == index
                       ? "bg-primary/30"
                       : "bg-primary/10"

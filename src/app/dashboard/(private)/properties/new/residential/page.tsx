@@ -15,7 +15,7 @@ export default function NewPropertyResidentialPage() {
         </p>
       </div>
       <FormStepProvider steps={formSteps}>
-        <div className="row w-full h-full space-x-6">
+        <div className="row h-full w-full space-x-6">
           {/* LEFT SIDE */}
           <VerticalStepper className="col w-[32%]" />
           {/* RIGHT SIDE */}

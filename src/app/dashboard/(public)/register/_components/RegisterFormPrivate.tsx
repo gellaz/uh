@@ -135,10 +135,10 @@ export default function RegisterFormPrivate({
     step === 1
       ? stepOneSchema
       : step === 2
-      ? stepTwoBaseSchema
-      : step === 3
-      ? stepThreeBaseSchema
-      : combinedSchema;
+        ? stepTwoBaseSchema
+        : step === 3
+          ? stepThreeBaseSchema
+          : combinedSchema;
 
   const defaultFormValues = {
     email: "",
@@ -313,7 +313,6 @@ export default function RegisterFormPrivate({
                               )}
                             >
                               {field.value ? (
-                                // eslint-disable-next-line @typescript-eslint/no-unsafe-call
                                 format(field.value, "PPP")
                               ) : (
                                 <span>Pick a date</span>
@@ -422,8 +421,8 @@ export default function RegisterFormPrivate({
             <>
               <p className="text-pretty">
                 Read the terms and conditions carefully before proceeding. By
-                clicking "Create account", you agree to abide by the terms and
-                conditions outlined in the document.
+                clicking &quot;Create account&quot;, you agree to abide by the
+                terms and conditions outlined in the document.
               </p>
               {/** acceptTerms */}
               <FormField

@@ -30,8 +30,8 @@ export default function Sidebar({ items, profile }: SidebarProps) {
 
   return (
     <aside className="h-screen">
-      <nav className="h-full flex flex-col bg-white border-r shadow-sm">
-        <div className="flex flex-col p-4 gap-4">
+      <nav className="flex h-full flex-col border-r bg-white shadow-sm">
+        <div className="flex flex-col gap-4 p-4">
           {/* Toggle button */}
           <Button onClick={toggleExpanded} variant={"ghost"} size={"icon"}>
             {expanded ? (
@@ -41,19 +41,17 @@ export default function Sidebar({ items, profile }: SidebarProps) {
             )}
           </Button>
           {/* Logo container */}
-          <div className="flex gap-4 items-end">
+          <div className="flex items-end gap-4">
             <Image
               src="/logo.svg"
-              className="overflow-hidden transition-all ml-1"
+              className="ml-1 overflow-hidden transition-all"
               alt="UrbanHunt Logo"
               width={30}
               height={30}
             />
             {expanded && (
-              <span className="font-extrabold text-xl">
-                <h5>
-                  UrbanHunt
-                </h5>
+              <span className="text-xl font-extrabold">
+                <h5>UrbanHunt</h5>
               </span>
             )}
           </div>
@@ -68,16 +66,15 @@ export default function Sidebar({ items, profile }: SidebarProps) {
             return (
               <Link href={href} key={href}>
                 <li
-                  className={`relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group ${isActive
-                    ? "bg-gradient-to-tr from-orange-200 to-orange-100 text-orange-800"
-                    : "hover:bg-orange-50 text-gray-600"
-                    }`}
+                  className={`group relative my-1 flex cursor-pointer items-center rounded-md px-3 py-2 font-medium transition-colors ${
+                    isActive
+                      ? "bg-gradient-to-tr from-orange-200 to-orange-100 text-orange-800"
+                      : "text-gray-600 hover:bg-orange-50"
+                  }`}
                 >
                   <Icon icon={icon} height={22} width={22} />
                   <span className={`ml-3 ${expanded ? "inline" : "hidden"}`}>
-                    <p>
-                      {text}
-                    </p>
+                    <p>{text}</p>
                   </span>
                 </li>
               </Link>
@@ -85,8 +82,8 @@ export default function Sidebar({ items, profile }: SidebarProps) {
           })}
         </ul>
 
-        <div className="border-t flex p-3">
-          <Avatar className="hover:ring-2 hover:ring-primary hover:cursor-pointer">
+        <div className="flex border-t p-3">
+          <Avatar className="hover:cursor-pointer hover:ring-2 hover:ring-primary">
             <AvatarFallback>
               {capitalizeInitials(profile.first_name, profile.last_name)}
             </AvatarFallback>
@@ -94,8 +91,8 @@ export default function Sidebar({ items, profile }: SidebarProps) {
 
           <div
             className={`
-              flex justify-between items-center
-              overflow-hidden transition-all ${expanded ? "w-52 ml-3" : "w-0"}
+              flex items-center justify-between
+              overflow-hidden transition-all ${expanded ? "ml-3 w-52" : "w-0"}
           `}
           >
             <div className="leading-4">

@@ -27,7 +27,7 @@ export default async function DashboardLayout({
   return (
     <main className="flex">
       <Sidebar items={sidebarItems} profile={profile} />
-      <div className="p-4 flex-grow h-screen">{children}</div>
+      <div className="h-screen flex-grow p-4">{children}</div>
     </main>
   );
 }

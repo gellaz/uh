@@ -28,8 +28,8 @@ export default function LoginPage() {
           <h6 className="italic">«Hunt for the perfect property»</h6>
           <Separator className="mt-6" />
           <div className="mt-4 flex items-center justify-center">
-            <span className="text-base mr-1">
-              You don't have an account yet?
+            <span className="mr-1 text-base">
+              You don&apos;t have an account yet?
             </span>
             <Button asChild variant={"link"} className=" text-white">
               <Link href="/dashboard/register">Create account</Link>
@@ -39,7 +39,7 @@ export default function LoginPage() {
         {/* Right Panel */}
         <div className="flex flex-1 flex-col justify-center p-4 sm:p-8 md:p-16 lg:p-24">
           <div className="mx-auto w-full max-w-md rounded-lg border border-gray-300 bg-white p-8 shadow-lg">
-            <div className="col h-fit mb-6">
+            <div className="col mb-6 h-fit">
               <h2>Welcome back</h2>
               <p>Please enter your credentials to log in</p>
             </div>

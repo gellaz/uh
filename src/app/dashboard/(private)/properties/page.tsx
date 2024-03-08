@@ -3,7 +3,7 @@ import NewPropertyCategoryDialog from "./new/_components/NewPropertyCategoryDial
 export default function DashboardPropertiesPage() {
   return (
     <div className="flex flex-col">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <div className="flex flex-col">
           <h4>Properties</h4>
           <p className="text-pretty">

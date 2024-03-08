@@ -13,12 +13,12 @@ export default function TabGroup({ tabs, role }: TabGroupProps) {
           key={role}
           type="button"
           className={
-            "px-4 py-2 text-sm font-normal text-black bg-transparent border hover:bg-primary/20 hover:text-primary focus:z-10 focus:ring-none focus:ring-none focus:bg-primary focus:text-white " +
+            "focus:ring-none focus:ring-none border bg-transparent px-4 py-2 text-sm font-normal text-black hover:bg-primary/20 hover:text-primary focus:z-10 focus:bg-primary focus:text-white " +
             (index === 0
               ? "rounded-l-lg"
               : index === tabs.length - 1
-              ? "rounded-r-lg"
-              : "")
+                ? "rounded-r-lg"
+                : "")
           }
         >
           {tab}

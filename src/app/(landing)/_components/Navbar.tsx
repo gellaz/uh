@@ -15,8 +15,8 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <nav className="fixed start-0 top-0 z-20 w-full border-b border-gray-200 bg-white dark:border-gray-600 dark:bg-gray-900">
+      <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
         <a
           href="https://flowbite.com/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
@@ -28,11 +28,11 @@ export default function Navbar() {
             className="h-8"
             alt="UrbanHunt Logo"
           />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+          <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
             UrbanHunt
           </span>
         </a>
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <div className="flex space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
           <Button asChild>
             <Link href={"/dashboard/login"}>
               Login
@@ -41,7 +41,7 @@ export default function Navbar() {
           </Button>
         </div>
         <div
-          className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+          className="hidden w-full items-center justify-between md:order-1 md:flex md:w-auto"
           id="navbar-sticky"
         >
           <NavigationMenu>

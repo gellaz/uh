@@ -128,7 +128,7 @@ export default function NewPropertyResidentialForm() {
         const selection = 0;
 
         return (
-          <div className="space-y-4 h-full ">
+          <div className="h-full space-y-4 ">
             <Input
               placeholder="Search here for sub category..."
               className="text-sm"
@@ -241,7 +241,7 @@ export default function NewPropertyResidentialForm() {
               control={form.control}
               name="garden"
               render={({ field }) => (
-                <FormItem className="row h-fit w-full space-x-4 items-baseline justify-between">
+                <FormItem className="row h-fit w-full items-baseline justify-between space-x-4">
                   <FormLabel>Garden</FormLabel>
                   <TabGroup
                     tabs={Object.values(propertyGardenEnum.Values)}
@@ -257,7 +257,7 @@ export default function NewPropertyResidentialForm() {
               control={form.control}
               name="garage"
               render={({ field }) => (
-                <FormItem className="row h-fit w-full space-x-4 items-baseline justify-between">
+                <FormItem className="row h-fit w-full items-baseline justify-between space-x-4">
                   <FormLabel>Garage</FormLabel>
                   <TabGroup
                     tabs={Object.values(propertyGarageEnum.Values)}
@@ -273,7 +273,7 @@ export default function NewPropertyResidentialForm() {
               control={form.control}
               name="parking_spaces"
               render={({ field }) => (
-                <FormItem className="row h-fit w-full space-x-4 items-baseline justify-between">
+                <FormItem className="row h-fit w-full items-baseline justify-between space-x-4">
                   <FormLabel>Parking space</FormLabel>
                   <TabGroup
                     tabs={Object.values(
@@ -383,7 +383,7 @@ export default function NewPropertyResidentialForm() {
         // ADDRESS
         return (
           <div className="row space-x-4">
-            <div className="w-full bg-slate-100 rounded-lg" />
+            <div className="w-full rounded-lg bg-slate-100" />
             <div className="col space-y-4">
               <FormField
                 control={form.control}
@@ -468,17 +468,6 @@ export default function NewPropertyResidentialForm() {
           </div>
         );
       case 3:
-        const icons = [
-          <Zap className="text-primary" size={32} />,
-          <Sun className="text-primary" size={32} />,
-        ];
-        const iconStyle =
-          "flex items-center justify-center w-12 h-12 rounded-full ";
-        const heatingTypeIcons = [
-          <Wind className="text-primary" size={32} />,
-          <Heater className="text-primary" size={32} />,
-        ];
-
         return (
           <div className="col space-y-6">
             {/** Heating */}
@@ -580,39 +569,39 @@ export default function NewPropertyResidentialForm() {
                         {Object.values(propertyEnergyClassEnum.Values)
                           .sort()
                           .slice(-3)
-                          .map(function (item) {
-                            return <SelectItem value={item}>{item}</SelectItem>;
-                          })}
+                          .map((item, index) => (
+                            <SelectItem key={index} value={item}>
+                              {item}
+                            </SelectItem>
+                          ))}
                       </SelectGroup>
                       <SelectGroup>
                         <SelectLabel className="pl-2">
-                          <Separator className="h-[0.8px] w-full bg-black/70 my-2" />
+                          <Separator className="my-2 h-[0.8px] w-full bg-black/70" />
                           2005
                         </SelectLabel>
                         {Object.values(propertyEnergyClassEnum.Values)
                           .sort()
                           .filter((item) => item.includes("2005"))
-                          .map(function (item) {
-                            const value = item.replace("2005_", "");
-                            return (
-                              <SelectItem value={value}>{value}</SelectItem>
-                            );
-                          })}
+                          .map((item, index) => (
+                            <SelectItem key={index} value={item}>
+                              {item.replace("2005_", "")}
+                            </SelectItem>
+                          ))}
                       </SelectGroup>
                       <SelectGroup>
                         <SelectLabel className="pl-2">
-                          <Separator className="h-[0.8px] w-full bg-black/70 my-2" />
+                          <Separator className="my-2 h-[0.8px] w-full bg-black/70" />
                           2013
                         </SelectLabel>
                         {Object.values(propertyEnergyClassEnum.Values)
                           .sort()
                           .filter((item) => item.includes("2013"))
-                          .map(function (item) {
-                            const value = item.replace("2013_", "");
-                            return (
-                              <SelectItem value={value}>{value}</SelectItem>
-                            );
-                          })}
+                          .map((item, index) => (
+                            <SelectItem key={index} value={item}>
+                              {item.replace("2013_", "")}
+                            </SelectItem>
+                          ))}
                       </SelectGroup>
                     </SelectContent>
                   </Select>
@@ -657,7 +646,7 @@ export default function NewPropertyResidentialForm() {
   };
 
   return (
-    <div className="col space-y-4 border rounded-2xl p-4 ">
+    <div className="col space-y-4 rounded-2xl border p-4 ">
       <Form {...form}>
         <div className="row h-fit justify-between">
           <div className="col">
@@ -669,7 +658,7 @@ export default function NewPropertyResidentialForm() {
               asChild
               variant={"secondary"}
               onClick={prevStep}
-              className="rounded-full w-10 h-10 px-[10px]"
+              className="h-10 w-10 rounded-full px-[10px]"
             >
               <ArrowLeft />
             </Button>
@@ -677,7 +666,7 @@ export default function NewPropertyResidentialForm() {
               asChild
               variant={"secondary"}
               onClick={nextStep}
-              className="rounded-full w-10 h-10 px-[10px]"
+              className="h-10 w-10 rounded-full px-[10px]"
             >
               <ArrowRight />
             </Button>
@@ -685,7 +674,7 @@ export default function NewPropertyResidentialForm() {
         </div>
         <form
           onSubmit={(e) => e.preventDefault()}
-          className=" w-full h-full overflow-clip"
+          className=" h-full w-full overflow-clip"
         >
           {getFormContent()}
         </form>

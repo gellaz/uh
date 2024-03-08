@@ -30,7 +30,7 @@ export default function RegisterPage() {
             <h6 className="italic">«Join the community of hunters»</h6>
             <Separator className="mt-6" />
             <div className="mt-4 flex items-center justify-center">
-              <span className="text-base mr-1">Do you have an account?</span>
+              <span className="mr-1 text-base">Do you have an account?</span>
               <Button asChild variant={"link"} className=" text-white">
                 <Link href="/dashboard/login">Login</Link>
               </Button>
@@ -43,7 +43,7 @@ export default function RegisterPage() {
           <div className="flex flex-1 flex-col justify-center">
             <div className="mx-auto flex w-full max-w-md flex-col items-center rounded-lg border border-gray-300 bg-white p-6 shadow-lg">
               <div className="mx-auto w-full max-w-md">
-                <div className="col h-fit mb-6">
+                <div className="col mb-6 h-fit">
                   <h2>Join our comminuty</h2>
                   <p>Please enter your information to create an account</p>
                 </div>

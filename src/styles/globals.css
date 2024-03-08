@@ -82,25 +82,24 @@
     @apply text-[12.8px];
   }
 
-  .xs-text{
+  .xs-text {
     @apply text-[10.24px];
   }
 
   body {
-    @apply bg-primary-foreground text-foreground overflow-hidden w-full h-full;
+    @apply h-full w-full overflow-hidden bg-primary-foreground text-foreground;
   }
-
 
   main {
     @apply bg-background;
   }
 
   .col {
-    @apply flex flex-col w-full h-full;
+    @apply flex h-full w-full flex-col;
   }
 
   .row {
-    @apply flex flex-row w-full h-full;
+    @apply flex h-full w-full flex-row;
   }
 
   .grid-col {
@@ -108,7 +107,7 @@
   }
 
   .outlined {
-    @apply border hover:border-black rounded-md;
+    @apply rounded-md border hover:border-black;
   }
 }
 .rdp-vhidden {

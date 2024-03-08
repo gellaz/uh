@@ -51,7 +51,7 @@ export default function UploadMediaDiv(props: uploadMediaDivProps) {
       onMouseLeave={() => {
         isUploaded ? setIsHovered(false) : null;
       }}
-      className="col h-[124px] w-[160px] p-2 items-center justify-center border rounded-sm text-sm font-medium space-y-1 cursor-pointer hover:border-black"
+      className="col h-[124px] w-[160px] cursor-pointer items-center justify-center space-y-1 rounded-sm border p-2 text-sm font-medium hover:border-black"
       style={{
         backgroundImage: selectedImage ? `url(${selectedImage})` : "none",
         backgroundSize: "cover",
@@ -65,7 +65,7 @@ export default function UploadMediaDiv(props: uploadMediaDivProps) {
       {isUploaded && isHover ? (
         <div className="flex h-full w-full items-center justify-center">
           <button
-            className="flex w-10 h-10 rounded-full items-center justify-center bg-red-100 text-red-500 text-xl"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-red-100 text-xl text-red-500"
             onClick={() => handleDeleteFileSelected()}
           >
             <Trash2 size={16} />

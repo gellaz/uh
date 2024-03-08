@@ -1,8 +1,8 @@
 export default function DashboardPropertiesDetailPage() {
   return (
     <div>
-      <h1 className="font-extrabold text-3xl mb-2">Property Details</h1>
-      <p className="text-sm text-pretty">Edit your property</p>
+      <h1 className="mb-2 text-3xl font-extrabold">Property Details</h1>
+      <p className="text-pretty text-sm">Edit your property</p>
     </div>
   );
 }
