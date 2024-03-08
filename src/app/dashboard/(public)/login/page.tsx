@@ -2,9 +2,8 @@ import { Button } from "@/components/ui/button";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import LoginForm from "@/components/LoginForm";
+import LoginForm from "@/app/dashboard/(public)/login/_components/LoginForm";
 import { Separator } from "@/components/ui/separator";
-import { UserCircle2Icon } from "lucide-react";
 
 export default function LoginPage() {
   return (
@@ -29,14 +28,11 @@ export default function LoginPage() {
           <h6 className="italic">«Hunt for the perfect property»</h6>
           <Separator className="mt-6" />
           <div className="mt-4 flex items-center justify-center">
-            <span className="text-base mr-1">You don't have an account yet?</span>
-            <Button asChild
-              variant={"link"}
-              className=" text-white"
-            >
-              <Link href="/dashboard/create_account">
-                Create account
-              </Link>
+            <span className="text-base mr-1">
+              You don't have an account yet?
+            </span>
+            <Button asChild variant={"link"} className=" text-white">
+              <Link href="/dashboard/register">Create account</Link>
             </Button>
           </div>
         </div>

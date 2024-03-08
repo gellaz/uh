@@ -1,4 +1,4 @@
-import PropertyCategoryDialog from "@/components/PropertyCategoryDialog";
+import NewPropertyCategoryDialog from "./new/_components/NewPropertyCategoryDialog";
 
 export default function DashboardPropertiesPage() {
   return (
@@ -10,7 +10,7 @@ export default function DashboardPropertiesPage() {
             Here you can view and manage your properties
           </p>
         </div>
-        <PropertyCategoryDialog />
+        <NewPropertyCategoryDialog />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import Navbar from "@/components/landing/Navbar";
+import Navbar from "@/app/(landing)/_components/Navbar";
 
 export default async function HomeLayout({
   children,

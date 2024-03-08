@@ -1,11 +1,11 @@
 "use client";
 
-import { FormStepProvider, useFormStep } from "@/context/FormStepContext";
-import PropertyResidentialForm from "@/components/forms/PropertyResidentialForm";
-import VerticalStepper from "@/components/dashboard/property/new/VerticalStepper";
+import { FormStepProvider } from "@/context/FormStepContext";
+import NewPropertyResidentialForm from "./_components/NewPropertyResidentialForm";
+import VerticalStepper from "@/app/dashboard/(private)/properties/new/_components/VerticalStepper";
 import { formSteps } from "@/constants/newPropertyResidentialSteps";
 
-export default function NewPropertyPage() {
+export default function NewPropertyResidentialPage() {
   return (
     <div className="col space-y-4">
       <div>
@@ -15,12 +15,11 @@ export default function NewPropertyPage() {
         </p>
       </div>
       <FormStepProvider steps={formSteps}>
-        {/* LEFT SIDE */}
         <div className="row w-full h-full space-x-6">
+          {/* LEFT SIDE */}
           <VerticalStepper className="col w-[32%]" />
-
           {/* RIGHT SIDE */}
-          <PropertyResidentialForm />
+          <NewPropertyResidentialForm />
         </div>
       </FormStepProvider>
     </div>

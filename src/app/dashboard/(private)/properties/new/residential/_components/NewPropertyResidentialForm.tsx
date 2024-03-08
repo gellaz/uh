@@ -1,6 +1,15 @@
 "use client";
 
 import {
+  ArrowLeft,
+  ArrowRight,
+  Heater,
+  LocateFixed,
+  Sun,
+  Wind,
+  Zap,
+} from "lucide-react";
+import {
   Form,
   FormControl,
   FormField,
@@ -15,6 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { SelectGroup, SelectLabel } from "@radix-ui/react-select";
 import {
   propertyAirConditioningTypeEnum,
   propertyEnergyClassEnum,
@@ -27,22 +37,19 @@ import {
   propertyResidentialSchema,
   propertyResidentialSubcategoryEnum,
 } from "@/lib/validation";
+
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import CardOption from "@/components/CardOption";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@radix-ui/react-separator";
+import TabGroup from "@/components/TabGroup";
 import { useForm } from "react-hook-form";
 import { useFormStep } from "@/context/FormStepContext";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RadioGroup } from "@radix-ui/react-dropdown-menu";
-import { RadioGroupItem } from "@radix-ui/react-radio-group";
-import { Card } from "../ui/card";
-import { ArrowLeft, ArrowRight, Heater, LocateFixed, Sun, Wind, Zap } from "lucide-react";
-import TabGroup from "../TabGroup";
-import { Separator } from "@radix-ui/react-separator";
-import CardOption from "../CardOption";
-import { SelectGroup, SelectLabel } from "@radix-ui/react-select";
 
-export default function PropertyResidentialForm() {
+export default function NewPropertyResidentialForm() {
   const { currentStepIndex, nextStep, prevStep, totalSteps, currentStep } =
     useFormStep();
 
@@ -111,7 +118,9 @@ export default function PropertyResidentialForm() {
         const emojiDivStyle =
           "flex items-center justify-center w-10 h-10 rounded-full ";
         const emoji = () => {
-          const array = Object.values(propertyResidentialSubcategoryEnum.Values);
+          const array = Object.values(
+            propertyResidentialSubcategoryEnum.Values
+          );
           const emojiArray = Array(array.length).fill("🏠");
           return emojiArray;
         };
@@ -459,177 +468,189 @@ export default function PropertyResidentialForm() {
           </div>
         );
       case 3:
-        const icons = [<Zap className="text-primary" size={32} />, <Sun className="text-primary" size={32} />]
-        const iconStyle = "flex items-center justify-center w-12 h-12 rounded-full ";
-        const heatingTypeIcons = [<Wind className="text-primary" size={32} />, <Heater className="text-primary" size={32} />]
+        const icons = [
+          <Zap className="text-primary" size={32} />,
+          <Sun className="text-primary" size={32} />,
+        ];
+        const iconStyle =
+          "flex items-center justify-center w-12 h-12 rounded-full ";
+        const heatingTypeIcons = [
+          <Wind className="text-primary" size={32} />,
+          <Heater className="text-primary" size={32} />,
+        ];
 
-        return <div className="col space-y-6">
-          {/** Heating */}
-          <FormField
-            control={form.control}
-            name="heating"
-            render={({ field }) => (
-              <FormItem className={rowStyle}>
-                <FormLabel>Heating</FormLabel>
-                <TabGroup tabs={Object.values(propertyHeatingEnum.Values).sort()} role={field.name} />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {/** Heating fuel */}
-          <FormField
-            control={form.control}
-            name="heating_fuel"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Heating fuel</FormLabel>
-                <div className="grid grid-cols-6 gap-4">
-                  {
-                    Object.values(propertyHeatingFuelEnum.Values).sort().map((item, index) => (
-                      CardOption({
-                        item,
-                        color: "bg-orange-100",
-                        icon: <Zap className="text-primary" size={32} />,
-                      })
-                    ))
-                  }
-                </div>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {/** Heating type */}
-          <FormField
-            control={form.control}
-            name="heating_type"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Heating type</FormLabel>
-                <div className="grid grid-cols-6 gap-4">
-                  {
-                    Object.values(propertyHeatingTypeEnum.Values).sort().map((item) => (
-                      CardOption({
-                        item,
-                        color: "bg-orange-100",
-                        icon: <Zap className="text-primary" size={32} />,
-                      })
-                    ))
-                  }
-                </div>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {/** Air conditioning */}
-          <FormField
-            control={form.control}
-            name="air_conditioning"
-            render={({ field }) => (
-              <FormItem className={rowStyle}>
-                <FormLabel>Air conditioning</FormLabel>
-                <FormControl>
+        return (
+          <div className="col space-y-6">
+            {/** Heating */}
+            <FormField
+              control={form.control}
+              name="heating"
+              render={({ field }) => (
+                <FormItem className={rowStyle}>
+                  <FormLabel>Heating</FormLabel>
                   <TabGroup
-                    tabs={Object.values(propertyAirConditioningTypeEnum.Values)}
-                    role={"garden"}
+                    tabs={Object.values(propertyHeatingEnum.Values).sort()}
+                    role={field.name}
                   />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {/** Energy class */}
-          <FormField
-            control={form.control}
-            name="energy_class"
-            render={({ field }) => (
-              <FormItem className={rowStyle}>
-                <FormLabel>Energy class</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl className="w-1/4">
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select energy class" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectGroup>
-                      {
-                        Object.values(propertyEnergyClassEnum.Values).sort().slice(-3).map(function (item) {
-
-                          return (
-                            <SelectItem value={item}>{item}</SelectItem>
-                          );
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/** Heating fuel */}
+            <FormField
+              control={form.control}
+              name="heating_fuel"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Heating fuel</FormLabel>
+                  <div className="grid grid-cols-6 gap-4">
+                    {Object.values(propertyHeatingFuelEnum.Values)
+                      .sort()
+                      .map((item, index) =>
+                        CardOption({
+                          item,
+                          color: "bg-orange-100",
+                          icon: <Zap className="text-primary" size={32} />,
                         })
-                      }
-                    </SelectGroup>
-                    <SelectGroup>
-                      <SelectLabel className="pl-2">
-                        <Separator className="h-[0.8px] w-full bg-black/70 my-2" />
-                        2005
-                      </SelectLabel>
-                      {
-                        Object.values(propertyEnergyClassEnum.Values).sort().filter((item) => item.includes("2005")).map(function (item) {
-
-                          const value = item.replace("2005_", "");
-                          return (
-                            <SelectItem value={value}>{value}</SelectItem>
-                          );
+                      )}
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/** Heating type */}
+            <FormField
+              control={form.control}
+              name="heating_type"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Heating type</FormLabel>
+                  <div className="grid grid-cols-6 gap-4">
+                    {Object.values(propertyHeatingTypeEnum.Values)
+                      .sort()
+                      .map((item) =>
+                        CardOption({
+                          item,
+                          color: "bg-orange-100",
+                          icon: <Zap className="text-primary" size={32} />,
                         })
-                      }
-                    </SelectGroup>
-                    <SelectGroup>
-                      <SelectLabel className="pl-2">
-                        <Separator className="h-[0.8px] w-full bg-black/70 my-2" />
-                        2013
-                      </SelectLabel>
-                      {
-                        Object.values(propertyEnergyClassEnum.Values).sort().filter((item) => item.includes("2013")).map(function (item) {
-                          const value = item.replace("2013_", "");
-                          return (
-                            <SelectItem value={value}>{value}</SelectItem>
-                          );
-                        })
-                      }
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )
-            }
-          />
-          {/** Furnishing */}
-          <FormField
-            control={form.control}
-            name="furnishing"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Furnishing</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+                      )}
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/** Air conditioning */}
+            <FormField
+              control={form.control}
+              name="air_conditioning"
+              render={({ field }) => (
+                <FormItem className={rowStyle}>
+                  <FormLabel>Air conditioning</FormLabel>
                   <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select furnishing" />
-                    </SelectTrigger>
+                    <TabGroup
+                      tabs={Object.values(
+                        propertyAirConditioningTypeEnum.Values
+                      )}
+                      role={"garden"}
+                    />
                   </FormControl>
-                  <SelectContent>
-                    <SelectItem value="Furnished">Furnished</SelectItem>
-                    <SelectItem value="Unfurnished">Unfurnished</SelectItem>
-                    <SelectItem value="Partially furnished">
-                      Partially furnished
-                    </SelectItem>
-                    <SelectItem value="Kitchen only">Kitchen only</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div >;
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/** Energy class */}
+            <FormField
+              control={form.control}
+              name="energy_class"
+              render={({ field }) => (
+                <FormItem className={rowStyle}>
+                  <FormLabel>Energy class</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl className="w-1/4">
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select energy class" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectGroup>
+                        {Object.values(propertyEnergyClassEnum.Values)
+                          .sort()
+                          .slice(-3)
+                          .map(function (item) {
+                            return <SelectItem value={item}>{item}</SelectItem>;
+                          })}
+                      </SelectGroup>
+                      <SelectGroup>
+                        <SelectLabel className="pl-2">
+                          <Separator className="h-[0.8px] w-full bg-black/70 my-2" />
+                          2005
+                        </SelectLabel>
+                        {Object.values(propertyEnergyClassEnum.Values)
+                          .sort()
+                          .filter((item) => item.includes("2005"))
+                          .map(function (item) {
+                            const value = item.replace("2005_", "");
+                            return (
+                              <SelectItem value={value}>{value}</SelectItem>
+                            );
+                          })}
+                      </SelectGroup>
+                      <SelectGroup>
+                        <SelectLabel className="pl-2">
+                          <Separator className="h-[0.8px] w-full bg-black/70 my-2" />
+                          2013
+                        </SelectLabel>
+                        {Object.values(propertyEnergyClassEnum.Values)
+                          .sort()
+                          .filter((item) => item.includes("2013"))
+                          .map(function (item) {
+                            const value = item.replace("2013_", "");
+                            return (
+                              <SelectItem value={value}>{value}</SelectItem>
+                            );
+                          })}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/** Furnishing */}
+            <FormField
+              control={form.control}
+              name="furnishing"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Furnishing</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select furnishing" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="Furnished">Furnished</SelectItem>
+                      <SelectItem value="Unfurnished">Unfurnished</SelectItem>
+                      <SelectItem value="Partially furnished">
+                        Partially furnished
+                      </SelectItem>
+                      <SelectItem value="Kitchen only">Kitchen only</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        );
       default:
         return <>DEFAULT</>;
     }

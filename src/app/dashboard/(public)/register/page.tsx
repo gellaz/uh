@@ -5,8 +5,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import RegisterFormPrivate from "@/components/forms/RegisterFormPrivate";
-import RegisterStepperPrivate from "@/components/RegisterStepperPrivate";
+import RegisterFormPrivate from "@/app/dashboard/(public)/register/_components/RegisterFormPrivate";
+import RegisterStepperPrivate from "@/app/dashboard/(public)/register/_components/RegisterStepperPrivate";
 import { Separator } from "@/components/ui/separator";
 import { UserPlusIcon } from "lucide-react";
 import { useState } from "react";
@@ -30,16 +30,9 @@ export default function RegisterPage() {
             <h6 className="italic">«Join the community of hunters»</h6>
             <Separator className="mt-6" />
             <div className="mt-4 flex items-center justify-center">
-              <span className="text-base mr-1">
-                Do you have an account?
-              </span>
-              <Button asChild
-                variant={"link"}
-                className=" text-white"
-              >
-                <Link href="/dashboard/login">
-                  Login
-                </Link>
+              <span className="text-base mr-1">Do you have an account?</span>
+              <Button asChild variant={"link"} className=" text-white">
+                <Link href="/dashboard/login">Login</Link>
               </Button>
             </div>
           </div>

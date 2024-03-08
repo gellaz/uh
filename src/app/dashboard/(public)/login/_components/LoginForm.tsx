@@ -11,7 +11,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import PasswordInput from "@/components/PasswordInput";
+import { PasswordInput } from "@/components/PasswordInput";
 import { createClient } from "@/utils/supabase/client";
 import { loginFormSchema } from "@/lib/validation";
 import { useForm } from "react-hook-form";

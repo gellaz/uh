@@ -38,7 +38,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { CalendarIcon } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import PasswordInput from "@/components/PasswordInput";
+import { PasswordInput } from "@/components/PasswordInput";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/client";
