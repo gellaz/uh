@@ -179,7 +179,7 @@ CREATE TYPE property_tv_system_enum AS enum(
 );
 
 --
--- servizio portineria 
+-- Servizio portineria 
 --
 CREATE TYPE property_concierge_service_enum AS enum(
     'None', -- assente
@@ -189,7 +189,7 @@ CREATE TYPE property_concierge_service_enum AS enum(
 
 --
 -- Lati liberi
--- pareti o lati dell'appartamento che non sono adiacenti ad altri appartamenti, scale, muri portanti dell'edificio
+-- Pareti o lati dell'appartamento che non sono adiacenti ad altri appartamenti, scale, muri portanti dell'edificio
 --
 CREATE TYPE property_free_sides_enum AS enum(
     'One', -- Uno
@@ -385,27 +385,43 @@ CREATE TYPE property_cadestral_category_enum AS enum(
     
 -- #############################################################
 --
--- PROPRIETÀ RESIDENZIALE
+-- Residential Properties (Proprietà Residenziali)
 --
 CREATE TABLE public.properties_residential(
     id uuid NOT NULL DEFAULT gen_random_uuid(),
     user_id uuid NOT NULL,
+    -- Subcategory & Property Class (Sottocategoria e Classe Proprietà)
     subcategory property_residential_subcategory_enum NOT NULL,
+    property_class property_class_enum NULL,
     -- SUPERFICIE: sezione da aggiungere vedi getrix
-    -- COMPOSIZIONE
-    mq smallint NOT NULL,
-    rooms smallint NOT NULL,
-    bathrooms smallint NOT NULL, -- può essere di vari tipi lo gestiamo con jsonb?
-    kitchens smallint NOT NULL, -- può essere di vari tipi lo gestiamo con jsonb?
-    garden property_garden_enum NULL,
-    garage property_garage_enum NULL,
-    parking_spaces smallint NULL,
-    terraces smallint NULL,
-    balcony smallint NULL,
-    cantina smallint NULL, -- cantina
-    mansarda smallint NULL, -- mansarda
-    taverna smallint NULL, -- taverna
-    -- INDIRIZZO
+    -- Composition (Composizione)
+    mq smallint NOT NULL, -- Metri quadri
+    rooms smallint NOT NULL, -- Numero di stanze/vani
+    bathrooms smallint NOT NULL, -- Numero di bagni
+    kitchens smallint NOT NULL, -- Numero di cucine
+    garden property_garden_enum NULL, -- Giardino
+    garage property_garage_enum NULL, -- Garage
+    parking_spaces smallint NULL, -- Posti auto
+    terraces smallint NULL, -- Terrazze
+    balcony smallint NULL, -- Balconi
+    cellar smallint NULL, -- Cantine
+    attic smallint NULL, -- Mansarde
+    basement smallint NULL, -- Taverne
+    -- Features (Caratteristiche)
+    condition property_condition_enum NULL, -- Stato
+    floor property_floor_enum NULL, -- Piano
+    multiple_floors boolean NULL, -- Proprietà su più piani
+    elevators smallint NULL, -- Ascensori
+    wheelchair_access boolean NULL, -- Accesso per disabili
+    free_sides property_free_sides_enum NULL,  -- Lati liberi
+    facing property_facing_enum NULL, -- Affaccio
+    furnishing property_furnishing_enum NULL, -- Arredamento
+    wall_waredrobes boolean NULL, -- Armadi a muro
+    external_fixtures_material property_external_fixtures_material_enum NULL, -- Materiale infissi esterni
+    external_fixtures_glass_type property_external_fixtures_glass_type_enum NULL, -- Vetro infissi esterni
+    building_construction_year smallint NULL, -- Anno di costruzione edificio
+    building_total_floors smallint NULL, -- Piani totali edificio
+    -- Location (Posizione)
     street_name text NOT NULL,
     street_number text NOT NULL,
     city text NOT NULL,
@@ -413,42 +429,27 @@ CREATE TABLE public.properties_residential(
     province text NOT NULL,
     region text NOT NULL,
     country property_country_enum NOT NULL,
-    -- AMENITIES / COMODITA'
-    furnishing property_furnishing_enum NULL,
-    wall_waredrobes boolean NULL, -- armadi a muro
-    external_fixtures_material property_external_fixtures_material_enum NULL,
-    external_fixtures_glass_type property_external_fixtures_glass_type_enum NULL,
-    tv_system property_tv_system_enum NULL,
-    concierge_service property_concierge_service_enum NULL,
-    reinforced_door boolean NULL,
-    alarm boolean NULL,
-    electric_gate boolean NULL,
-    video_intercom boolean NULL,
-    optic_fiber boolean NULL,
-    chimney boolean NULL,
-    hot_tub boolean NULL,
-    pool boolean NULL,
-    sports_facility smallint NULL,
-    -- BUILDING CARATTERISTICHE
-    construction_year smallint NULL,
-    property_class property_class_enum NULL,
-    condition property_condition_enum NULL,
-    floor property_floor_enum NULL,
-    multiple_floors boolean NULL,
-    total_floors_building smallint NULL,
-    elevators smallint NULL,
-    wheelchair_access boolean NULL,
-    free_sides property_free_sides_enum NULL, 
-    facing property_facing_enum NULL,
-    -- RISCALDAMENTO E CLIMATIZZAZIONE
+    -- Heating & Air Conditioning (Riscaldamento & Climatizzazione)
     heating property_heating_enum NOT NULL,
     heating_type property_heating_type_enum NULL,
     heating_fuel property_heating_fuel_enum NULL,
     air_conditioning property_air_conditioning_enum NULL,
     air_conditioning_type property_air_conditioning_type_enum NULL,
-    -- CERTIFICAZIONE ENRGETICA
-    energy_class_grade property_energy_class_enum NULL,
-    -- DATI CATASTALI
+    -- Energy Certification (Certificazione Energetica)
+    energy_class property_energy_class_enum NULL,
+    -- Additional Features (Caratteristiche Aggiuntive)
+    tv_system property_tv_system_enum NULL, -- Impianto TV
+    concierge_service property_concierge_service_enum NULL, -- Servizio portineria
+    reinforced_door boolean NULL, -- Porta blindata
+    alarm boolean NULL, -- Allarme
+    electric_gate boolean NULL, -- Cancello elettrico
+    video_intercom boolean NULL, -- Videocitofono
+    optic_fiber boolean NULL, -- Fibra ottica
+    chimney boolean NULL, -- Camino
+    hot_tub boolean NULL, -- Vasca idromassaggio
+    pool boolean NULL, -- Piscina
+    sports_facilities boolean NULL, -- Impianti sportivi
+    -- Cadastral Data (Dati Catastali)
     cadastral_section text NULL,
     cadastral_sheet text NULL,
     cadastral_particle text NULL,
@@ -457,11 +458,11 @@ CREATE TABLE public.properties_residential(
     cadastral_income float NULL,
     cadastral_quote text NULL,
     cadastral_other text NULL,
-    -- DESCRIZIONE
+    -- Description (Descrizione)
     description text NULL,
     title text NULL,
     notes text NULL,
-    -- MEDIA
+    -- Media
     -- fotografie, video, planimetrie, virtual tour, APE,
     CONSTRAINT properties_pkey PRIMARY KEY (id),
     CONSTRAINT properties_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE

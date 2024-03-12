@@ -16,13 +16,16 @@ export enum FormStepperStatusEnum {
 }
 
 export interface FormStep {
+  id: string;
   title: string;
   description?: string;
   status: FormStepperStatusEnum;
 }
 
 const FormStepContext = createContext({
+  currentStepId: "",
   currentStepIndex: 0,
+  setCurrentStepId: (id: string) => {},
   setCurrentStepIndex: (index: number) => {},
   goToStep: (index: number) => {},
   nextStep: () => {},
@@ -39,6 +42,7 @@ export function FormStepProvider({
   steps: FormStep[];
 }) {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [currentStepId, setCurrentStepId] = useState(steps[0]?.id || "");
   const totalSteps = steps.length;
 
   const nextStep = () =>
@@ -50,19 +54,22 @@ export function FormStepProvider({
       const targetStepIndex = Math.min(Math.max(index, 0), totalSteps - 1); // Clamp the value between 0 and totalSteps - 1
       const previousStatus = steps[index].status;
       setCurrentStepIndex(targetStepIndex);
+      setCurrentStepId(steps[targetStepIndex].id);
 
       // TO-DO:
       // here we should change the target step status to ACTIVE and update the previous step status to its previous status
       steps[targetStepIndex].status = FormStepperStatusEnum.ACTIVE;
       steps[index].status = previousStatus;
     },
-    [totalSteps]
+    [steps, totalSteps]
   );
 
   return (
     <FormStepContext.Provider
       value={{
+        currentStepId,
         currentStepIndex,
+        setCurrentStepId,
         setCurrentStepIndex,
         goToStep,
         nextStep,
@@ -82,8 +89,10 @@ export const useFormStep = () => {
   }
 
   const {
+    currentStepId,
     currentStepIndex,
     steps,
+    setCurrentStepId,
     setCurrentStepIndex,
     goToStep,
     nextStep,
@@ -96,8 +105,10 @@ export const useFormStep = () => {
   // Return the corrected object without using ...rest
   return {
     currentStep,
+    currentStepId,
     currentStepIndex,
-    steps, // Include the entire steps array
+    steps,
+    setCurrentStepId,
     setCurrentStepIndex,
     goToStep,
     nextStep,

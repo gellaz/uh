@@ -428,8 +428,9 @@ export const propertyDescriptionSchema = z.object({
 
 export const propertyResidentialSchema = z
   .object({
-    // Subcategory
+    // Subcategory & Property Class
     subcategory: propertyResidentialSubcategoryEnum,
+    property_class: propertyClassEnum.optional(),
     // Composition
     mq: z.number(),
     rooms: z.number(),
@@ -440,17 +441,34 @@ export const propertyResidentialSchema = z
     parking_spaces: z.number(),
     terraces: z.number(),
     balcony: z.number(),
-    cantina: z.number(),
-    mansarda: z.number(),
-    taverna: z.number(),
+    cellar: z.number(),
+    attic: z.number(),
+    basement: z.number(),
+    // Features
+    condition: propertyConditionEnum.optional(),
     floor: propertyFloorEnum,
     multiple_floors: z.boolean(),
-    // Features
+    elevators: z.number().optional(),
+    wheelchair_access: z.boolean().optional(),
+    free_sides: propertyFreeSidesEnum.optional(),
+    facing: propertyFacingEnum.optional(),
     furnishing: propertyFurnishingEnum.optional(),
     wall_waredrobes: z.boolean().optional(),
     external_fixtures_material: propertyExternalFixturesMaterialEnum.optional(),
     external_fixtures_glass_type:
       propertyExternalFixturesGlassTypeEnum.optional(),
+    building_construction_year: z.number().optional(),
+    building_total_floors: z.number().optional(),
+    //Location
+    // Heating & Air Conditioning
+    heating: propertyHeatingEnum,
+    heating_type: propertyHeatingTypeEnum.optional(),
+    heating_fuel: propertyHeatingFuelEnum.optional(),
+    air_conditioning: propertyAirConditioningEnum.optional(),
+    air_conditioning_type: propertyAirConditioningTypeEnum.optional(),
+    // Energy Certification
+    energy_class: propertyEnergyClassEnum,
+    // Additional Features
     tv_system: propertyTvSystemEnum.optional(),
     concierge_service: propertyConciergeServiceEnum.optional(),
     reinforced_door: z.boolean().optional(),
@@ -461,23 +479,10 @@ export const propertyResidentialSchema = z
     chimney: z.boolean().optional(),
     hot_tub: z.boolean().optional(),
     pool: z.boolean().optional(),
-    sports_facility: z.number(),
-    condition: propertyConditionEnum.optional(),
-    class: propertyClassEnum.optional(),
-    exposure: propertyExposureEnum.optional(),
-    heating: propertyHeatingEnum,
-    heating_type: propertyHeatingTypeEnum.optional(),
-    heating_fuel: propertyHeatingFuelEnum.optional(),
-    air_conditioning: propertyAirConditioningEnum.optional(),
-    air_conditioning_type: propertyAirConditioningTypeEnum.optional(),
-    energy_class: propertyEnergyClassEnum,
-    // Building
-    construction_year: z.number().optional(),
-    total_floors_building: z.number().optional(),
-    elevators: z.number().optional(),
-    wheelchair_access: z.boolean().optional(),
-    free_sides: propertyFreeSidesEnum.optional(),
-    facing: propertyFacingEnum.optional(),
+    sports_facilities: z.boolean().optional(),
+    // Cadastral Data
+    // Description
+    // Media
   })
   .merge(propertyLocationSchema)
   .merge(propertyCadastralSchema)
