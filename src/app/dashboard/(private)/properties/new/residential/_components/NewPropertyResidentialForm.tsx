@@ -1327,7 +1327,43 @@ function FormStepContent({
       );
     // Description
     case 8:
-      return <div>Description</div>;
+      return (
+        <div className="flex flex-col">
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem className="h-fit">
+                <FormLabel>Title</FormLabel>
+                <Input placeholder="Insert title..." {...field} />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem className="h-fit">
+                <FormLabel>Description</FormLabel>
+                <Input placeholder="Insert description..." {...field} />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="notes"
+            render={({ field }) => (
+              <FormItem className="h-fit">
+                <FormLabel>Notes</FormLabel>
+                <Input placeholder="Insert notes..." {...field} />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+      );
     // Media
     case 9:
       return <div>Media</div>;
