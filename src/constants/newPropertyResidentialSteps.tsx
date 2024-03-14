@@ -2,9 +2,10 @@ import { FormStep, FormStepperStatusEnum } from "@/context/FormStepContext";
 
 export const formSteps: FormStep[] = [
   {
-    id: "subcategory",
-    title: "Subcategory",
-    description: "Select the type of property you want to add",
+    id: "subcategory_and_property_class",
+    title: "Subcategory & Property Class",
+    description:
+      "Select the type of residential property you want to add and the property class",
     status: FormStepperStatusEnum.PENDING,
   },
   {
