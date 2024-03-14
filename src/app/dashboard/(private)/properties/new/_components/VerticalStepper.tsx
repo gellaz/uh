@@ -1,8 +1,9 @@
 "use client";
 
 import { AlertTriangle, Check, ChevronRight } from "lucide-react";
-import React from "react";
 import { FormStepperStatusEnum, useFormStep } from "@/context/FormStepContext";
+
+import React from "react";
 
 export default function VerticalStepper({ className = "" }) {
   const { steps, currentStepIndex, goToStep } = useFormStep();
@@ -28,7 +29,6 @@ export default function VerticalStepper({ className = "" }) {
     <ol className={className}>
       {steps.map((item, index) => {
         const isActive = index === currentStepIndex;
-        console.log("currentStepIndex", currentStepIndex);
 
         return (
           <li
