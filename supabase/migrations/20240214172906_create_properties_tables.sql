@@ -55,6 +55,17 @@ CREATE TYPE property_floor_enum AS enum(
     'mezzanine', -- ammezzato
     'raised floor', -- piano rialzato
     '1', -- 1
+    '2', -- 2
+    '3', -- 3
+    '4', -- 4
+    '5', -- 5
+    '6', -- 6
+    '7', -- 7
+    '8', -- 8
+    '9', -- 9
+    '10', -- 10
+    '11', -- 11
+    '12', -- 12
     '13', -- '13' 
     '14', -- '14' 
     '15', -- '15' 
@@ -468,6 +479,16 @@ CREATE TABLE public.properties_residential(
     CONSTRAINT properties_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
 );
 
+ALTER TABLE public.properties_residential ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Residential properties are viewable by all authenticated users." ON public.properties_residential
+    FOR SELECT
+    TO authenticated
+    USING ( true );
+
+CREATE POLICY "Users can insert their own residential properties." ON public.properties_residential
+    FOR INSERT
+    WITH CHECK (auth.uid() = user_id);
 
 CREATE TYPE building_usage_enum AS enum(
     'Industrial', -- industriale
