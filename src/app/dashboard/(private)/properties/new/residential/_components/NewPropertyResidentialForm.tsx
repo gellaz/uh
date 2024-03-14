@@ -74,13 +74,13 @@ export default function NewPropertyResidentialForm() {
       //
       condition: undefined,
       floor: undefined,
-      multiple_floors: undefined,
+      multiple_floors: false,
       elevators: undefined,
-      wheelchair_access: undefined,
+      wheelchair_access: false,
       free_sides: undefined,
       facing: undefined,
       furnishing: undefined,
-      wall_waredrobes: undefined,
+      wall_waredrobes: false,
       external_fixtures_material: undefined,
       external_fixtures_glass_type: undefined,
       building_construction_year: undefined,
@@ -130,11 +130,12 @@ export default function NewPropertyResidentialForm() {
   });
 
   function onSubmit(values: z.infer<typeof propertyResidentialSchema>) {
+    console.log("submit");
     console.log(values);
   }
 
   return (
-    <div className="col space-y-4 rounded-2xl border p-4 ">
+    <div className="col space-y-4 rounded-2xl border p-4 px-8">
       <Form {...form}>
         <div className="row h-fit justify-between">
           <div className="col">
@@ -143,28 +144,30 @@ export default function NewPropertyResidentialForm() {
           </div>
           <div className="row h-fit w-fit space-x-2 ">
             <Button
-              asChild
               variant={"secondary"}
+              size={"icon"}
               onClick={prevStep}
-              className="h-10 w-10 rounded-full px-[10px]"
+              className="rounded-full px-2"
             >
               <ArrowLeft />
             </Button>
             <Button
-              asChild
               variant={"secondary"}
+              size={"icon"}
               onClick={nextStep}
-              className="h-10 w-10 rounded-full px-[10px]"
+              className="rounded-full px-2"
             >
               <ArrowRight />
             </Button>
           </div>
         </div>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className=" h-full w-full overflow-clip"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="h-full w-full">
           <FormStepContent form={form} currentStepIndex={currentStepIndex} />
+          {currentStepIndex === totalSteps - 1 && (
+            <Button type="submit" className="w-full">
+              Submit
+            </Button>
+          )}
         </form>
       </Form>
     </div>
@@ -263,6 +266,7 @@ function FormStepContent({
                   <FormControl>
                     <Input
                       type="number"
+                      min={0}
                       placeholder="Insert area..."
                       {...field}
                     />
@@ -327,7 +331,6 @@ function FormStepContent({
             />
           </div>
           <Separator className={separatorStyle} />
-
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {/* Terraces */}
             <FormField
@@ -339,6 +342,7 @@ function FormStepContent({
                   <FormControl>
                     <Input
                       type="number"
+                      min={0}
                       placeholder="Insert number of terraces..."
                       {...field}
                     />
@@ -357,6 +361,7 @@ function FormStepContent({
                   <FormControl>
                     <Input
                       type="number"
+                      min={0}
                       placeholder="Insert number of balconies..."
                       {...field}
                     />
@@ -375,6 +380,7 @@ function FormStepContent({
                   <FormControl>
                     <Input
                       type="number"
+                      min={0}
                       placeholder="Insert number of cellars..."
                       {...field}
                     />
@@ -393,6 +399,7 @@ function FormStepContent({
                   <FormControl>
                     <Input
                       type="number"
+                      min={0}
                       placeholder="Insert number of attics..."
                       {...field}
                     />
@@ -411,6 +418,7 @@ function FormStepContent({
                   <FormControl>
                     <Input
                       type="number"
+                      min={0}
                       placeholder="Insert number of basements..."
                       {...field}
                     />
@@ -489,6 +497,7 @@ function FormStepContent({
                   <FormControl>
                     <Input
                       type="number"
+                      min={0}
                       placeholder="Insert number of parking spaces..."
                       {...field}
                     />
@@ -584,7 +593,7 @@ function FormStepContent({
               </FormItem>
             )}
           />
-
+          {/* Elevators */}
           <FormField
             control={form.control}
             name="elevators"
@@ -602,6 +611,7 @@ function FormStepContent({
               </FormItem>
             )}
           />
+          {/* Wheelchair Access */}
           <FormField
             control={form.control}
             name="wheelchair_access"
@@ -618,6 +628,7 @@ function FormStepContent({
               </FormItem>
             )}
           />
+          {/* Free Sides */}
           <FormField
             control={form.control}
             name="free_sides"
@@ -647,6 +658,7 @@ function FormStepContent({
               </FormItem>
             )}
           />
+          {/* Facing */}
           <FormField
             control={form.control}
             name="facing"
@@ -676,6 +688,7 @@ function FormStepContent({
               </FormItem>
             )}
           />
+          {/* Furnishing */}
           <FormField
             control={form.control}
             name="furnishing"
@@ -705,6 +718,7 @@ function FormStepContent({
               </FormItem>
             )}
           />
+          {/* Wall Wardrobes */}
           <FormField
             control={form.control}
             name="wall_waredrobes"
@@ -721,6 +735,7 @@ function FormStepContent({
               </FormItem>
             )}
           />
+          {/* External Fixtures Material */}
           <FormField
             control={form.control}
             name="external_fixtures_material"
@@ -750,6 +765,7 @@ function FormStepContent({
               </FormItem>
             )}
           />
+          {/* External Fixtures Glass Type */}
           <FormField
             control={form.control}
             name="external_fixtures_glass_type"
@@ -1304,6 +1320,7 @@ function FormStepContent({
     case 7:
       return (
         <div className="grid grid-cols-2 gap-2">
+          {/** Cadastral Section */}
           <FormField
             control={form.control}
             name="cadastral_section"
@@ -1317,6 +1334,7 @@ function FormStepContent({
               </FormItem>
             )}
           />
+          {/** Cadastral Sheet */}
           <FormField
             control={form.control}
             name="cadastral_sheet"
@@ -1330,6 +1348,7 @@ function FormStepContent({
               </FormItem>
             )}
           />
+          {/** Cadastral Particle */}
           <FormField
             control={form.control}
             name="cadastral_particle"
@@ -1346,6 +1365,7 @@ function FormStepContent({
               </FormItem>
             )}
           />
+          {/** Cadastral Subaltern */}
           <FormField
             control={form.control}
             name="cadastral_subaltern"
@@ -1362,9 +1382,10 @@ function FormStepContent({
               </FormItem>
             )}
           />
+          {/** Cadastral Category */}
           <FormField
             control={form.control}
-            name="heating"
+            name="cadastral_category"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Cadastral Category</FormLabel>
@@ -1391,6 +1412,7 @@ function FormStepContent({
               </FormItem>
             )}
           />
+          {/** Cadastral Income */}
           <FormField
             control={form.control}
             name="cadastral_income"
@@ -1398,12 +1420,17 @@ function FormStepContent({
               <FormItem>
                 <FormLabel>Cadastral Income</FormLabel>
                 <FormControl>
-                  <Input placeholder="Insert cadastral income..." {...field} />
+                  <Input
+                    type="number"
+                    placeholder="Insert cadastral income..."
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
+          {/** Cadastral Quote */}
           <FormField
             control={form.control}
             name="cadastral_quote"
@@ -1417,6 +1444,7 @@ function FormStepContent({
               </FormItem>
             )}
           />
+          {/** Other Cadastral Information */}
           <FormField
             control={form.control}
             name="cadastral_other"
