@@ -6,15 +6,13 @@ import { createClient } from "@/utils/supabase/server";
 export async function getProperties() {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from("properties")
-    .select("*")
-    .order("inserted_at", { ascending: false });
+    .from("properties_residential")
+    .select("*");
 
   if (error) {
     throw error;
   }
 
-  console.log(data);
   return data;
 }
 
@@ -31,7 +29,6 @@ export async function getPropertyWithId(id: string) {
     return error;
   }
 
-  console.log(data);
   return data;
 }
 
