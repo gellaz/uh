@@ -409,20 +409,20 @@ export const propertyLocationSchema = z.object({
 });
 
 export const propertyCadastralSchema = z.object({
-  cadastral_section: z.string(),
-  cadastral_sheet: z.string(),
-  cadastral_particle: z.string(),
-  cadastral_subaltern: z.string(),
+  cadastral_section: z.string().optional(),
+  cadastral_sheet: z.string().optional(),
+  cadastral_particle: z.string().optional(),
+  cadastral_subaltern: z.string().optional(),
   cadastral_category: propertyCadastralCategoryEnum,
-  cadastral_income: z.number(),
-  cadastral_quote: z.string(),
-  cadastral_other: z.string(),
+  cadastral_income: z.coerce.number().positive(),
+  cadastral_quote: z.string().optional(),
+  cadastral_other: z.string().optional(),
 });
 
 export const propertyDescriptionSchema = z.object({
-  description: z.string(),
-  title: z.string(),
-  notes: z.string(),
+  description: z.string().optional(),
+  title: z.string().optional(),
+  notes: z.string().optional(),
 });
 
 export const propertyResidentialSchema = z
@@ -431,23 +431,23 @@ export const propertyResidentialSchema = z
     subcategory: propertyResidentialSubcategoryEnum,
     property_class: propertyClassEnum.optional(),
     // Composition
-    mq: z.number(),
-    rooms: z.number(),
-    bathrooms: z.number(),
-    kitchens: z.number(),
+    mq: z.coerce.number().int().positive(),
+    rooms: z.coerce.number().int().positive(),
+    bathrooms: z.coerce.number().int().positive(),
+    kitchens: z.coerce.number().int().positive(),
     garden: propertyGardenEnum,
     garage: propertyGarageEnum,
-    parking_spaces: z.number(),
-    terraces: z.number(),
-    balcony: z.number(),
-    cellar: z.number(),
-    attic: z.number(),
-    basement: z.number(),
+    parking_spaces: z.coerce.number().int().positive(),
+    terraces: z.coerce.number().int().positive(),
+    balcony: z.coerce.number().int().positive(),
+    cellar: z.coerce.number().int().positive(),
+    attic: z.coerce.number().int().positive(),
+    basement: z.coerce.number().int().positive(),
     // Features
     condition: propertyConditionEnum.optional(),
     floor: propertyFloorEnum,
     multiple_floors: z.boolean(),
-    elevators: z.number().optional(),
+    elevators: z.coerce.number().int().positive().optional(),
     wheelchair_access: z.boolean().optional(),
     free_sides: propertyFreeSidesEnum.optional(),
     facing: propertyFacingEnum.optional(),
@@ -456,8 +456,8 @@ export const propertyResidentialSchema = z
     external_fixtures_material: propertyExternalFixturesMaterialEnum.optional(),
     external_fixtures_glass_type:
       propertyExternalFixturesGlassTypeEnum.optional(),
-    building_construction_year: z.number().optional(),
-    building_total_floors: z.number().optional(),
+    building_construction_year: z.coerce.number().int().positive().optional(),
+    building_total_floors: z.coerce.number().int().positive().optional(),
     //Location
     // Heating & Air Conditioning
     heating: propertyHeatingEnum,
