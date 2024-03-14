@@ -277,10 +277,9 @@ export const propertyAirConditioningEnum = z.enum([
 ]);
 
 export const propertyAirConditioningTypeEnum = z.enum([
-  "Autonomous",
-  "Centralized",
-  "Air conditioning system preparation",
-  "None",
+  "Cold only",
+  "Hot only",
+  "Cold/Hot",
 ]);
 
 export const propertyEnergyClassEnum = z.enum([

@@ -19,8 +19,10 @@ import {
 import { SelectGroup, SelectLabel } from "@radix-ui/react-select";
 import { UseFormReturn, useForm } from "react-hook-form";
 import {
+  propertyAirConditioningEnum,
   propertyAirConditioningTypeEnum,
   propertyCadastralCategoryEnum,
+  propertyClassEnum,
   propertyConciergeServiceEnum,
   propertyConditionEnum,
   propertyEnergyClassEnum,
@@ -46,6 +48,7 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@radix-ui/react-separator";
 import { Switch } from "@/components/ui/switch";
 import TabGroup from "@/components/TabGroup";
+import { Textarea } from "@/components/ui/textarea";
 import { useFormStep } from "@/context/FormStepContext";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -179,72 +182,94 @@ function FormStepContent({
   form: UseFormReturn<z.infer<typeof propertyResidentialSchema>>;
   currentStepIndex: number;
 }) {
-  const separatorStyle = "h-[1px] bg-slate-200";
+  const separatorStyle = "h-[1px] bg-slate-200 my-4 w-full";
   const rowStyle = "row space-x-6 items-baseline justify-between";
 
   switch (currentStepIndex) {
-    // Subcategory
+    // Subcategory & Property Class
     case 0:
-      const cardStyle =
-        "row p-2 items-center justify-start space-x-2 cursor-pointer transition-all duration-150 ease-in-out shadow-none ";
-      const emojiDivStyle =
-        "flex items-center justify-center w-10 h-10 rounded-full ";
-      const emoji = () => {
-        const array = Object.values(propertyResidentialSubcategoryEnum.Values);
-        const emojiArray = Array(array.length).fill("🏠");
-        return emojiArray;
-      };
-      // SUBCATEGORY
-      const selection = 0;
-
       return (
-        <div className="h-full space-y-4 ">
-          <Input
-            placeholder="Search here for sub category..."
-            className="text-sm"
-          />
-          <div className="grid grid-cols-3 gap-2 ">
-            {Object.values(propertyResidentialSubcategoryEnum.Values)
-              .sort()
-              .map((item, index) => (
-                <Card
-                  key={item}
-                  // onClick={() => categoryCardTapped(index)}
-                  className={
-                    cardStyle +
-                    (selection === index
-                      ? "bg-orange-500 text-white"
-                      : "bg-white  hover:bg-orange-100")
-                  }
+        <div className="flex flex-col space-y-6">
+          {/** Subcategory */}
+          <FormField
+            control={form.control}
+            name="subcategory"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Subcategory</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
                 >
-                  <div
-                    className={
-                      emojiDivStyle +
-                      (selection == index ? "bg-orange-300" : "bg-orange-100")
-                    }
-                  >
-                    <h5>{emoji()[index]}</h5>
-                  </div>
-                  <p className="text-pretty">{item}</p>
-                </Card>
-              ))}
-          </div>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select subcategory" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {Object.values(
+                      propertyResidentialSubcategoryEnum.Values
+                    ).map((item, index) => (
+                      <SelectItem key={index} value={item}>
+                        {item}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {/** Property Class */}
+          <FormField
+            control={form.control}
+            name="property_class"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Property Class</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select property class" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {Object.values(propertyClassEnum.Values).map(
+                      (item, index) => (
+                        <SelectItem key={index} value={item}>
+                          {item}
+                        </SelectItem>
+                      )
+                    )}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
       );
     // Composition
     case 1:
       return (
         <div className="col space-y-6">
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {/* Mq */}
             <FormField
               control={form.control}
               name="mq"
               render={({ field }) => (
                 <FormItem className="flex-1">
-                  <FormLabel>Area (mq)</FormLabel>
+                  <FormLabel>Area (mq) (*)</FormLabel>
                   <FormControl>
-                    <Input placeholder="Insert area" {...field} />
+                    <Input
+                      type="number"
+                      placeholder="Insert area..."
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -306,56 +331,8 @@ function FormStepContent({
             />
           </div>
           <Separator className={separatorStyle} />
-          {/** Garden */}
-          <FormField
-            control={form.control}
-            name="garden"
-            render={({ field }) => (
-              <FormItem className="row h-fit w-full items-baseline justify-between space-x-4">
-                <FormLabel>Garden</FormLabel>
-                <TabGroup
-                  tabs={Object.values(propertyGardenEnum.Values)}
-                  role={"garden"}
-                />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Separator className={separatorStyle} />
-          {/** Garage */}
-          <FormField
-            control={form.control}
-            name="garage"
-            render={({ field }) => (
-              <FormItem className="row h-fit w-full items-baseline justify-between space-x-4">
-                <FormLabel>Garage</FormLabel>
-                <TabGroup
-                  tabs={Object.values(propertyGarageEnum.Values)}
-                  role={"garage"}
-                />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Separator className={separatorStyle} />
-          {/** Parking spaces */}
-          <FormField
-            control={form.control}
-            name="parking_spaces"
-            render={({ field }) => (
-              <FormItem className="row h-fit w-full items-baseline justify-between space-x-4">
-                <FormLabel>Parking space</FormLabel>
-                <TabGroup
-                  tabs={Object.values(
-                    propertyParkingSpaceSubcategoryEnum.Values
-                  )}
-                  role={""}
-                />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="grid grid-cols-3 gap-4">
+
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {/* Terraces */}
             <FormField
               control={form.control}
@@ -365,6 +342,7 @@ function FormStepContent({
                   <FormLabel>Terraces</FormLabel>
                   <FormControl>
                     <Input
+                      type="number"
                       placeholder="Insert number of terraces..."
                       {...field}
                     />
@@ -382,8 +360,8 @@ function FormStepContent({
                   <FormLabel>Balcony</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Insert number of balconies..."
                       type="number"
+                      placeholder="Insert number of balconies..."
                       {...field}
                     />
                   </FormControl>
@@ -397,11 +375,11 @@ function FormStepContent({
               name="cellar"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Cantina</FormLabel>
+                  <FormLabel>Cellar</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Insert number of cellars..."
                       type="number"
+                      placeholder="Insert number of cellars..."
                       {...field}
                     />
                   </FormControl>
@@ -418,8 +396,8 @@ function FormStepContent({
                   <FormLabel>Attic</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Insert number of attics..."
                       type="number"
+                      placeholder="Insert number of attics..."
                       {...field}
                     />
                   </FormControl>
@@ -436,8 +414,86 @@ function FormStepContent({
                   <FormLabel>Basements</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Insert number of basements..."
                       type="number"
+                      placeholder="Insert number of basements..."
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/** Garden */}
+            <FormField
+              control={form.control}
+              name="garden"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Garden</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select property garden..." />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {Object.values(propertyGardenEnum.Values).map(
+                        (item, index) => (
+                          <SelectItem key={index} value={item}>
+                            {item}
+                          </SelectItem>
+                        )
+                      )}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/** Garage */}
+            <FormField
+              control={form.control}
+              name="garage"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Garage</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select property garage..." />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {Object.values(propertyGarageEnum.Values).map(
+                        (item, index) => (
+                          <SelectItem key={index} value={item}>
+                            {item}
+                          </SelectItem>
+                        )
+                      )}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/** Parking spaces */}
+            <FormField
+              control={form.control}
+              name="parking_spaces"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Parking Spaces</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="Insert number of parking spaces..."
                       {...field}
                     />
                   </FormControl>
@@ -451,36 +507,41 @@ function FormStepContent({
     // Features
     case 2:
       return (
-        <div className="md: grid gap-2 lg:grid-cols-2">
-          <FormField
-            control={form.control}
-            name="condition"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Condition</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select property condition..." />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {Object.values(propertyConditionEnum.Values).map(
-                      (item, index) => (
-                        <SelectItem key={index} value={item}>
-                          {item}
-                        </SelectItem>
-                      )
-                    )}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        <div className="grid grid-cols-2 gap-2">
+          {/* Condition */}
+          <div className="col-span-2">
+            <FormField
+              control={form.control}
+              name="condition"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Condition</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select property condition..." />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {Object.values(propertyConditionEnum.Values).map(
+                        (item, index) => (
+                          <SelectItem key={index} value={item}>
+                            {item}
+                          </SelectItem>
+                        )
+                      )}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          {/* Floor */}
           <FormField
             control={form.control}
             name="floor"
@@ -510,6 +571,7 @@ function FormStepContent({
               </FormItem>
             )}
           />
+          {/* Multiple Floors */}
           <FormField
             control={form.control}
             name="multiple_floors"
@@ -526,6 +588,7 @@ function FormStepContent({
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="elevators"
@@ -763,13 +826,13 @@ function FormStepContent({
                 </FormItem>
               )}
             />
-            {/* ZIPCODE */}
+            {/* ZIP Code */}
             <FormField
               control={form.control}
               name="zip_code"
               render={({ field }) => (
                 <FormItem className="h-fit">
-                  <FormLabel>Zipcode</FormLabel>
+                  <FormLabel>ZIP Code</FormLabel>
                   <Input placeholder="Zipcode" {...field} />
                   <FormMessage />
                 </FormItem>
@@ -813,14 +876,14 @@ function FormStepContent({
     // Heating & Air Conditioning
     case 4:
       return (
-        <div className="col space-y-6">
+        <div className="flex flex-col space-y-6">
           {/** Heating */}
           <FormField
             control={form.control}
             name="heating"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Heating Type</FormLabel>
+                <FormLabel>Heating</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
@@ -844,7 +907,7 @@ function FormStepContent({
               </FormItem>
             )}
           />
-          {/** Heating fuel */}
+          {/** Heating Fuel */}
           <FormField
             control={form.control}
             name="heating_fuel"
@@ -874,41 +937,92 @@ function FormStepContent({
               </FormItem>
             )}
           />
-          {/** Heating type */}
+          {/** Heating Type */}
           <FormField
             control={form.control}
             name="heating_type"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Heating type</FormLabel>
-                <div className="grid grid-cols-6 gap-4">
-                  {Object.values(propertyHeatingTypeEnum.Values)
-                    .sort()
-                    .map((item) =>
-                      CardOption({
-                        item,
-                        color: "bg-orange-100",
-                        icon: <Zap className="text-primary" size={32} />,
-                      })
+                <FormLabel>Heating Type</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select heating type" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {Object.values(propertyHeatingTypeEnum.Values).map(
+                      (item, index) => (
+                        <SelectItem key={index} value={item}>
+                          {item}
+                        </SelectItem>
+                      )
                     )}
-                </div>
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
           />
-          {/** Air conditioning */}
+          {/** Air Conditioning */}
           <FormField
             control={form.control}
             name="air_conditioning"
             render={({ field }) => (
-              <FormItem className={rowStyle}>
-                <FormLabel>Air conditioning</FormLabel>
-                <FormControl>
-                  <TabGroup
-                    tabs={Object.values(propertyAirConditioningTypeEnum.Values)}
-                    role={"garden"}
-                  />
-                </FormControl>
+              <FormItem>
+                <FormLabel>Air Condiitioning</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select air conditioning" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {Object.values(propertyAirConditioningEnum.Values).map(
+                      (item, index) => (
+                        <SelectItem key={index} value={item}>
+                          {item}
+                        </SelectItem>
+                      )
+                    )}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {/** Air Conditioning Type */}
+          <FormField
+            control={form.control}
+            name="air_conditioning"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Air Condiitioning Type</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select air conditioning type" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {Object.values(propertyAirConditioningTypeEnum.Values).map(
+                      (item, index) => (
+                        <SelectItem key={index} value={item}>
+                          {item}
+                        </SelectItem>
+                      )
+                    )}
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
@@ -1328,7 +1442,7 @@ function FormStepContent({
     // Description
     case 8:
       return (
-        <div className="flex flex-col">
+        <div className="flex flex-col space-y-4">
           <FormField
             control={form.control}
             name="title"
@@ -1346,7 +1460,11 @@ function FormStepContent({
             render={({ field }) => (
               <FormItem className="h-fit">
                 <FormLabel>Description</FormLabel>
-                <Input placeholder="Insert description..." {...field} />
+                <Textarea
+                  placeholder="Insert description..."
+                  className="resize-none"
+                  {...field}
+                />
                 <FormMessage />
               </FormItem>
             )}
@@ -1357,7 +1475,11 @@ function FormStepContent({
             render={({ field }) => (
               <FormItem className="h-fit">
                 <FormLabel>Notes</FormLabel>
-                <Input placeholder="Insert notes..." {...field} />
+                <Textarea
+                  placeholder="Insert notes..."
+                  className="resize-none"
+                  {...field}
+                />
                 <FormMessage />
               </FormItem>
             )}
