@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, LocateFixed, Zap } from "lucide-react";
+import { ArrowLeft, ArrowRight, LocateFixed } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -35,19 +35,15 @@ import {
   propertyHeatingEnum,
   propertyHeatingFuelEnum,
   propertyHeatingTypeEnum,
-  propertyParkingSpaceSubcategoryEnum,
   propertyResidentialSchema,
   propertyResidentialSubcategoryEnum,
   propertyTvSystemEnum,
 } from "@/lib/validation";
 
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import CardOption from "@/components/CardOption";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@radix-ui/react-separator";
 import { Switch } from "@/components/ui/switch";
-import TabGroup from "@/components/TabGroup";
 import { Textarea } from "@/components/ui/textarea";
 import { useFormStep } from "@/context/FormStepContext";
 import { z } from "zod";
