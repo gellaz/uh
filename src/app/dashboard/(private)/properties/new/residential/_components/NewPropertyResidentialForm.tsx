@@ -28,6 +28,8 @@ import {
   propertyConditionEnum,
   propertyCountryEnum,
   propertyEnergyClassEnum,
+  propertyExternalFixturesGlassTypeEnum,
+  propertyExternalFixturesMaterialEnum,
   propertyFacingEnum,
   propertyFloorEnum,
   propertyFreeSidesEnum,
@@ -47,6 +49,7 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@radix-ui/react-separator";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import { createPropertyResidential } from "@/actions/property";
 import { useFormStep } from "@/context/FormStepContext";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -133,6 +136,7 @@ export default function NewPropertyResidentialForm() {
 
   function onSubmit(values: z.infer<typeof propertyResidentialSchema>) {
     console.log(values);
+    createPropertyResidential(values);
   }
 
   return (
@@ -765,13 +769,13 @@ function FormStepContent({
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {Object.values(propertyFurnishingEnum.Values).map(
-                      (item, index) => (
-                        <SelectItem key={index} value={item}>
-                          {item}
-                        </SelectItem>
-                      )
-                    )}
+                    {Object.values(
+                      propertyExternalFixturesMaterialEnum.Values
+                    ).map((item, index) => (
+                      <SelectItem key={index} value={item}>
+                        {item}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -795,13 +799,13 @@ function FormStepContent({
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {Object.values(propertyFurnishingEnum.Values).map(
-                      (item, index) => (
-                        <SelectItem key={index} value={item}>
-                          {item}
-                        </SelectItem>
-                      )
-                    )}
+                    {Object.values(
+                      propertyExternalFixturesGlassTypeEnum.Values
+                    ).map((item, index) => (
+                      <SelectItem key={index} value={item}>
+                        {item}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
                 <FormMessage />
