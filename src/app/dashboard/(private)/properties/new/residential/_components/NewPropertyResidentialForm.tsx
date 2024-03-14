@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, LocateFixed } from "lucide-react";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -25,6 +26,7 @@ import {
   propertyClassEnum,
   propertyConciergeServiceEnum,
   propertyConditionEnum,
+  propertyCountryEnum,
   propertyEnergyClassEnum,
   propertyFacingEnum,
   propertyFloorEnum,
@@ -58,7 +60,7 @@ export default function NewPropertyResidentialForm() {
     defaultValues: {
       subcategory: undefined,
       property_class: undefined,
-      //
+      // Composition
       mq: undefined,
       rooms: undefined,
       bathrooms: undefined,
@@ -71,7 +73,7 @@ export default function NewPropertyResidentialForm() {
       cellar: undefined,
       attic: undefined,
       basement: undefined,
-      //
+      // Features
       condition: undefined,
       floor: undefined,
       multiple_floors: false,
@@ -85,7 +87,7 @@ export default function NewPropertyResidentialForm() {
       external_fixtures_glass_type: undefined,
       building_construction_year: undefined,
       building_total_floors: undefined,
-      //
+      // Location
       street_name: undefined,
       street_number: undefined,
       city: undefined,
@@ -93,15 +95,15 @@ export default function NewPropertyResidentialForm() {
       province: undefined,
       region: undefined,
       country: undefined,
-      //
+      // Heating & Air Conditioning
       heating: undefined,
       heating_type: undefined,
       heating_fuel: undefined,
       air_conditioning: undefined,
       air_conditioning_type: undefined,
-      //
+      // Energy Certification
       energy_class: undefined,
-      //
+      // Additional Features
       tv_system: undefined,
       concierge_service: undefined,
       reinforced_door: undefined,
@@ -113,7 +115,7 @@ export default function NewPropertyResidentialForm() {
       hot_tub: undefined,
       pool: undefined,
       sports_facilities: undefined,
-      //
+      // Cadastral Data
       cadastral_section: undefined,
       cadastral_sheet: undefined,
       cadastral_particle: undefined,
@@ -122,7 +124,7 @@ export default function NewPropertyResidentialForm() {
       cadastral_income: undefined,
       cadastral_quote: undefined,
       cadastral_other: undefined,
-      //
+      // Description
       description: undefined,
       title: undefined,
       notes: undefined,
@@ -130,7 +132,6 @@ export default function NewPropertyResidentialForm() {
   });
 
   function onSubmit(values: z.infer<typeof propertyResidentialSchema>) {
-    console.log("submit");
     console.log(values);
   }
 
@@ -195,7 +196,9 @@ function FormStepContent({
             name="subcategory"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Subcategory</FormLabel>
+                <FormLabel>
+                  Subcategory<sup>*</sup>
+                </FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
@@ -254,15 +257,17 @@ function FormStepContent({
     // Composition
     case 1:
       return (
-        <div className="col space-y-6">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="flex flex-col space-y-6">
+          <div className="grid gap-x-8 gap-y-2 lg:grid-cols-2">
             {/* Mq */}
             <FormField
               control={form.control}
               name="mq"
               render={({ field }) => (
-                <FormItem className="flex-1">
-                  <FormLabel>Area (mq) (*)</FormLabel>
+                <FormItem>
+                  <FormLabel>
+                    Area<sup>*</sup>
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="number"
@@ -280,11 +285,14 @@ function FormStepContent({
               control={form.control}
               name="rooms"
               render={({ field }) => (
-                <FormItem className="flex-1">
-                  <FormLabel>Rooms</FormLabel>
+                <FormItem>
+                  <FormLabel>
+                    Rooms<sup>*</sup>
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="number"
+                      min={0}
                       placeholder="Number of rooms"
                       {...field}
                     />
@@ -298,11 +306,14 @@ function FormStepContent({
               control={form.control}
               name="bathrooms"
               render={({ field }) => (
-                <FormItem className="flex-1">
-                  <FormLabel>Bathrooms</FormLabel>
+                <FormItem>
+                  <FormLabel>
+                    Bathrooms<sup>*</sup>
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="number"
+                      min={0}
                       placeholder="Number of bathrooms"
                       {...field}
                     />
@@ -316,11 +327,14 @@ function FormStepContent({
               control={form.control}
               name="kitchens"
               render={({ field }) => (
-                <FormItem className="flex-1">
-                  <FormLabel>Kitchens</FormLabel>
+                <FormItem>
+                  <FormLabel>
+                    Kitchens<sup>*</sup>
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="number"
+                      min={0}
                       placeholder="Number of kitchens"
                       {...field}
                     />
@@ -331,7 +345,7 @@ function FormStepContent({
             />
           </div>
           <Separator className={separatorStyle} />
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 lg:grid-cols-2">
             {/* Terraces */}
             <FormField
               control={form.control}
@@ -545,7 +559,6 @@ function FormStepContent({
               )}
             />
           </div>
-
           {/* Floor */}
           <FormField
             control={form.control}
@@ -795,6 +808,44 @@ function FormStepContent({
               </FormItem>
             )}
           />
+          {/* Building Construction Year */}
+          <FormField
+            control={form.control}
+            name="building_construction_year"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Building Construction Year</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    min={0}
+                    placeholder="Insert building construction year..."
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {/* Building Total Floors */}
+          <FormField
+            control={form.control}
+            name="building_total_floors"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Building Total Floors</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    min={0}
+                    placeholder="Insert building total floors..."
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
       );
     // Location
@@ -870,6 +921,36 @@ function FormStepContent({
                 <FormItem className="h-fit">
                   <FormLabel>Region</FormLabel>
                   <Input placeholder="Region" {...field} />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* COUNTRY */}
+            <FormField
+              control={form.control}
+              name="country"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Country</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select country..." />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {Object.values(propertyCountryEnum.Values).map(
+                        (item, index) => (
+                          <SelectItem key={index} value={item}>
+                            {item}
+                          </SelectItem>
+                        )
+                      )}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}

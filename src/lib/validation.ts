@@ -120,6 +120,17 @@ export const propertyFloorEnum = z.enum([
   "mezzanine",
   "raised floor",
   "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11",
+  "12",
   "13",
   "14",
   "15",
@@ -170,23 +181,24 @@ export const propertyFloorEnum = z.enum([
   "60",
 ]);
 
-export const propertyGardenEnum = z.enum([
-  "None",
-  "Shared",
-  "Private",
-  "Shared and Private",
-]);
+export const propertyGardenEnum = z.enum(
+  ["None", "Shared", "Private", "Shared and Private"],
+  { required_error: "Select the garden type" }
+);
 
-export const propertyGarageEnum = z.enum([
-  "None",
-  "Single",
-  "Double",
-  "Triple",
-  "Quadruple",
-  "Box",
-  "Carport",
-  "Parking space",
-]);
+export const propertyGarageEnum = z.enum(
+  [
+    "None",
+    "Single",
+    "Double",
+    "Triple",
+    "Quadruple",
+    "Box",
+    "Carport",
+    "Parking space",
+  ],
+  { required_error: "Select the garage type" }
+);
 
 export const propertyFurnishingEnum = z.enum([
   "Furnished",
@@ -398,7 +410,104 @@ export const propertyParkingSpaceSubcategoryEnum = z.enum([
   "Uncovered (external)",
 ]);
 
-export const propertyLocationSchema = z.object({
+/**
+ * Property Residential schema
+ */
+export const propertyResidentialSchema = z.object({
+  // Subcategory & Property Class
+  subcategory: propertyResidentialSubcategoryEnum,
+  property_class: propertyClassEnum.optional(),
+  // Composition
+  mq: z.coerce
+    .number({
+      required_error: "Area is required",
+      invalid_type_error: "Insert a valid area",
+    })
+    .int()
+    .min(1, { message: "Area must be at least 1 square meter" })
+    .nonnegative(),
+  rooms: z.coerce
+    .number({
+      required_error: "Number of rooms required",
+      invalid_type_error: "Insert a valid number of rooms",
+    })
+    .int()
+    .min(1, { message: "The property must have at least 1 room" })
+    .nonnegative(),
+  bathrooms: z.coerce
+    .number({
+      required_error: "Number of bathrooms required",
+      invalid_type_error: "Insert a valid number of bathrooms",
+    })
+    .int()
+    .nonnegative(),
+  kitchens: z.coerce
+    .number({
+      required_error: "Number of kitchens required",
+      invalid_type_error: "Insert a valid number of kitchens",
+    })
+    .int()
+    .nonnegative(),
+  garden: propertyGardenEnum,
+  garage: propertyGarageEnum,
+  parking_spaces: z.coerce
+    .number({
+      required_error: "Number of parking spaces required",
+      invalid_type_error: "Insert a valid number of parking spaces",
+    })
+    .int()
+    .nonnegative(),
+  terraces: z.coerce
+    .number({
+      required_error: "Number of terraces required",
+      invalid_type_error: "Insert a valid number of terraces",
+    })
+    .int()
+    .nonnegative(),
+  balcony: z.coerce
+    .number({
+      required_error: "Number of balconies required",
+      invalid_type_error: "Insert a valid number of balconies",
+    })
+    .int()
+    .nonnegative(),
+  cellar: z.coerce
+    .number({
+      required_error: "Number of cellars required",
+      invalid_type_error: "Insert a valid number of cellars",
+    })
+    .int()
+    .nonnegative(),
+  attic: z.coerce
+    .number({
+      required_error: "Number of attics required",
+      invalid_type_error: "Insert a valid number of attics",
+    })
+    .int()
+    .nonnegative(),
+  basement: z.coerce
+    .number({
+      required_error: "Number of basements required",
+      invalid_type_error: "Insert a valid number of basements",
+    })
+    .int()
+    .nonnegative(),
+  // Features
+  condition: propertyConditionEnum.optional(),
+  floor: propertyFloorEnum,
+  multiple_floors: z.boolean(),
+  elevators: z.coerce.number().int().nonnegative().optional(),
+  wheelchair_access: z.boolean().optional(),
+  free_sides: propertyFreeSidesEnum.optional(),
+  facing: propertyFacingEnum.optional(),
+  furnishing: propertyFurnishingEnum.optional(),
+  wall_waredrobes: z.boolean().optional(),
+  external_fixtures_material: propertyExternalFixturesMaterialEnum.optional(),
+  external_fixtures_glass_type:
+    propertyExternalFixturesGlassTypeEnum.optional(),
+  building_construction_year: z.coerce.number().int().nonnegative().optional(),
+  building_total_floors: z.coerce.number().int().nonnegative().optional(),
+  //Location
   street_name: z.string(),
   street_number: z.string(),
   city: z.string(),
@@ -406,86 +515,41 @@ export const propertyLocationSchema = z.object({
   province: z.string(),
   region: z.string(),
   country: propertyCountryEnum,
-});
-
-export const propertyCadastralSchema = z.object({
+  // Heating & Air Conditioning
+  heating: propertyHeatingEnum,
+  heating_type: propertyHeatingTypeEnum.optional(),
+  heating_fuel: propertyHeatingFuelEnum.optional(),
+  air_conditioning: propertyAirConditioningEnum.optional(),
+  air_conditioning_type: propertyAirConditioningTypeEnum.optional(),
+  // Energy Certification
+  energy_class: propertyEnergyClassEnum,
+  // Additional Features
+  tv_system: propertyTvSystemEnum.optional(),
+  concierge_service: propertyConciergeServiceEnum.optional(),
+  reinforced_door: z.boolean().optional(),
+  alarm: z.boolean().optional(),
+  electric_gate: z.boolean().optional(),
+  video_intercom: z.boolean().optional(),
+  optic_fiber: z.boolean().optional(),
+  chimney: z.boolean().optional(),
+  hot_tub: z.boolean().optional(),
+  pool: z.boolean().optional(),
+  sports_facilities: z.boolean().optional(),
+  // Cadastral Data
   cadastral_section: z.string().optional(),
   cadastral_sheet: z.string().optional(),
   cadastral_particle: z.string().optional(),
   cadastral_subaltern: z.string().optional(),
-  cadastral_category: propertyCadastralCategoryEnum,
-  cadastral_income: z.coerce.number().positive(),
+  cadastral_category: propertyCadastralCategoryEnum.optional(),
+  cadastral_income: z.coerce.number().int().nonnegative(),
   cadastral_quote: z.string().optional(),
   cadastral_other: z.string().optional(),
-});
-
-export const propertyDescriptionSchema = z.object({
+  // Description
   description: z.string().optional(),
   title: z.string().optional(),
   notes: z.string().optional(),
+  // Media
 });
-
-export const propertyResidentialSchema = z
-  .object({
-    // Subcategory & Property Class
-    subcategory: propertyResidentialSubcategoryEnum,
-    property_class: propertyClassEnum.optional(),
-    // Composition
-    mq: z.coerce.number().int().positive(),
-    rooms: z.coerce.number().int().positive(),
-    bathrooms: z.coerce.number().int().positive(),
-    kitchens: z.coerce.number().int().positive(),
-    garden: propertyGardenEnum,
-    garage: propertyGarageEnum,
-    parking_spaces: z.coerce.number().int().positive(),
-    terraces: z.coerce.number().int().positive(),
-    balcony: z.coerce.number().int().positive(),
-    cellar: z.coerce.number().int().positive(),
-    attic: z.coerce.number().int().positive(),
-    basement: z.coerce.number().int().positive(),
-    // Features
-    condition: propertyConditionEnum.optional(),
-    floor: propertyFloorEnum,
-    multiple_floors: z.boolean(),
-    elevators: z.coerce.number().int().positive().optional(),
-    wheelchair_access: z.boolean().optional(),
-    free_sides: propertyFreeSidesEnum.optional(),
-    facing: propertyFacingEnum.optional(),
-    furnishing: propertyFurnishingEnum.optional(),
-    wall_waredrobes: z.boolean().optional(),
-    external_fixtures_material: propertyExternalFixturesMaterialEnum.optional(),
-    external_fixtures_glass_type:
-      propertyExternalFixturesGlassTypeEnum.optional(),
-    building_construction_year: z.coerce.number().int().positive().optional(),
-    building_total_floors: z.coerce.number().int().positive().optional(),
-    //Location
-    // Heating & Air Conditioning
-    heating: propertyHeatingEnum,
-    heating_type: propertyHeatingTypeEnum.optional(),
-    heating_fuel: propertyHeatingFuelEnum.optional(),
-    air_conditioning: propertyAirConditioningEnum.optional(),
-    air_conditioning_type: propertyAirConditioningTypeEnum.optional(),
-    // Energy Certification
-    energy_class: propertyEnergyClassEnum,
-    // Additional Features
-    tv_system: propertyTvSystemEnum.optional(),
-    concierge_service: propertyConciergeServiceEnum.optional(),
-    reinforced_door: z.boolean().optional(),
-    alarm: z.boolean().optional(),
-    electric_gate: z.boolean().optional(),
-    video_intercom: z.boolean().optional(),
-    optic_fiber: z.boolean().optional(),
-    chimney: z.boolean().optional(),
-    hot_tub: z.boolean().optional(),
-    pool: z.boolean().optional(),
-    sports_facilities: z.boolean().optional(),
-    // Cadastral Data
-    // Description
-    // Media
-  })
-  .merge(propertyLocationSchema)
-  .merge(propertyCadastralSchema)
-  .merge(propertyDescriptionSchema);
 
 export type PropertyResidentialInput = z.input<
   typeof propertyResidentialSchema
