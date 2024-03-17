@@ -93,22 +93,6 @@
   main {
     @apply bg-background;
   }
-
-  .col {
-    @apply flex h-full w-full flex-col;
-  }
-
-  .row {
-    @apply flex h-full w-full flex-row;
-  }
-
-  .grid-col {
-    @apply grid grid-flow-row gap-2;
-  }
-
-  .outlined {
-    @apply rounded-md border hover:border-black;
-  }
 }
 
 .rdp-vhidden {

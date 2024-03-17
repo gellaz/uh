@@ -8,7 +8,7 @@ import React from "react";
 export default function VerticalStepper({ className = "" }) {
   const { steps, currentStepIndex, goToStep } = useFormStep();
   const liStyle =
-    "row px-2 py-4 h-fit justify-between items-center hover:bg-orange-50 hover:cursor-pointer border-b-[1px] ";
+    "flex h-full w-full flex-row px-2 py-4 h-fit justify-between items-center hover:bg-orange-50 hover:cursor-pointer border-b-[1px] ";
   const liStyleActive = "bg-white hover:bg-orange-50";
   const getStatusColor = (status: FormStepperStatusEnum) => {
     switch (status) {
@@ -39,7 +39,7 @@ export default function VerticalStepper({ className = "" }) {
             <p className={isActive ? "text-primary" : "text-black"}>
               {item.title}
             </p>
-            <div className="row w-fit space-x-1">
+            <div className="flex h-full w-fit flex-row space-x-1">
               {getStatusColor(item.status)}
             </div>
           </li>

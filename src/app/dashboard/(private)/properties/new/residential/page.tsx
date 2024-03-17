@@ -7,7 +7,7 @@ import { formSteps } from "@/constants/newPropertyResidentialSteps";
 
 export default function NewPropertyResidentialPage() {
   return (
-    <div className="col space-y-4">
+    <div className="flex h-full w-full flex-col space-y-4">
       <div>
         <h4>New residential property</h4>
         <p className="text-pretty">
@@ -15,9 +15,9 @@ export default function NewPropertyResidentialPage() {
         </p>
       </div>
       <FormStepProvider steps={formSteps}>
-        <div className="row h-full w-full space-x-6">
+        <div className="flex h-full w-full flex-row space-x-6">
           {/* LEFT SIDE */}
-          <VerticalStepper className="col w-1/3" />
+          <VerticalStepper className="flex h-full w-1/3 flex-col" />
           {/* RIGHT SIDE */}
           <NewPropertyResidentialForm />
         </div>

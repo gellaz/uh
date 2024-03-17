@@ -140,14 +140,14 @@ export default function NewPropertyResidentialForm() {
   }
 
   return (
-    <div className="col space-y-4 rounded-2xl border p-4 px-8">
+    <div className="flex h-full w-full flex-col space-y-4 rounded-2xl border p-4 px-8">
       <Form {...form}>
-        <div className="row h-fit justify-between">
-          <div className="col">
+        <div className="flex h-full w-full flex-row justify-between">
+          <div className="flex h-full w-full flex-col">
             <h6 className="font-medium">{currentStep.title}</h6>
             <p className="font-light">{currentStep.description}</p>
           </div>
-          <div className="row h-fit w-fit space-x-2 ">
+          <div className="flex h-full w-full flex-row space-x-2 ">
             <Button
               variant={"secondary"}
               size={"icon"}
@@ -187,7 +187,8 @@ function FormStepContent({
   currentStepIndex: number;
 }) {
   const separatorStyle = "h-[1px] bg-slate-200 my-4 w-full";
-  const rowStyle = "row space-x-6 items-baseline justify-between";
+  const rowStyle =
+    "flex h-full w-full flex-row space-x-6 items-baseline justify-between";
 
   switch (currentStepIndex) {
     // Subcategory & Property Class
@@ -855,7 +856,7 @@ function FormStepContent({
     // Location
     case 3:
       return (
-        <div className="row space-x-4">
+        <div className="flex h-full w-full flex-row space-x-4">
           <div className="w-full rounded-lg bg-slate-100" />
           <div className="col space-y-4">
             <FormField
@@ -961,7 +962,7 @@ function FormStepContent({
             />
 
             <Button asChild variant={"outline"}>
-              <div className="row space-x-2">
+              <div className="flex h-full w-full flex-row space-x-2">
                 <LocateFixed size={16} />
                 <p>Use your location</p>
               </div>

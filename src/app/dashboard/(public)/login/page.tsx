@@ -39,7 +39,7 @@ export default function LoginPage() {
         {/* Right Panel */}
         <div className="flex flex-1 flex-col justify-center p-4 sm:p-8 md:p-16 lg:p-24">
           <div className="mx-auto w-full max-w-md rounded-lg border border-gray-300 bg-white p-8 shadow-lg">
-            <div className="col mb-6 h-fit">
+            <div className="mb-6 flex h-fit w-full flex-col">
               <h2>Welcome back</h2>
               <p>Please enter your credentials to log in</p>
             </div>

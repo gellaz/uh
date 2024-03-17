@@ -101,7 +101,7 @@ export default function NewPropertyCategoryDialog() {
               <Card
                 key={index}
                 onClick={() => categoryCardTapped(index)}
-                className={`row cursor-pointer items-center justify-start space-x-2 px-4 py-2 transition-all duration-150 ease-in-out ${
+                className={`flex h-full w-full cursor-pointer flex-row items-center justify-start space-x-2 px-4 py-2 transition-all duration-150 ease-in-out ${
                   selectedItemIndex == index
                     ? "bg-primary text-white"
                     : "hover:bg-primary/50"

@@ -43,7 +43,7 @@ export default function RegisterPage() {
           <div className="flex flex-1 flex-col justify-center">
             <div className="mx-auto flex w-full max-w-md flex-col items-center rounded-lg border border-gray-300 bg-white p-6 shadow-lg">
               <div className="mx-auto w-full max-w-md">
-                <div className="col mb-6 h-fit">
+                <div className="mb-6 flex h-fit w-full flex-col">
                   <h2>Join our comminuty</h2>
                   <p>Please enter your information to create an account</p>
                 </div>
