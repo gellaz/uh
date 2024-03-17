@@ -14,4 +14,9 @@ export const sidebarItems = [
     text: "Properties",
     icon: "ci:building-01",
   },
+  {
+    href: "/dashboard/settings",
+    text: "Settings",
+    icon: "lucide:settings",
+  },
 ];

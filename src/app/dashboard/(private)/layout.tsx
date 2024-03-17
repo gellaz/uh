@@ -25,9 +25,11 @@ export default async function DashboardLayout({
   if (profileErr || !profile) redirect("/login");
 
   return (
-    <main className="flex">
+    <div className="flex">
       <Sidebar items={sidebarItems} profile={profile} />
-      <div className="h-screen flex-grow p-4">{children}</div>
-    </main>
+      <main className="ml-2 h-screen flex-grow overflow-y-auto p-4">
+        {children}
+      </main>
+    </div>
   );
 }
