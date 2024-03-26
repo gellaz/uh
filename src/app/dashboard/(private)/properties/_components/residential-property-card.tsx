@@ -1,3 +1,16 @@
+"use client";
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import {
   Card,
   CardContent,
@@ -11,6 +24,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import Image from "next/image";
+import { deletePropertyResidential } from "@/actions/property";
+import { toast } from "sonner";
 
 interface ResidentialPropertyCardProps {
   property: PropertyResidential;
@@ -19,6 +34,16 @@ interface ResidentialPropertyCardProps {
 export default function ResidentialPropertyCard({
   property,
 }: ResidentialPropertyCardProps) {
+  const handleDelete = async (id: string) => {
+    toast.promise(deletePropertyResidential(id), {
+      loading: "Loading...",
+      success: (data) => {
+        return "Property deleted successfully";
+      },
+      error: "Error creating residential property",
+    });
+  };
+
   return (
     <Card key={property.id} className="overflow-hidden">
       <CardHeader className="p-0">
@@ -67,10 +92,28 @@ export default function ResidentialPropertyCard({
           <Icon icon="lucide:edit-2" width={18} />
           <span>Edit</span>
         </Button>
-        <Button variant={"destructive"} className="flex gap-2">
-          <Icon icon="lucide:trash" width={18} />
-          <span>Delete</span>
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger>Delete</AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your
+                account and remove your data from our servers.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={async () => {
+                  await handleDelete(property.id);
+                }}
+              >
+                Delete
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </CardFooter>
     </Card>
   );

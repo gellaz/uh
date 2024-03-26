@@ -80,3 +80,15 @@ export async function createPropertyResidential(
 
   return data;
 }
+
+export async function deletePropertyResidential(id: string) {
+  const supabase = createClient();
+  const { error } = await supabase
+    .from("properties_residential")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    throw error;
+  }
+}
