@@ -33,38 +33,43 @@ export default function ResidentialPropertyCard({
         />
       </CardHeader>
       <CardContent className="space-y-3 p-4">
-        <CardTitle>{property.subcategory}</CardTitle>
-        <CardDescription className="flex flex-wrap space-x-2">
-          {property.street_name + property.street_number + ", " + property.city}
-        </CardDescription>
-        <section className="flex space-x-2">
-          <Badge variant="secondary" className="flex space-x-2 px-2 py-1">
-            <Icon icon="teenyicons:floorplan-outline" width={18} />
+        <CardTitle className="text-xl font-black">
+          {property.subcategory}
+        </CardTitle>
+        <div className="flex items-center gap-4">
+          <CardDescription className="flex flex-wrap space-x-2">
+            {`${property.street_name} ${property.street_number}, ${property.city} (${property.country})`}
+          </CardDescription>
+          <Icon icon="lucide:map-pinned" width={16} />
+        </div>
+
+        <section className="flex flex-wrap gap-2">
+          <Badge variant="outline" className="flex space-x-2 px-2 py-1">
+            <Icon icon="teenyicons:floorplan-outline" width={14} />
             <span>{property.rooms}</span>
           </Badge>
-          <Badge variant="secondary" className="flex space-x-2">
-            <Icon icon="mdi:bathroom" width={18} />
+          <Badge variant="outline" className="flex space-x-2 px-2 py-1">
+            <Icon icon="mdi:bathroom" width={14} />
             <span>{property.bathrooms}</span>
           </Badge>
-          <Badge variant="secondary" className="flex space-x-2">
-            <Icon icon="tabler:tools-kitchen-2" width={18} />
+          <Badge variant="outline" className="flex space-x-2 px-2 py-1">
+            <Icon icon="tabler:tools-kitchen-2" width={14} />
             <span>{property.kitchens}</span>
           </Badge>
-          <Badge variant="secondary" className="flex space-x-2">
-            <Icon icon="material-symbols:floor" width={18} />
+          <Badge variant="outline" className="flex space-x-2 px-2 py-1">
+            <Icon icon="material-symbols:floor" width={14} />
             <span>{property.floor}</span>
           </Badge>
         </section>
       </CardContent>
-      <CardFooter className="space-x-2 p-4">
-        <Button asChild className="w-full">
-          <section>
-            <Icon icon={"ph:megaphone-bold"} width={16} className="mr-2" />
-            {"Promote"}
-          </section>
+      <CardFooter className="grid grid-cols-2 gap-4 ">
+        <Button variant={"secondary"} className="flex gap-2">
+          <Icon icon="lucide:edit-2" width={18} />
+          <span>Edit</span>
         </Button>
-        <Button asChild variant={"outline"} className="w-1/4">
-          <Icon icon="mdi:heart-outline" width={18} />
+        <Button variant={"destructive"} className="flex gap-2">
+          <Icon icon="lucide:trash" width={18} />
+          <span>Delete</span>
         </Button>
       </CardFooter>
     </Card>
