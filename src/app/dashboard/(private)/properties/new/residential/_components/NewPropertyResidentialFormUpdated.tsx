@@ -55,10 +55,13 @@ import { Separator } from "@radix-ui/react-separator";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { createPropertyResidential } from "@/actions/property";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function NewPropertyResidentialFormUpdated() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof propertyResidentialSchema>>({
     resolver: zodResolver(propertyResidentialSchema),
     defaultValues: {
@@ -135,9 +138,15 @@ export default function NewPropertyResidentialFormUpdated() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof propertyResidentialSchema>) {
-    console.log(values);
-    createPropertyResidential(values);
+  async function onSubmit(values: z.infer<typeof propertyResidentialSchema>) {
+    toast.promise(createPropertyResidential(values), {
+      loading: "Loading...",
+      success: (data) => {
+        return `${data.subcategory} property has been added`;
+      },
+      error: "Error creating residential property",
+    });
+    router.push("/dashboard/properties");
   }
 
   function onErrors(
@@ -321,7 +330,9 @@ export default function NewPropertyResidentialFormUpdated() {
                   name="terraces"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Terraces</FormLabel>
+                      <FormLabel>
+                        Terraces<sup>*</sup>
+                      </FormLabel>
                       <FormControl>
                         <Input
                           type="number"
@@ -340,7 +351,9 @@ export default function NewPropertyResidentialFormUpdated() {
                   name="balcony"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Balcony</FormLabel>
+                      <FormLabel>
+                        Balconies<sup>*</sup>
+                      </FormLabel>
                       <FormControl>
                         <Input
                           type="number"
@@ -359,7 +372,9 @@ export default function NewPropertyResidentialFormUpdated() {
                   name="cellar"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Cellar</FormLabel>
+                      <FormLabel>
+                        Cellars<sup>*</sup>
+                      </FormLabel>
                       <FormControl>
                         <Input
                           type="number"
@@ -378,7 +393,9 @@ export default function NewPropertyResidentialFormUpdated() {
                   name="attic"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Attic</FormLabel>
+                      <FormLabel>
+                        Attics<sup>*</sup>
+                      </FormLabel>
                       <FormControl>
                         <Input
                           type="number"
@@ -397,7 +414,9 @@ export default function NewPropertyResidentialFormUpdated() {
                   name="basement"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Basements</FormLabel>
+                      <FormLabel>
+                        Basements<sup>*</sup>
+                      </FormLabel>
                       <FormControl>
                         <Input
                           type="number"
@@ -416,7 +435,9 @@ export default function NewPropertyResidentialFormUpdated() {
                   name="garden"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Garden</FormLabel>
+                      <FormLabel>
+                        Garden<sup>*</sup>
+                      </FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
@@ -446,7 +467,9 @@ export default function NewPropertyResidentialFormUpdated() {
                   name="garage"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Garage</FormLabel>
+                      <FormLabel>
+                        Garage<sup>*</sup>
+                      </FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
@@ -476,7 +499,9 @@ export default function NewPropertyResidentialFormUpdated() {
                   name="parking_spaces"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Parking Spaces</FormLabel>
+                      <FormLabel>
+                        Parking Spaces<sup>*</sup>
+                      </FormLabel>
                       <FormControl>
                         <Input
                           type="number"
@@ -530,7 +555,9 @@ export default function NewPropertyResidentialFormUpdated() {
                   name="floor"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Floor</FormLabel>
+                      <FormLabel>
+                        Floor<sup>*</sup>
+                      </FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
@@ -822,7 +849,9 @@ export default function NewPropertyResidentialFormUpdated() {
                     name="street_name"
                     render={({ field }) => (
                       <FormItem className="h-fit w-full">
-                        <FormLabel>Street name</FormLabel>
+                        <FormLabel>
+                          Street name<sup>*</sup>
+                        </FormLabel>
                         <Input placeholder="Street name" {...field} />
                         <FormMessage />
                       </FormItem>
@@ -834,7 +863,9 @@ export default function NewPropertyResidentialFormUpdated() {
                     name="street_number"
                     render={({ field }) => (
                       <FormItem className="h-fit">
-                        <FormLabel>Street number</FormLabel>
+                        <FormLabel>
+                          Street number<sup>*</sup>
+                        </FormLabel>
                         <Input placeholder="Street number" {...field} />
                         <FormMessage />
                       </FormItem>
@@ -846,7 +877,9 @@ export default function NewPropertyResidentialFormUpdated() {
                     name="city"
                     render={({ field }) => (
                       <FormItem className="h-fit">
-                        <FormLabel>City</FormLabel>
+                        <FormLabel>
+                          City<sup>*</sup>
+                        </FormLabel>
                         <Input placeholder="City" {...field} />
                         <FormMessage />
                       </FormItem>
@@ -858,7 +891,9 @@ export default function NewPropertyResidentialFormUpdated() {
                     name="zip_code"
                     render={({ field }) => (
                       <FormItem className="h-fit">
-                        <FormLabel>ZIP Code</FormLabel>
+                        <FormLabel>
+                          ZIP Code<sup>*</sup>
+                        </FormLabel>
                         <Input placeholder="Zipcode" {...field} />
                         <FormMessage />
                       </FormItem>
@@ -870,7 +905,9 @@ export default function NewPropertyResidentialFormUpdated() {
                     name="province"
                     render={({ field }) => (
                       <FormItem className="h-fit">
-                        <FormLabel>Province</FormLabel>
+                        <FormLabel>
+                          Province<sup>*</sup>
+                        </FormLabel>
                         <Input placeholder="Province" {...field} />
                         <FormMessage />
                       </FormItem>
@@ -882,7 +919,9 @@ export default function NewPropertyResidentialFormUpdated() {
                     name="region"
                     render={({ field }) => (
                       <FormItem className="h-fit">
-                        <FormLabel>Region</FormLabel>
+                        <FormLabel>
+                          Region<sup>*</sup>
+                        </FormLabel>
                         <Input placeholder="Region" {...field} />
                         <FormMessage />
                       </FormItem>
@@ -894,7 +933,9 @@ export default function NewPropertyResidentialFormUpdated() {
                     name="country"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Country</FormLabel>
+                        <FormLabel>
+                          Country<sup>*</sup>
+                        </FormLabel>
                         <Select
                           onValueChange={field.onChange}
                           defaultValue={field.value}
@@ -928,7 +969,9 @@ export default function NewPropertyResidentialFormUpdated() {
                   name="heating"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Heating</FormLabel>
+                      <FormLabel>
+                        Heating<sup>*</sup>
+                      </FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
@@ -1089,7 +1132,9 @@ export default function NewPropertyResidentialFormUpdated() {
                   name="energy_class"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Energy class</FormLabel>
+                      <FormLabel>
+                        Energy class<sup>*</sup>
+                      </FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}

@@ -541,7 +541,7 @@ export const propertyResidentialSchema = z.object({
   cadastral_particle: z.string().optional(),
   cadastral_subaltern: z.string().optional(),
   cadastral_category: propertyCadastralCategoryEnum.optional(),
-  cadastral_income: z.coerce.number().int().nonnegative(),
+  cadastral_income: z.coerce.number().int().nonnegative().optional(),
   cadastral_quote: z.string().optional(),
   cadastral_other: z.string().optional(),
   // Description
