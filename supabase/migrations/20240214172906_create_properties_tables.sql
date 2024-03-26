@@ -493,7 +493,7 @@ CREATE POLICY "Users can insert their own residential properties." ON public.pro
 CREATE POLICY "Enable delete for users based on user_id" ON "public"."properties_residential"
     AS PERMISSIVE FOR DELETE
     TO public
-    USING (auth.uid() = user_id)
+    USING (auth.uid() = user_id);
 
 CREATE TYPE building_usage_enum AS enum(
     'Industrial', -- industriale
