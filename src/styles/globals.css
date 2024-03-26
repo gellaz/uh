@@ -50,38 +50,6 @@
 }
 
 @layer base {
-  h1 {
-    @apply text-[31.25px] font-extrabold;
-  }
-
-  h2 {
-    @apply text-[31.25px] font-semibold;
-  }
-
-  h3 {
-    @apply text-[31.25px] font-medium;
-  }
-
-  h4 {
-    @apply text-[25px] font-bold;
-  }
-
-  h5 {
-    @apply text-[25px] font-medium;
-  }
-
-  h6 {
-    @apply text-[20px] font-medium;
-  }
-
-  p {
-    @apply text-[16px] font-normal;
-  }
-
-  label {
-    @apply text-[12.8px];
-  }
-
   .xs-text {
     @apply text-[10.24px];
   }
