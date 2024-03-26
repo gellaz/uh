@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 
 import { Radio_Canada } from "next/font/google";
+import { Toaster } from "@/components/ui/sonner";
 
 // If loading a variable font, you don't need to specify the font weight
 const canada = Radio_Canada({ subsets: ["latin"] });
@@ -17,6 +18,7 @@ export default async function RootLayout({
     <html lang="en" className={canada.className}>
       <body className="">
         <main className="">{children}</main>
+        <Toaster />
       </body>
     </html>
   );
