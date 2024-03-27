@@ -17,7 +17,7 @@ export default async function DashboardPropertiesPage() {
 
         <NewPropertyDialog />
       </div>
-      <div className="grid gap-4 py-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+      <div className="flex flex-wrap gap-2">
         {properties.map((property) => (
           <ResidentialPropertyCard key={property.id} property={property} />
         ))}

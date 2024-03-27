@@ -61,13 +61,9 @@ export default function ResidentialPropertyCard({
         <CardTitle className="text-xl font-black">
           {property.subcategory}
         </CardTitle>
-        <div className="flex items-center gap-4">
-          <CardDescription className="flex flex-wrap space-x-2">
-            {`${property.street_name} ${property.street_number}, ${property.city} (${property.country})`}
-          </CardDescription>
-          <Icon icon="lucide:map-pinned" width={16} />
-        </div>
-
+        <CardDescription className="flex flex-wrap space-x-2 text-xs">
+          {`${property.street_name} ${property.street_number}, ${property.city} (${property.country})`}
+        </CardDescription>
         <section className="flex flex-wrap gap-2">
           <Badge variant="outline" className="flex space-x-2 px-2 py-1">
             <Icon icon="teenyicons:floorplan-outline" width={14} />
