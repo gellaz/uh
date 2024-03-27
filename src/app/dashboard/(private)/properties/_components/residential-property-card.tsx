@@ -11,6 +11,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -21,7 +22,6 @@ import {
 } from "@/components/ui/card";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import Image from "next/image";
 import { deletePropertyResidential } from "@/actions/property";
@@ -93,7 +93,14 @@ export default function ResidentialPropertyCard({
           <span>Edit</span>
         </Button>
         <AlertDialog>
-          <AlertDialogTrigger>Delete</AlertDialogTrigger>
+          <AlertDialogTrigger
+            className={buttonVariants({ variant: "destructive" })}
+          >
+            <div className="flex gap-2">
+              <Icon icon="lucide:trash" width={18} className="mr-2" />
+              <span>Delete</span>
+            </div>
+          </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -105,6 +112,7 @@ export default function ResidentialPropertyCard({
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction
+                className={buttonVariants({ variant: "destructive" })}
                 onClick={async () => {
                   await handleDelete(property.id);
                 }}
