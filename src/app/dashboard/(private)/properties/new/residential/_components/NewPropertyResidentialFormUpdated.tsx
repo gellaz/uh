@@ -172,7 +172,7 @@ export default function NewPropertyResidentialFormUpdated() {
             <div className="flex flex-col space-y-4">
               <FormSection
                 title="Subcategory & Class"
-                icon="lucide:map-pinned"
+                icon="bi:building-fill-check"
               />
               <div className="grid grid-cols-1 gap-4 rounded-lg border p-6">
                 {/** Subcategory */}
@@ -515,7 +515,7 @@ export default function NewPropertyResidentialFormUpdated() {
                   )}
                 />
               </div>
-              <FormSection title="Features" icon="lucide:map-pinned" />
+              <FormSection title="Features" icon="mdi:feature-highlight" />
               <div className="grid grid-cols-2 gap-4 rounded-lg border p-6">
                 {/* Condition */}
                 <div className="col-span-2">
