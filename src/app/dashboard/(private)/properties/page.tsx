@@ -1,4 +1,4 @@
-import NewPropertyCategoryDialog from "./new/_components/NewPropertyCategoryDialog";
+import NewPropertyDialog from "./_components/new-property-dialog";
 import ResidentialPropertyCard from "./_components/residential-property-card";
 import { getProperties } from "@/actions/property";
 
@@ -15,7 +15,7 @@ export default async function DashboardPropertiesPage() {
           </p>
         </div>
 
-        <NewPropertyCategoryDialog />
+        <NewPropertyDialog />
       </div>
       <div className="grid gap-4 py-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         {properties.map((property) => (

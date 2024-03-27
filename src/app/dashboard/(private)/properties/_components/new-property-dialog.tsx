@@ -55,7 +55,7 @@ const propertyCategoryItems: PropertyCategoryItem[] = [
   },
 ];
 
-export default function NewPropertyCategoryDialog() {
+export default function NewPropertyDialog() {
   const [selectedItemIndex, setSelectedItemIndex] = useState<
     number | undefined
   >(undefined);
@@ -95,7 +95,7 @@ export default function NewPropertyCategoryDialog() {
             Choose the category that best describe your property
           </DialogDescription>
         </DialogHeader>
-        <div className="grid h-fit grid-cols-3 gap-2">
+        <div className="grid h-fit gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {propertyCategoryItems.map((item, index) => {
             return (
               <Card
@@ -103,20 +103,16 @@ export default function NewPropertyCategoryDialog() {
                 onClick={() => categoryCardTapped(index)}
                 className={`flex h-full w-full cursor-pointer flex-row items-center justify-start space-x-2 px-4 py-2 transition-all duration-150 ease-in-out ${
                   selectedItemIndex == index
-                    ? "bg-primary text-white"
-                    : "hover:bg-primary/50"
+                    ? "ring ring-primary"
+                    : "hover:ring hover:ring-primary"
                 }`}
               >
                 <div
-                  className={`flex h-12 w-12 items-center justify-center rounded-full ${
-                    selectedItemIndex == index
-                      ? "bg-primary/30"
-                      : "bg-primary/10"
-                  }`}
+                  className={`flex h-12 w-12 items-center justify-center rounded-full border`}
                 >
-                  <h4>{item.icon}</h4>
+                  <h4 className="text-2xl font-bold">{item.icon}</h4>
                 </div>
-                <p>{item.name}</p>
+                <p className=" font-semibold">{item.name}</p>
               </Card>
             );
           })}
